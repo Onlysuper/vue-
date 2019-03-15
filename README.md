@@ -1,4 +1,4 @@
-# zhongfu-customer
+# customer
 
 ## Project setup
 ```
