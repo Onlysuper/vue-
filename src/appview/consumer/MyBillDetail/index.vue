@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { Swiper } from "@src/components/Swiper";
+import { Swiper } from "@src/appcomponents/Swiper";
 import {
         getInvoiceDetail,
         getInvoiceImageUrl,

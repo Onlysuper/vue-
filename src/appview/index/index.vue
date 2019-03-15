@@ -1,12 +1,19 @@
 <template>
-<div>
-  我是移动
-</div>
+  <div id="app">
+      <keep-alive>
+              <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "app"
+        name: "app",
+        methods: {},
+        mounted() { }
 };
 </script>
 
+<style lang="less">
+</style>

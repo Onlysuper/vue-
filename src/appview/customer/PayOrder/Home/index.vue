@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import PayItem from "@src/components/PayItem";
+import PayItem from "@src/appcomponents/PayItem";
 import utils from "@src/common/utils.js";
-import Loadmore from "@src/components/Loadmore";
+import Loadmore from "@src/appcomponents/Loadmore";
 import CONST from "@src/const";
 import { Toast } from "mint-ui";
 import {

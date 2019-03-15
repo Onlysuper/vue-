@@ -1,10 +1,10 @@
 const path = require('path')
-// const CompressionWebpackPlugin = require("compression-webpack-plugin");
-// function resolve(dir) {
-//     return path.join(__dirname, dir)
-// }
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
 // // 使用 webpack
-// var webpack = require('webpack')
+var webpack = require('webpack')
 module.exports = {
     publicPath: "./",
     assetsDir: "static",
@@ -49,45 +49,45 @@ module.exports = {
     //     // }
     // },
     //修改全局路径
-    // chainWebpack: (config) => {
-    //     config.resolve.alias
-    //         .set('vue$', 'vue/dist/vue.esm.js')
-    //         .set('@src', resolve('src'))
-    //         .set('@node_modules', resolve('node_modules'))
+    chainWebpack: (config) => {
+        config.resolve.alias
+            .set('vue$', 'vue/dist/vue.esm.js')
+            .set('@src', resolve('src'))
+            .set('@node_modules', resolve('node_modules'))
 
-    //     // 因为是多页面，所以取消 chunks，每个页面只对应一个单独的 JS / CSS
-    //     config.optimization
-    //     .splitChunks({
-    //     cacheGroups: {}
-    //     });
-    // },
-    // productionSourceMap: false,
-    // css: {
-    //     // 是否使用css分离插件 ExtractTextPlugin
-    //     extract: true,
-    // },
-    // configureWebpack: {
-    //     resolve: {
-    //         extensions: ['.js', '.vue', '.json']
-    //     },
-    //     output: {
-    //     },
-    //     plugins: [
-    //         new webpack.ProvidePlugin({
-    //             '$': 'jquery',
-    //             'jQuery': 'jquery',
-    //             'window.jQuery': 'jquery',
-    //             'window.$': 'jquery',
-    //             'jWeixin': 'weixin-js-sdk',
-    //             'pubsub': 'pubsub-js'
-    //         }),
-    //         new CompressionWebpackPlugin({
-    //             filename: '[path].gz[query]',
-    //             algorithm: 'gzip',
-    //             test: new RegExp('\\.(js|css)$'),
-    //             threshold: 10240,
-    //             minRatio: 0.8
-    //         })
-    //     ]
-    // }
+        // 因为是多页面，所以取消 chunks，每个页面只对应一个单独的 JS / CSS
+        config.optimization
+        .splitChunks({
+        cacheGroups: {}
+        });
+    },
+    productionSourceMap: false,
+    css: {
+        // 是否使用css分离插件 ExtractTextPlugin
+        extract: true,
+    },
+    configureWebpack: {
+        resolve: {
+            extensions: ['.js', '.vue', '.json']
+        },
+        output: {
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+                '$': 'jquery',
+                'jQuery': 'jquery',
+                'window.jQuery': 'jquery',
+                'window.$': 'jquery',
+                'jWeixin': 'weixin-js-sdk',
+                'pubsub': 'pubsub-js'
+            }),
+            new CompressionWebpackPlugin({
+                filename: '[path].gz[query]',
+                algorithm: 'gzip',
+                test: new RegExp('\\.(js|css)$'),
+                threshold: 10240,
+                minRatio: 0.8
+            })
+        ]
+    }
 }

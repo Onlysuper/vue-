@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import EicItem from "@src/components/EicItem";
-import FullPagePopup from "@src/components/FullPagePopup";
+import EicItem from "@src/appcomponents/EicItem";
+import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import InfiniteScroll from "./loadmore.vue";
-import SearchPage from "@src/components/SearchPage";
+import SearchPage from "@src/appcomponents/SearchPage";
 import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
 import { queryEicList } from "@src/apis";
 import utils from "@src/common/utils";

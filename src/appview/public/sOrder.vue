@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import CityPicher from "@src/components/CityPicher";
+import CityPicher from "@src/appcomponents/CityPicher";
 import { submitLoan } from "@src/apis";
 
 export default {

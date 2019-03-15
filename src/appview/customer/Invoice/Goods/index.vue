@@ -46,7 +46,7 @@
 <script>
 import utils from "@src/common/utils.js";
 import { MessageBox } from "mint-ui";
-import TabRouterLink from "@src/components/TabRouterLink";
+import TabRouterLink from "@src/appcomponents/TabRouterLink";
 import {
         electronicQueryGoodsList,
         electronicConfigDefault,

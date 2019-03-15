@@ -23,8 +23,8 @@
 <script>
 import validator from "@src/common/validator.js";
 import utils from "@src/common/utils.js";
-import TimerBtn from "@src/components/TimerBtn";
-import Buttonr from "@src/components/Button";
+import TimerBtn from "@src/appcomponents/TimerBtn";
+import Buttonr from "@src/appcomponents/Button";
 import {
         getVerificationCode,
         getCustomerList,

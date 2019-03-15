@@ -35,8 +35,8 @@
 <script>
 import utils from "@src/common/utils.js";
 import { electronicAddGoods } from "@src/apis";
-import Picker from "@src/components/Picker";
-import SearchModle from "@src/components/SearchModle";
+import Picker from "@src/appcomponents/Picker";
+import SearchModle from "@src/appcomponents/SearchModle";
 import taxJson from "@src/data/tax.json";
 import taxTypeJson from "@src/data/enjoy.json";
 import discountJson from "@src/data/discount.json";

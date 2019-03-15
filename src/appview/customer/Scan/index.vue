@@ -22,7 +22,7 @@ import { MessageBox } from "mint-ui";
 import utils from "@src/common/utils.js";
 import { getCustomerInfo, msgLF } from "@src/apis";
 import { getWxSign } from "@src/apis/getSign";
-import CustomerHeader from "@src/components/CustomerHeader";
+import CustomerHeader from "@src/appcomponents/CustomerHeader";
 
 export default {
         components: { CustomerHeader },

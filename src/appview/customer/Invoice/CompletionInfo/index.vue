@@ -31,10 +31,10 @@
 
 <script>
 import utils from "@src/common/utils.js";
-import CityPicher from "@src/components/CityPicher";
-import BankPopup from "@src/components/BankPopup";
-import BankBranchPopup from "@src/components/BankBranchPopup";
-import BankSearchPopup from "@src/components/BankSearchPopup";
+import CityPicher from "@src/appcomponents/CityPicher";
+import BankPopup from "@src/appcomponents/BankPopup";
+import BankBranchPopup from "@src/appcomponents/BankBranchPopup";
+import BankSearchPopup from "@src/appcomponents/BankSearchPopup";
 import { queryCustomer, electronicComplete, getBankList } from "@src/apis";
 
 export default {

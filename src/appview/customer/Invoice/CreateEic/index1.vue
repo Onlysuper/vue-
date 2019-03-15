@@ -67,8 +67,8 @@
 <script>
 
 import { electronicQueryGoodsList, createEicOrder, electronicQueryConfig } from "@src/apis";
-import Picker from "@src/components/Picker";
-import NotGoods from "@src/components/NotGoods";
+import Picker from "@src/appcomponents/Picker";
+import NotGoods from "@src/appcomponents/NotGoods";
 import utils from "@src/common/utils";
 import NumberInputSpinner from 'vue-number-input-spinner';
 export default {

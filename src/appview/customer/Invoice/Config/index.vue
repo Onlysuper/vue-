@@ -35,9 +35,9 @@
 <script>
 import utils from "@src/common/utils.js";
 import { electronicAddInvoiceConfig, electronicQueryConfig } from "@src/apis";
-import Picker from "@src/components/Picker";
+import Picker from "@src/appcomponents/Picker";
 import actions from "@src/data/billCity.json";
-import TabRouterLink from "@src/components/TabRouterLink";
+import TabRouterLink from "@src/appcomponents/TabRouterLink";
 
 export default {
         components: { Picker, TabRouterLink },

@@ -14,7 +14,7 @@
 
 <script>
 import QRCode from 'qrcode';
-import ShareTip from "@src/components/ShareTip";
+import ShareTip from "@src/appcomponents/ShareTip";
 import { getWxSign, setWxShare } from "@src/apis/getSign";
 import base from "@src/apis/base";
 

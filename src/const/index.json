@@ -1,0 +1,44 @@
+{
+        "eicStatus": {
+                "": "全部状态",
+                "BILLING_SUCCESS": "开票成功",
+                "AT_RED": "已红冲",
+                "ORDER": "待开票",
+                "SUBMITTING": "已提交",
+                "BILLING": "开票中",
+                "BILLING_FAIL": "开票失败"
+        },
+        "billTypes": {
+                "0": "未知",
+                "1": "企业",
+                "3": "个人"
+        },
+        "payTypeDetail": {
+                "trade.scanPay": "扫码支付",
+                "trade.microPay": "刷卡支付",
+                "trade.jsPay": "公众号支付",
+                "trade.appPay": "app支付",
+                "trade.h5Pay": "H5支付"
+        },
+        "payStatus": {
+                "": "全部",
+                "SUCCESS": "支付成功",
+                "FAIL": "支付失败",
+                "INIT": "订单初始化",
+                "PAY_WAIT": "等待支付",
+                "CANCEL": "订单撤回"
+        },
+        "payType": {
+                "": "全部",
+                "WECHAT": "微信",
+                "ALIPAY": "支付宝"
+        },
+        "outMoneyStatus": {
+                "": "全部",
+                "OUT_SUCCESS": "出款成功",
+                "OUT_SEND": "出款已发送",
+                "OUT_FAIL": "出款失败",
+                "WAIT_AUDIT": "等待审核",
+                "AUDIT_FAIL": "审核失败"
+        }
+}

@@ -15,7 +15,7 @@
 <script>
 import utils from "@src/common/utils.js";
 import { getCustomerInfo } from "@src/apis";
-import CustomerHeader from "@src/components/CustomerHeader";
+import CustomerHeader from "@src/appcomponents/CustomerHeader";
 
 export default {
         components: { CustomerHeader },

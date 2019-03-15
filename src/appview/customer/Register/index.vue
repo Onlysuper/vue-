@@ -54,10 +54,10 @@
 <script>
 import validator from "@src/common/validator.js";
 import utils from "@src/common/utils.js";
-import TimerBtn from "@src/components/TimerBtn";
-import Buttonr from "@src/components/Button";
+import TimerBtn from "@src/appcomponents/TimerBtn";
+import Buttonr from "@src/appcomponents/Button";
 import { getVerificationCode, registCustomer, upload } from "@src/apis";
-import UploadView from "@src/components/Upload/UploadView";
+import UploadView from "@src/appcomponents/Upload/UploadView";
 
 export default {
         data() {

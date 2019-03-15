@@ -1,0 +1,255 @@
+
+@red:#e60012;
+@grey:#e5e5e5;
+@rem:2.3px;
+.page{
+        position: absolute;
+        left:0;
+        top:0;
+        height:100%;
+        width:100%;
+        overflow: hidden;
+}
+// .menu-box{
+// 	display: flex;
+// 	flex:1;
+// 	transform: translate(0,0)
+// }
+//清楚浮动
+.clearfix:after {
+          content: "\0020";
+          display: block;
+          height: 0;
+          clear: both;
+}
+._av:active{
+	background-color:#eee !important;
+}
+
+.z-index2{
+	z-index: 2;
+}
+.z-index3{
+	z-index: 3;
+}
+.z-index4{
+	z-index: 4;
+}
+.z-index5{
+	z-index: 5;
+}
+.z-index6{
+	z-index: 6;
+}
+.z-index7{
+	z-index: 7;
+}
+.z-index8{
+	z-index: 8;
+}
+.z-index9{
+	z-index: 9;
+}
+
+.icon-wechat{
+	color: #04c511;
+}
+
+.icon-alipay{
+	color: #007fff;
+}
+
+	//中间线
+	.line_center{
+		position: relative;
+	}
+  .line_center:after {
+    content: "";
+    width: 3px;
+    position: absolute;
+    right: 0;
+    top: 10%;
+		height: 80%;
+		width: 1px;
+		background-color: #dfdcdc;
+  }
+  .line_center:last-child {
+    &:after {
+      content: none;
+    }
+  }
+
+.___border_all:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    border: 1px solid #e5e5e5;
+    width: 200%;
+    height: 200%;
+    -webkit-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: left top;
+		transform-origin: left top;
+}
+
+.border-top-1px{
+    background-image: linear-gradient(0deg, #d9d9d9, #d9d9d9 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.border-bottom-1px{
+    background-image: linear-gradient(0deg, #d9d9d9, #d9d9d9 50%, transparent 50%);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.clearfix {
+          zoom: 1;
+}
+
+// width: calc(~"100% - "40/@rem);
+
+.arrow(){
+	border-top: 1px solid #999999;
+	border-left: 1px solid #999999;
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+}
+
+//文字超出省略号
+.text-ellipsis(){
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+//单行文字两端对齐
+.text-align-justify(){
+	text-align: justify;
+	text-align-last: justify;
+	-moz-text-align-last: justify;
+	&:after {
+		content: "";
+		display: inline-block;
+		width: 100%;
+		height: 0;
+		overflow: hidden;
+	}
+}
+//定位
+.absolute(@x,@y,@w,@h){
+	position: absolute;
+          left: @x;
+          top: @y;
+          width: @w;
+          height: @h;
+}
+
+
+.absoluteCenter(){
+	position: absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+
+.transform(@val){
+	transform: @val;
+	-webkit-transform: @val;
+}
+.transition(@val){
+	transition: @val;
+	-webkit-transition: @val;
+}
+
+//声明flex 盒模型 向后兼容
+.flex(){
+	display: flex;
+	display:-webkit-box;
+}
+
+/**设置主轴排列方向**/
+//水平方向
+.flex-row{
+	flex-direction: row;
+	-webkit-box-orient: horizontal;
+}
+//水平方向-反向
+.flex-row-reverse{
+	flex-direction: row-reverse;
+	-webkit-box-direction:reverse;
+}
+//垂直方向
+.flex-column{
+	flex-direction: column;
+	-webkit-box-orient: vertical;
+}
+//垂直方向-反向
+.flex-column-reverse{
+	flex-direction:column-reverse;
+	-webkit-box-direction:reverse;
+}
+
+/**设置富裕空间位置**/
+//
+
+
+
+
+
+//设置主轴排列方向---垂直方向
+
+
+
+
+//动画相关
+
+@keyframes opacityPage {
+	0% {
+		opacity: 0;
+		// transform: translateX(100%)
+	}
+	100% {
+		opacity: 1;
+		// transform: translateX(0%)
+	}
+}
+@-webkit-keyframes opacityPage {
+	0% {
+		opacity: 0;
+		// transform: translateX(100%)
+	}
+	100% {
+		opacity: 1;
+		// transform: translateX(0%)
+	}
+}
+.transformPage() {
+	-webkit-animation: opacityPage 0.5s linear;
+	animation: opacityPage 0.3s linear;
+}
+
+
+
+.animation-scale(){
+	-webkit-animation-name: zoomIn;
+}
+
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

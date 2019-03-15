@@ -35,16 +35,16 @@
 </template>
 
 <script>
-import PayItem from "@src/components/PayItem";
-import FullPagePopup from "@src/components/FullPagePopup";
-import InfiniteScroll from "@src/components/InfiniteScroll";
-import SearchPage from "@src/components/SearchPage";
+import PayItem from "@src/appcomponents/PayItem";
+import FullPagePopup from "@src/appcomponents/FullPagePopup";
+import InfiniteScroll from "@src/appcomponents/InfiniteScroll";
+import SearchPage from "@src/appcomponents/SearchPage";
 import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
 import { settleQuery, getCustomerInfo } from "@src/apis";
 import utils from "@src/common/utils";
 import CONST from "@src/const";
-import ChangePanel from "@src/components/ChangePanel";
-import PanelBodyRow from "@src/components/PanelBodyRow";
+import ChangePanel from "@src/appcomponents/ChangePanel";
+import PanelBodyRow from "@src/appcomponents/PanelBodyRow";
 export default {
         components: {
                 PayItem,

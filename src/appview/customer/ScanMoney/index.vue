@@ -9,9 +9,9 @@
 
 <script>
 
-import CustomerHeader from "@src/components/CustomerHeader";
-import Keyboard from "@src/components/Keyboard";
-import MoneyInput from "@src/components/Keyboard/MoneyInput";
+import CustomerHeader from "@src/appcomponents/CustomerHeader";
+import Keyboard from "@src/appcomponents/Keyboard";
+import MoneyInput from "@src/appcomponents/Keyboard/MoneyInput";
 import utils from "@src/common/utils.js";
 import { getCustomerInfo, getPaySigninfo, submitPayOrder } from "@src/apis";
 import { getWxSign } from "@src/apis/getSign";

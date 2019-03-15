@@ -48,8 +48,8 @@
 <script>
 import { MessageBox } from "mint-ui";
 import utils from "@src/common/utils.js";
-import TimerBtn from "@src/components/TimerBtn";
-import Buttonr from "@src/components/Button";
+import TimerBtn from "@src/appcomponents/TimerBtn";
+import Buttonr from "@src/appcomponents/Button";
 import { getCustomerInfo, logout, changeCustomerName } from "@src/apis";
 export default {
         components: {},

@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import PayItem from "@src/components/PayItem";
-import BannerDate from "@src/components/BannerDate";
-import Loadmore from "@src/components/Loadmore";
-import FullPagePopup from "@src/components/FullPagePopup";
-import SearchPage from "@src/components/SearchPage";
-import Tip from "@src/components/Tip";
+import PayItem from "@src/appcomponents/PayItem";
+import BannerDate from "@src/appcomponents/BannerDate";
+import Loadmore from "@src/appcomponents/Loadmore";
+import FullPagePopup from "@src/appcomponents/FullPagePopup";
+import SearchPage from "@src/appcomponents/SearchPage";
+import Tip from "@src/appcomponents/Tip";
 
 import { payOrderQueryList, payOrderSum } from "@src/apis";
 import utils from "@src/common/utils.js";

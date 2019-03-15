@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import SearchPage from "@src/components/SearchPage";
+import SearchPage from "@src/appcomponents/SearchPage";
 import { mapState } from "vuex";
 export default {
         components: { SearchPage },

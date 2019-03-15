@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Nodata from '@src/components/Nodata';
+import Nodata from '@src/appcomponents/Nodata';
 export default {
         components: { Nodata },
         props: {

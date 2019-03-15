@@ -43,9 +43,9 @@
 <script>
 import { queryEicListDetail, createEicOrder } from "@src/apis";
 import utils from "@src/common/utils";
-import ChangePanel from "@src/components/ChangePanel";
-import PanelBodyRow from "@src/components/PanelBodyRow";
-import Message from "@src/components/Message";
+import ChangePanel from "@src/appcomponents/ChangePanel";
+import PanelBodyRow from "@src/appcomponents/PanelBodyRow";
+import Message from "@src/appcomponents/Message";
 import CONST from "@src/const";
 export default {
         components: { ChangePanel, PanelBodyRow, Message },

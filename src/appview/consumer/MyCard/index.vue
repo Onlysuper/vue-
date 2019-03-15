@@ -71,10 +71,10 @@
 </template>
 
 <script>
-import Swiper from "../../../../static/swiper-3.4.2.min";
+import Swiper from "@src/common/swiper/swiper-3.4.2.min";
 import utils from "@src/common/utils.js";
 import { MessageBox } from "mint-ui";
-import ShareTip from "@src/components/ShareTip";
+import ShareTip from "@src/appcomponents/ShareTip";
 import { queryEntCardList, qrcode, removeEntCard, myCardShareLink, getCardShareLink } from "@src/apis/consumer";
 import { getWxSign, setWxShare } from "@src/apis/getSign";
 import wx from "weixin-js-sdk";
