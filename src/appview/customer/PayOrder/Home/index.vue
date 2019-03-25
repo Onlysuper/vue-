@@ -6,10 +6,11 @@
                                 <div class="income-today-amount">
                                         <span>{{totalAmount | moneyFormatCN}}</span>
                                 </div>
-                                <div class="income-today-number">交易共 {{parseInt(totalWechatCount) + parseInt(totalAlipayCount)}} 笔</div>
+                                <div class="income-today-number">交易共 {{totalAllCount}} 笔</div>
                                 <div class="income-today-numbers clearfix">
                                         <div class="income-today-weixin-number">微信共 {{totalWechatCount}} 笔</div>
                                         <div class="income-today-alipay-number">支付宝共 {{totalAlipayCount}} 笔</div>
+                                        <div class="income-today-alipay-number">刷卡共 {{totalSkCount}} 笔</div>
                                 </div>
                         </div>
                         <div class="navbar-box">
@@ -24,9 +25,12 @@
                         </div>
                         <div class="today-pay-order-list" ref="scrollWarpper">
                                 <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
-                                        <!-- <myp-item4 class="list-item" v-for="(item,index) in list" :key="index" :leftTopText="item.payType | payType" :leftBottomText="item.createTime | dateFormatCN('hhmm')" :rightTopText="item.amount | moneyFormatCN" :rightBottomText="item.status | analy('payStatus')" :rightTopClass="item.status !== 'SUCCESS'?'':'lime'" @click.native="toDetail(item)"></myp-item4> -->
-                                        <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" :entName="item.payType | analy('payType')" :time="item.createTime | dateFormatCN('hhmm')" :status="item.status | analy('payStatus')" :statusClass="item.status" :amount="item.amount | moneyFormatCN">
-                                                <i :class="`icon-${item.payType.toLowerCase()}`" slot="icon"></i>
+                                        <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" 
+                                        :entName="payType | analy('payType')" 
+                                        :time="item.tranDateTime | dateFormatCN('hhmm')" 
+                                        :amount="item.tranAmt | moneyFormatCN"
+                                        >
+                                                <i :class="`icon-${payType.toLowerCase()}`" slot="icon"></i>
                                         </pay-item>
                                 </loadmore>
                         </div>
@@ -37,6 +41,7 @@
 <script>
 import PayItem from "@src/appcomponents/PayItem";
 import utils from "@src/common/utils.js";
+import base from "@src/apis/base.js";
 import Loadmore from "@src/appcomponents/Loadmore";
 import CONST from "@src/const";
 import { Toast } from "mint-ui";
@@ -54,38 +59,26 @@ export default {
                 return {
                         scroll: 0,
                         openId: utils.getOpenId(),
-                        payType: "",
+                         payType: "",
                         payTypes: utils.constToArr(CONST.payType),
                         totalCount: 0,
                         totalAmount: 0,
+                        totalAllCount:0,
                         totalWechatCount: 0,
                         totalAlipayCount: 0,
+                        totalSkCount: 0,
                         api: payOrderQueryList,
                         list: []
                 };
         },
-        beforeRouteEnter(to, from, next) {
-                //中间件-----检测是否开通支付
-                console.info("支付功能权限校验！")
-                payOrderQuery(utils.getOpenId())({ token: utils.storage.getStorage("token") }).then(data => {
-                        if (data.resultCode == "0") {
-                                if (data.data.payStatus == "TRUE") {
-                                        next();
-                                } else {
-                                        next({ path: "/customer/notPay", replace: true });
-                                }
-                        } else {
-                                Toast(data.resultMsg);
-                        }
-                });
-        },
         mounted() {
                 this.init();
+        },
+        computed:{
         },
         methods: {
                 scrollChanged() {
                         this.scroll = this.$refs.scrollWarpper.scrollTop;
-                        console.log(this.scroll)
                 },
                 selectChange(e) {
                         this.init();
@@ -98,20 +91,33 @@ export default {
                         this.payTotal();
                         this.$refs.MypLoadmoreApi.load({
                                 token: utils.storage.getStorage("token"),
-                                payType: this.payType,
+                                merCode: utils.storage.getStorage("merCode"),
+                                telePhone: utils.storage.getStorage("telePhone"),
+                                md5Data: base.md5Data,
                                 startTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
-                                endTime: utils.formatDate(new Date(), "yyyy-MM-dd")
+                                endTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
+                                tranType:this.payType,
+
                         });
                 },
                 payTotal() {
                         payOrderTodayTotal(this.openId)({
                                 token: utils.storage.getStorage("token"),
+                                merCode: utils.storage.getStorage("merCode"),
+                                telePhone: utils.storage.getStorage("telePhone"),
+                                md5Data: base.md5Data,
+                                startTime:utils.formatDate(new Date(), "yyyy-MM-dd"),
+                                endTime:utils.formatDate(new Date(), "yyyy-MM-dd"),
                                 payType: this.payType
-                        }).then(data => {
-                                if (data.resultCode === "0") {
-                                        this.totalAmount = data.data.amount;
-                                        this.totalWechatCount = data.data.wxCount;
-                                        this.totalAlipayCount = data.data.aliCount;
+                        }).then(res => {
+                                if (res.code === "001") {
+                                        let data = res.result.data.merTodayTranAllInfo;
+                                        this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
+                                        this.totalAllCount = data.totalCount; //  当天总交易条数
+
+                                        this.totalWechatCount = data.wxCount; //  当天微信交易条数
+                                        this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
+                                        this.totalSkCount = data.skCount; // 当前刷卡交易条数
                                 } else {
                                         this.Toast(data.resultMsg);
                                 }

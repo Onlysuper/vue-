@@ -14,8 +14,13 @@
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
-                                        <pay-item @click.native="toDetail(item)" :entName="item.payType | analy('payType')" :time="item.createTime | dateFormatCN('mmddhhmm')" :status="item.status | analy('payStatus')" :statusClass="item.status" :amount="item.amount | moneyFormatCN">
-                                                <i :class="`icon-${item.payType.toLowerCase()}`" slot="icon"></i>
+                                        <pay-item 
+                                        @click.native="toDetail(item)" 
+                                        :entName="payType | analy('payType')"
+                                        :time="item.tranDateTime | dateFormatCN('mmddhhmm')" 
+                                        :amount="item.tranAmt | moneyFormatCN"
+                                        >
+                                                <i :class="`icon-${payType.toLowerCase()}`" slot="icon"></i>
                                         </pay-item>
                                 </div>
                         </loadmore>
@@ -36,7 +41,7 @@ import Loadmore from "@src/appcomponents/Loadmore";
 import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import SearchPage from "@src/appcomponents/SearchPage";
 import Tip from "@src/appcomponents/Tip";
-
+import base from "@src/apis/base.js";
 import { payOrderQueryList, payOrderSum } from "@src/apis";
 import utils from "@src/common/utils.js";
 import { mapState } from "vuex";
@@ -63,18 +68,23 @@ export default {
                         amountCount: "",
                         amountSum: "",
                         payStatus: CONST.payStatus,
+                        payType:"",
                         searchQuery: {
-                                status: "SUCCESS",
-                                payType: "",
+                                
+                                token: utils.storage.getStorage("token"),
+                                merCode: utils.storage.getStorage("merCode"),
+                                telePhone: utils.storage.getStorage("telePhone"),
+                                md5Data: base.md5Data,
+                                tranType:"",
                                 startTime: utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd"),
                                 endTime: utils.formatDate(new Date(Date.now() - 0 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd")
                         }
                 };
         },
         mounted() {
-                this.payOrderSum();
+                // this.payOrderSum();
                 this.$refs.MypLoadmoreApi.load({
-                        token: utils.storage.getStorage("token"),
+                        // token: utils.storage.getStorage("token"),
                         ...this.searchQuery
                 });
 
@@ -89,18 +99,19 @@ export default {
                 },
                 formatList(list) {
                         this.newlist = [...list];
-                        for (let i = 0; i < this.newlist.length; i++) {
-                                let currentDate = this.newlist[i].createTime.split(" ")[0];
-                                if (i === 0) {
-                                        this.newlist[i]["date"] = currentDate;
-                                } else {
-                                        let preDate = this.newlist[i - 1].createTime.split(" ")[0];
-                                        this.newlist[i]["date"] = "";
-                                        if (currentDate !== preDate) {
-                                                this.newlist[i]["date"] = currentDate;
-                                        }
-                                }
-                        }
+                        // console.log(this.newlist);
+                        // for (let i = 0; i < this.newlist.length; i++) {
+                        //         let currentDate = this.newlist[i].tranDateTime.split(" ")[0];
+                        //         if (i === 0) {
+                        //                 this.newlist[i]["date"] = currentDate;
+                        //         } else {
+                        //                 let preDate = this.newlist[i - 1].tranDateTime.split(" ")[0];
+                        //                 this.newlist[i]["date"] = "";
+                        //                 if (currentDate !== preDate) {
+                        //                         this.newlist[i]["date"] = currentDate;
+                        //                 }
+                        //         }
+                        // }
                 },
                 watchDataList(list) {
                         this.formatList(list);
@@ -114,7 +125,7 @@ export default {
                                 token: utils.storage.getStorage("token"),
                                 ...this.searchQuery
                         });
-                        this.payOrderSum();
+                        // this.payOrderSum();
                 },
                 payOrderSum() {
                         this.showTip = false;

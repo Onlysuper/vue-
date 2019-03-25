@@ -49,6 +49,16 @@
                                 </div>
                                 <div class="info-item">
                                         <i class="icon"></i>
+                                        <div class="info-title">银联二维码手续费率(一千元以下) </div>
+                                        <div class="info-cont">{{detailData.qylCommisionValue}}</div>
+                                </div>
+                                 <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">银联二维码手续费率(一千元以上) </div>
+                                        <div class="info-cont">{{detailData.qylThousandValue}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
                                         <div class="info-title">结算类型</div>
                                         <div class="info-cont">{{detailData.merSettType}}</div>
                                 </div>

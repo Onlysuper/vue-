@@ -68,8 +68,8 @@ export default {
                         type: Object,
                         default() {
                                 return {
-                                        pageSize: 20,//查询条数
-                                        currentPage: 0// 当前页数
+                                        limit: 20,
+                                        page: 0
                                 };
                         }
                 },
@@ -82,8 +82,7 @@ export default {
         },
         watch: {
                 list(list) {
-                        console.log(list);
-                        this.$emit("watchDataList", list, this.count, this.loadQuery.currentPage);
+                        this.$emit("watchDataList", list, this.count, this.loadQuery.page);
                 }
         },
         data() {
@@ -103,13 +102,12 @@ export default {
 
         methods: {
                 loadData(query) {
-                        return this.api(this.openId)(query).then(res => {
-                                if (res.code === "001") {
-                                        let data = res.result.data.merTranList.resultList;
-                                        this.count = data.totalRows;
-                                        return data || [];
+                        return this.api(this.openId)(query).then(data => {
+                                if (data.resultCode === "0") {
+                                        this.count = data.count;
+                                        return data.data.list || [];
                                 } else {
-                                        Toast(res.message);
+                                        Toast(data.resultMsg);
                                         return [];
                                 }
                         });
@@ -122,7 +120,7 @@ export default {
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
                         this.list = [];
                         this.$refs.loadmore.finishInfinite(false);
-                        // this.loadQuery.currentPage++;
+                        // this.loadQuery.page++;
                         // this.loadData(this.loadQuery).then(list => {
                         //   this.list = list;
                         //   this.isAllLoaded(list);
@@ -133,7 +131,7 @@ export default {
                         this.allLoaded = false;
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
 
-                        this.loadQuery.currentPage = 1;
+                        this.loadQuery.page = 1;
                         this.loadData(this.loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = list;
@@ -150,7 +148,7 @@ export default {
                                 done(true)
                                 return;
                         };
-                        this.loadQuery.currentPage++;
+                        this.loadQuery.page++;
                         this.loadData(this.loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = this.list.concat(list);
@@ -160,7 +158,7 @@ export default {
                         });
                 },
                 isAllLoaded(data) {
-                        if (data.length < this.loadQuery.pageSize) {
+                        if (data.length < this.loadQuery.limit) {
                                 this.$refs.loadmore.finishInfinite(true);
                                 this.allLoaded = true;
                         }

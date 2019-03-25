@@ -13,8 +13,11 @@ const getCustomerList = () => { return (params) => { return http.post(base.oaIp,
 const getCustomerInfo = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerDetailInfo", params) } }
 //退出登录
 const logout = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/userLoginOut", params) } }
-// /ChnpayAgent/realMerPubNum/userLoginOut
+// 分页查询交易记录列表
+const payOrderQueryList = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerTranList", params) } }
 
+// 查询今日交易统计
+const payOrderTodayTotal = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerTodayTran", params) } }
 
 
 // 获取当前手机号下的商户列表
@@ -72,10 +75,10 @@ const electronicQueryConfig = () => { return params => { return http.post(base.o
 const payOrderQuery = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/product/status/" + openId, params, false) } }
 
 // 查询今日交易统计
-const payOrderTodayTotal = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/payOrder/total/nowday/" + openId, params, false) } }
+// const payOrderTodayTotal = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/payOrder/total/nowday/" + openId, params, false) } }
 
 // 分页查询交易记录列表
-const payOrderQueryList = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/payOrder/page/" + openId, params, false) } }
+// const payOrderQueryList = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/payOrder/page/" + openId, params, false) } }
 
 // 分页统计查询
 const payOrderSum = openId => { return params => { return http.post(base.oaIp, "/wxCustomer/payOrder/sum/" + openId, params, false) } }
