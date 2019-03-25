@@ -1,44 +1,63 @@
 <template>
         <div class="usercore-container" v-show="pageShow">
                 <div class="user-info">
-                        <div class="info-item">
-                                <i class="icon"></i>
-                                <div class="info-title">企业名称</div>
-                                <div class="info-cont">{{entName}}</div>
+                        <div class="block-container">
+                                <div class="block-title">商户基本信息</div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">商户编号</div>
+                                        <div class="info-cont">{{detailData.merCode}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">企业名称</div>
+                                        <div class="info-cont">{{detailData.merName}}</div>
+                                </div>
+                                
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">经营名称</div>
+                                        <div class="info-cont">{{detailData.merShortName}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">社会统一信用代码</div>
+                                        <div class="info-cont">{{detailData.businessLicense}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">联系人</div>
+                                        <div class="info-cont">{{detailData.merRelMan}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">联系人电话</div>
+                                        <div class="info-cont">{{detailData.merRelTel}}</div>
+                                </div>
                         </div>
-                        <div class="info-item">
-                                <i class="icon"></i>
-                                <div class="info-title">企业税号</div>
-                                <div class="info-cont">{{taxNo}}</div>
-                                <!--<span class="arrow"></span>-->
-                        </div>
-                        <div class="info-item">
-                                <i class="icon"></i>
-                                <div class="info-title">手机号</div>
-                                <div class="info-cont">{{telephone}}</div>
-                        </div>
-                        <div class="info-item">
-                                <i class="icon"></i>
-                                <div class="info-title">联系人</div>
-                                <div class="info-cont">{{linkMan}}</div>
-                        </div>
-                        <div class="info-item">
-                                <i class="icon"></i>
-                                <div class="info-title">序列号</div>
-                                <div class="info-cont">{{seriaNumber}}</div>
-                        </div>
-                </div>
-                <div class="info-item ent-name" v-show="entNameShow">
-                        <i class="icon"></i>
-                        <div class="info-title">经营名称</div>
-                        <div class="info-cont" @click="changeName">{{businessName}}</div>
-                        <span class="arrow"></span>
-                </div>
-                <div class="info-item pay-select" v-show="switchrShow">
-                        <span>电子发票</span>
-                        <div class="switch">
-                                <mt-switch v-model="switchr" @change="handleSwitchr"></mt-switch>
-                        </div>
+                         <div class="block-container">
+                                <div class="block-title">费率结算信息</div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">微信手续费</div>
+                                        <div class="info-cont">{{detailData.qwxCommisionValue}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">支付宝手续费率</div>
+                                        <div class="info-cont">{{detailData.qzfCommisionValue}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">结算类型</div>
+                                        <div class="info-cont">{{detailData.merSettType}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon"></i>
+                                        <div class="info-title">商户收款账号</div>
+                                        <div class="info-cont">{{detailData.merSettAcct}}</div>
+                                </div>
+                         </div>
                 </div>
                 <div class="info-item exit-login-btn" @click="exit">退出登录</div>
         </div>
@@ -48,6 +67,7 @@
 <script>
 import { MessageBox } from "mint-ui";
 import utils from "@src/common/utils.js";
+import base from "@src/apis/base.js";
 import TimerBtn from "@src/appcomponents/TimerBtn";
 import Buttonr from "@src/appcomponents/Button";
 import { getCustomerInfo, logout, changeCustomerName } from "@src/apis";
@@ -59,6 +79,18 @@ export default {
                         switchr: false,
                         switchrShow: false, //是否显示支付完成后开票
                         entNameShow: true, //是否显示经验名称项
+                        detailData:{
+                                merName:"",
+                                merCode:"",
+                                merShortName:"",
+                                businessLicense:"",
+                                merRelMan:"",
+                                merRelTel:"",
+                                merSettAcct:"",
+                                merSettType:"",
+                                qwxCommisionValue:"",
+                                qzfCommisionValue:""
+                        },
                         entName: "",
                         seriaNumber: "",
                         businessName: "",
@@ -84,22 +116,18 @@ export default {
         },
         methods: {
                 getUserInfo(openId) {
-                        getCustomerInfo(openId)({
-                                token: utils.storage.getStorage("token")
-                        }).then(data => {
-                                if (data.resultCode == "0") {
-                                        //登录成功
+                        getCustomerInfo()({
+                                token: utils.storage.getStorage("token"),
+                                telePhone:utils.storage.getStorage("telePhone"),
+                                merCode:utils.storage.getStorage("merCode"),// 商户编号
+                                md5Data:base.md5Data
+                        }).then(res => {
+                                if(res.code=='001'){
                                         this.pageShow = true;
-                                        let userInfo = data.data;
-                                        this.entName = userInfo.entName;
-                                        this.seriaNumber = userInfo.seriaNumber;
-                                        this.businessName = userInfo.businessName;
-                                        this.telephone = userInfo.telephone;
-                                        this.taxNo = userInfo.taxNo;
-                                        this.randomCode = userInfo.randomCode;
-                                        this.linkMan = userInfo.linkMan;
-                                } else if (data.resultCode == "01") {
-                                        //用户未登录，请重新登录
+                                        let data=res.result.data.merDetailInfo;
+                                        this.detailData={...data};
+                                }else{ 
+                                            //用户未登录，请重新登录
                                         this.Toast(data.resultMsg);
                                         this.$router.replace({
                                                 path: "/customer/login",
@@ -107,10 +135,8 @@ export default {
                                                         redirect: this.$route.path
                                                 }
                                         });
-                                } else {
-                                        //其他
-                                        this.Toast(data.resultMsg);
                                 }
+                              
                         });
                 },
                 changeName() {
@@ -159,11 +185,17 @@ export default {
                 },
                 exit() {
                         MessageBox.confirm("确定退出登录？").then(action => {
-                                logout(this.openId)({}).then(data => {
-                                        if (data.resultCode == "0") {
-                                                localStorage.removeItem("token");
+                                logout()({
+                                        token:utils.storage.getStorage("token"),
+                                        telePhone:"",
+                                        md5Data:""
+                                }).then(res => {
+                                        if(res.code=='001'){
+                                                utils.storage.removeStorage("token");
+                                                utils.storage.removeStorage("telePhone")
+                                                utils.storage.removeStorage("merCode")
                                                 location.reload();
-                                        } else {
+                                        }else{
                                                 this.Toast(data.resultMsg);
                                         }
                                 });
@@ -181,7 +213,16 @@ export default {
         .user-info {
                 background: #fff;
                 padding: 0 30 / @rem;
-                margin-top: 24 / @rem;
+                // margin-top: 24 / @rem;
+        }
+        .block-container{
+                margin-bottom:  30 / @rem;
+                padding-top: 10 / @rem;
+        }
+        .block-title{
+                font-size:30 / @rem;
+                padding: 10 / @rem 0;
+                // text-align: center;
         }
         .info-item {
                 height: 100 / @rem;

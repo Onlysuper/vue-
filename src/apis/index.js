@@ -3,26 +3,37 @@ import http from "./http";
 import base from "./base";
 
 
-// 获取验证码
-const getVerificationCode = phone => { return (params) => { return http.get(base.oaIp, "/wxCustomer/verificationCode/" + phone, params) } }
+// 登录获取验证码
+const getVerificationCode = () => { return (params) => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/sendMsgCode", params) } }
+// 商户登录
+const login = () => { return (params) => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/userLogin", params) } }
+// 获取当前手机号下的商户列表
+const getCustomerList = () => { return (params) => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerList", params) } }
+// 获取商户信息
+const getCustomerInfo = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerDetailInfo", params) } }
+//退出登录
+const logout = () => { return params => { return http.post(base.oaIp, "/ChnpayAgent/realMerPubNum/userLoginOut", params) } }
+// /ChnpayAgent/realMerPubNum/userLoginOut
+
+
 
 // 获取当前手机号下的商户列表
-const getCustomerList = phone => { return (data) => { return http.post(base.oaIp, "/wxCustomer/customerList/" + phone, data) } }
+// const getCustomerList = phone => { return (data) => { return http.post(base.oaIp, "/wxCustomer/customerList/" + phone, data) } }
 
 // 获取当前商户下的二维码列表
 const getCustomerQrcodeList = queryPath => { return (data) => { return http.post(base.oaIp, "/wxCustomer/qrcodeList/" + queryPath, data) } }
 
 // 微信商户登录接口
-const login = queryPath => { return (data) => { return http.post(base.oaIp, "/wxCustomer/login/" + queryPath, data) } }
+// const login = queryPath => { return (data) => { return http.post(base.oaIp, "/wxCustomer/login/" + queryPath, data) } }
 
 // 获取商户信息
-const getCustomerInfo = openId => { return params => { return http.get(base.oaIp, "/wxCustomer/info/" + openId, params) } }
+// const getCustomerInfo = openId => { return params => { return http.get(base.oaIp, "/wxCustomer/info/" + openId, params) } }
 
 // 变更商户经营名称
 const changeCustomerName = () => { return params => { return http.post(base.oaIp, "/wxCustomer/bussinessName/save/", params) } }
 
 // 微信商户退出接口
-const logout = openId => { return data => { return http.post(base.oaIp, "/wxCustomer/logout/" + openId, data) } }
+// const logout = openId => { return data => { return http.post(base.oaIp, "/wxCustomer/logout/" + openId, data) } }
 
 // 微信商户注册接口
 const registCustomer = () => { return data => { return http.postJSON(base.oaIp, "/wxCustomer/customer/register", data) } }
