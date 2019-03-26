@@ -78,6 +78,7 @@
 import { MessageBox } from "mint-ui";
 import utils from "@src/common/utils.js";
 import base from "@src/apis/base.js";
+import {md5Encrypt} from "@src/common/secret.js";
 import TimerBtn from "@src/appcomponents/TimerBtn";
 import Buttonr from "@src/appcomponents/Button";
 import { getCustomerInfo, logout, changeCustomerName } from "@src/apis";
@@ -126,19 +127,22 @@ export default {
         },
         methods: {
                 getUserInfo(openId) {
+                        let token = utils.storage.getStorage("token");
+                        let phone = utils.storage.getStorage("telePhone");
+                        let merCode = utils.storage.getStorage("merCode");
                         getCustomerInfo()({
-                                token: utils.storage.getStorage("token"),
-                                telePhone:utils.storage.getStorage("telePhone"),
-                                merCode:utils.storage.getStorage("merCode"),// 商户编号
-                                md5Data:base.md5Data
+                                token: token,
+                                telePhone:phone,
+                                merCode:merCode,// 商户编号
+                                md5Data:md5Encrypt(`${phone+merCode+token+base.md5Data}`)
                         }).then(res => {
                                 if(res.code=='001'){
-                                        this.pageShow = true;
-                                        let data=res.result.data.merDetailInfo;
-                                        this.detailData={...data};
+                                       this.pageShow = true;
+                                         let data=res.result.data.merDetailInfo;
+                                         this.detailData={...data};
                                 }else{ 
                                             //用户未登录，请重新登录
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(res.message);
                                         this.$router.replace({
                                                 path: "/customer/login",
                                                 query: {

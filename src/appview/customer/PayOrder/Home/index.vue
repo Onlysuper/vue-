@@ -91,16 +91,6 @@ export default {
                 init() {
                         this.scroll = 0;
                         this.payTotal();
-                        // this.$refs.MypLoadmoreApi.load({
-                        //         token: utils.storage.getStorage("token"),
-                        //         merCode: utils.storage.getStorage("merCode"),
-                        //         telePhone: utils.storage.getStorage("telePhone"),
-                        //         md5Data: base.md5Data,
-                        //         startTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
-                        //         endTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
-                        //         tranType:this.payType,
-
-                        // });
                 },
                 payTotal() {
                         payOrderTodayTotal(this.openId)({

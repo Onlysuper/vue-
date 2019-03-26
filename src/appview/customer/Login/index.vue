@@ -16,6 +16,7 @@
       </div>
       <div class="form-control border-bottom-1px">
         <input
+          v-model="valiCode"
           ref="code"
           @input="isCodeReg($event)"
           v-wx-blur
@@ -44,6 +45,7 @@
 import validator from "@src/common/validator.js";
 import base from "@src/apis/base.js";
 import utils from "@src/common/utils.js";
+import {md5Encrypt} from "@src/common/secret.js";
 import TimerBtn from "@src/appcomponents/TimerBtn";
 import Buttonr from "@src/appcomponents/Button";
 import {
@@ -57,7 +59,8 @@ export default {
   data() {
     return {
       isPhone: true,
-      isCode: true
+      isCode: true,
+      valiCode:"", // 验证码
     };
   },
   props: {},
@@ -92,8 +95,8 @@ export default {
       }
       let phone = this.$refs.phone.value.trim();
       getVerificationCode()({
-        md5Data:base.md5Data,
-        telePhone: phone
+        telePhone: phone,
+        md5Data:md5Encrypt(`${phone+base.md5Data}`),
       }).then(res => {
         if (res.code == "001") {
           this.Toast("验证码发送成功！");
@@ -113,12 +116,15 @@ export default {
     // 登录
     submitGetCustomerList() {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-      let phone = this.$refs.phone.value.trim(); // 电话号码
       let token;
+      let phone = this.$refs.phone.value.trim(); // 电话号码
+      let msgValiCode=this.valiCode;   // 验证码
+      let allData = `${phone+msgValiCode+base.md5Data}`; // 需要加密的数据;
+      let md5Data = md5Encrypt(allData,base.md5Data); // 加密内容
       login()({
-        telephone: phone,
-        msgValiCode: "",
-        md5Data: base.md5Data
+        telePhone: phone,
+        msgValiCode: msgValiCode,
+        md5Data: md5Data
       }).then(res => {
         return new Promise((resolve, reject) => {
           if (res.code == "001") {
@@ -127,7 +133,7 @@ export default {
             getCustomerList()({
               token: token,
               telePhone: phone,
-              md5Data: base.md5Data
+              md5Data: md5Encrypt(phone+token+base.md5Data)
             }).then(res => {
               if (res.code == "001") {
                 let { merList } = res.result.data; // 商户列表

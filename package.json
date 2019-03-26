@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "crypto-js": "^3.1.9-1",
     "jquery": "^3.2.1",
     "js-base64": "^2.4.5",
     "js-crc": "^0.2.0",
