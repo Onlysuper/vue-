@@ -15,7 +15,7 @@
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
-                                        <pay-item 
+                                        <pay-item  
                                         @click.native="toDetail(item)" 
                                         :entName="payType | analy('payType')"
                                         :time="item.tranDateTime | datenumFormatCN('yyyy-MM-dd hh:mm')" 
@@ -148,21 +148,22 @@ export default {
                         });
                         // this.payOrderSum();
                 },
+                // 合计
                 payOrderSum() {
-                        this.showTip = false;
-                        payOrderSum(utils.getOpenId())({
-                                token: utils.storage.getStorage("token"),
-                                ...this.searchQuery
-                        }).then(data => {
-                                if (data.resultCode == "0") {
-                                        this.amountCount = data.data.amountCount;
-                                        // this.amountSum = utils.accMul(data.data.amountSum, 0.01);
-                                        this.amountSum = data.data.amountSum;
-                                        this.showTip = true;
-                                } else {
-                                        this.Toast(data.resultMsg);
-                                }
-                        })
+                        // this.showTip = false;
+                        // payOrderSum(utils.getOpenId())({
+                        //         token: utils.storage.getStorage("token"),
+                        //         ...this.searchQuery
+                        // }).then(data => {
+                        //         if (data.resultCode == "0") {
+                        //                 this.amountCount = data.data.amountCount;
+                        //                 // this.amountSum = utils.accMul(data.data.amountSum, 0.01);
+                        //                 this.amountSum = data.data.amountSum;
+                        //                 this.showTip = true;
+                        //         } else {
+                        //                 this.Toast(data.resultMsg);
+                        //         }
+                        // })
                 },
                 setDate(type) {
                         switch (type) {

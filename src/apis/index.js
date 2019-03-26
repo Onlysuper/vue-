@@ -18,7 +18,8 @@ const payOrderQueryList = () => { return params => { return http.postJSON(base.o
 
 // 查询今日交易统计
 const payOrderTodayTotal = () => { return params => { return http.postJSON(base.oaIp, "/ChnpayAgent/realMerPubNum/queryMerTodayTran.do", params) } }
-
+// 查询商户结算记录
+const settleQuery = () => { return (params) => { return http.postJSON(base.oaIp, `/ChnpayAgent/realMerPubNum/queryMerSettList.do`, params, false) } }
 
 
 // 获取当前手机号下的商户列表
@@ -107,7 +108,7 @@ const getPaySigninfo = () => { return (params) => { return http.get(base.testIp,
 const submitPayOrder = () => { return (params) => { return http.post(base.testIp, `/pay/micropay`, params, false) } }
 
 // 查询商户结算记录
-const settleQuery = () => { return (params) => { return http.post(base.oaIp, `/wxCustomer/customerSettle/page`, params, false) } }
+// const settleQuery = () => { return (params) => { return http.post(base.oaIp, `/wxCustomer/customerSettle/page`, params, false) } }
 
 // 创建电票订单
 const createEicOrder = () => { return (params) => { return http.postJSON(base.oaIp, `/electronic/order`, params) } }

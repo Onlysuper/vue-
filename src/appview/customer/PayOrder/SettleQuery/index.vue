@@ -13,13 +13,13 @@
                                 <panel-body-row title="开户银行" :desc="settleCard.branchName"></panel-body-row>
                                 <panel-body-row title="结算帐号" :desc="settleCard.accountNo"></panel-body-row>
                         </div>
-
-                        <infinite-scroll :api="api" @watchDataList="watchDataList" ref="InfiniteScroll">
+                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi">
+                        <!-- <infinite-scroll :api="api" @watchDataList="watchDataList" ref="InfiniteScroll"> -->
                                 <!-- item -->
                                 <pay-item @click.native="toUrl(item)" v-for="(item,index) in newlist" :key="index" :entName="item.settleType" :time="item.lastUpdateTime" :status="item.outMoneyStatus | analy('outMoneyStatus')" :statusClass="item.outMoneyStatus == 'OUT_SUCCESS'?'SUCCESS':''" :amount="item.settleAmount | moneyFormatCN(true)">
                                         <!-- <i slot="icon" class="icon-piao piao-icon" :class="{'red-icon':item.billAmount < 0}"></i> -->
                                 </pay-item>
-                        </infinite-scroll>
+                        </loadmore>
 
                 </div>
 
@@ -37,7 +37,8 @@
 <script>
 import PayItem from "@src/appcomponents/PayItem";
 import FullPagePopup from "@src/appcomponents/FullPagePopup";
-import InfiniteScroll from "@src/appcomponents/InfiniteScroll";
+// import InfiniteScroll from "@src/appcomponents/InfiniteScroll";
+import Loadmore from "@src/appcomponents/Loadmore";
 import SearchPage from "@src/appcomponents/SearchPage";
 import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
 import { settleQuery, getCustomerInfo } from "@src/apis";
@@ -49,7 +50,8 @@ export default {
         components: {
                 PayItem,
                 FullPagePopup,
-                InfiniteScroll,
+                // InfiniteScroll,
+                Loadmore,
                 SearchPage,
                 ChangePanel,
                 PanelBodyRow
@@ -89,9 +91,12 @@ export default {
 
         },
         mounted() {
-                this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+                // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
 
-                this.$refs.InfiniteScroll.load({ ...this.searchQuery });
+                // this.$refs.InfiniteScroll.load({ ...this.searchQuery }); 
+                this.$refs.MypLoadmoreApi.load({
+                        ...this.searchQuery
+                });
                 this.initSearch();
         },
         methods: {
@@ -101,14 +106,14 @@ export default {
                 },
                 confirmQuery() {
                         this.searchVisible = false;
-                        this.$refs.InfiniteScroll.load({ ...this.searchQuery });
+                        // this.$refs.InfiniteScroll.load({ ...this.searchQuery });
                 },
                 toUrl(item) {
                         this.$router.push({ path: `/customer/settleDetail`, query: item })
                 },
                 setDate(date) {
                         this.searchQuery.createTimeStart = utils.formatDate(date, "yyyy-MM-dd");
-                        this.$refs.InfiniteScroll.load({ ...this.searchQuery });
+                        // this.$refs.InfiniteScroll.load({ ...this.searchQuery });
                 },
                 initSearch() {
                         this.$nextTick(() => {
@@ -122,6 +127,9 @@ export default {
                                         }
                                 });
                         });
+                },
+                loadmordFinishedHand(){
+                       console.log('loadmordFinishedHand'); 
                 }
         }
 }
