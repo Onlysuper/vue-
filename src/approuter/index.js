@@ -349,7 +349,7 @@ router.beforeEach((to, from, next) => {
                 if (openId) {
                         utils.storage.saveStorage("openId", openId);
                 } else {
-                        Toast("参数缺失");
+                        Toast("参数缺失"); 
                         return;
                 }
         }

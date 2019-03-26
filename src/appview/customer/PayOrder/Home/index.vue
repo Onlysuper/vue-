@@ -8,9 +8,10 @@
                                 </div>
                                 <div class="income-today-number">交易共 {{totalAllCount}} 笔</div>
                                 <div class="income-today-numbers clearfix">
-                                        <div class="income-today-weixin-number">微信共 {{totalWechatCount}} 笔</div>
-                                        <div class="income-today-alipay-number">支付宝共 {{totalAlipayCount}} 笔</div>
-                                        <div class="income-today-alipay-number">刷卡共 {{totalSkCount}} 笔</div>
+                                        <div class="income-today-weixin-number">微信 {{totalWechatCount}} 笔</div>
+                                        <div class="income-today-alipay-number">支付宝 {{totalAlipayCount}} 笔</div>
+                                        <div class="income-today-alipay-number">刷卡 {{totalSkCount}} 笔</div>
+                                        <div class="income-today-alipay-number">银联二维码 {{totalSkCount}} 笔</div>
                                 </div>
                         </div>
                         <div class="navbar-box">
@@ -23,8 +24,8 @@
                                         历史记录
                                 </div>
                         </div>
-                        <div class="today-pay-order-list" ref="scrollWarpper">
-                                <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
+                        <!-- <div class="today-pay-order-list" ref="scrollWarpper" v-if="false"> -->
+                                <!-- <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
                                         <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" 
                                         :entName="payType | analy('payType')" 
                                         :time="item.tranDateTime | dateFormatCN('hhmm')" 
@@ -32,8 +33,8 @@
                                         >
                                                 <i :class="`icon-${payType.toLowerCase()}`" slot="icon"></i>
                                         </pay-item>
-                                </loadmore>
-                        </div>
+                                </loadmore> -->
+                        <!-- </div> -->
                 </div>
         </div>
 </template>
@@ -67,6 +68,7 @@ export default {
                         totalWechatCount: 0,
                         totalAlipayCount: 0,
                         totalSkCount: 0,
+                        ylCount: 0,
                         api: payOrderQueryList,
                         list: []
                 };
@@ -89,16 +91,16 @@ export default {
                 init() {
                         this.scroll = 0;
                         this.payTotal();
-                        this.$refs.MypLoadmoreApi.load({
-                                token: utils.storage.getStorage("token"),
-                                merCode: utils.storage.getStorage("merCode"),
-                                telePhone: utils.storage.getStorage("telePhone"),
-                                md5Data: base.md5Data,
-                                startTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
-                                endTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
-                                tranType:this.payType,
+                        // this.$refs.MypLoadmoreApi.load({
+                        //         token: utils.storage.getStorage("token"),
+                        //         merCode: utils.storage.getStorage("merCode"),
+                        //         telePhone: utils.storage.getStorage("telePhone"),
+                        //         md5Data: base.md5Data,
+                        //         startTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
+                        //         endTime: utils.formatDate(new Date(), "yyyy-MM-dd"),
+                        //         tranType:this.payType,
 
-                        });
+                        // });
                 },
                 payTotal() {
                         payOrderTodayTotal(this.openId)({
@@ -118,6 +120,7 @@ export default {
                                         this.totalWechatCount = data.wxCount; //  当天微信交易条数
                                         this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
                                         this.totalSkCount = data.skCount; // 当前刷卡交易条数
+                                        this.ylCount = data.ylCount; // 当前刷卡交易条数
                                 } else {
                                         this.Toast(data.resultMsg);
                                 }

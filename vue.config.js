@@ -31,23 +31,24 @@ module.exports = {
     /**
      * 开发环境服务器配置
      */
-    // devServer: {
-    //     open: true,
-    //     host: '0.0.0.0',
-    //     port: 8080,
-    //     https: false,
-    //     hotOnly: false,
-    //     //配置跨域处理,只有一个代理
-    //     proxy: 'http://tm.yeepiao.com',
-    //     //配置跨域处理,多个代理
-    //     // disableHostCheck: true,
-    //     // proxy: {
-    //     // '/api': {
-    //     // target: 'http://118.190.149.38:8088',
-    //     // changeOrigin: false
-    //     // }
-    //     // }
-    // },
+    devServer: {
+        open: true,
+        host: '0.0.0.0',
+        port: 8080,
+        https: false,
+        hotOnly: false,
+        //配置跨域处理,只有一个代理
+        // proxy: 'http://test14.qtopay.cn',
+        proxy: 'http://test14.qtopay.cn',
+        //配置跨域处理,多个代理
+        // disableHostCheck: true,
+        // proxy: {
+        // '/api': {
+        // target: 'http://118.190.149.38:8088',
+        // changeOrigin: false
+        // }
+        // }
+    },
     //修改全局路径
     chainWebpack: (config) => {
         config.resolve.alias

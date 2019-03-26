@@ -9,6 +9,7 @@
                         <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
                                 {{searchQuery.status | analy('payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
                         </tip>
+                      
                         <!-- <div class="history-list"> -->
                         <loadmore :api="api" @watchDataList="watchDataList" @refresh="payOrderSum" ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
@@ -17,10 +18,10 @@
                                         <pay-item 
                                         @click.native="toDetail(item)" 
                                         :entName="payType | analy('payType')"
-                                        :time="item.tranDateTime | dateFormatCN('mmddhhmm')" 
+                                        :time="item.tranDateTime | datenumFormatCN('yyyy-MM-dd hh:mm')" 
                                         :amount="item.tranAmt | moneyFormatCN"
                                         >
-                                                <i :class="`icon-${payType.toLowerCase()}`" slot="icon"></i>
+                                                <i :class="`icon-${iconname}`" slot="icon"></i>
                                         </pay-item>
                                 </div>
                         </loadmore>
@@ -70,7 +71,7 @@ export default {
                         payStatus: CONST.payStatus,
                         payType:"",
                         searchQuery: {
-                                
+                                payType:"",
                                 token: utils.storage.getStorage("token"),
                                 merCode: utils.storage.getStorage("merCode"),
                                 telePhone: utils.storage.getStorage("telePhone"),
@@ -80,6 +81,24 @@ export default {
                                 endTime: utils.formatDate(new Date(Date.now() - 0 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd")
                         }
                 };
+        },
+        computed:{
+                iconname(){
+                    let payType =this.searchQuery.payType;
+                    if(payType=='0'){
+                            // 刷卡
+                            return "wechat";
+                    }if(payType=='1'){
+                            // 微信
+                            return "wechat";
+                    }if(payType=='2'){
+                            // 支付宝
+                            return "alipay";
+                    }if(payType=='3'){
+                            // 银联
+                            return "wechat";
+                    }
+                }
         },
         mounted() {
                 // this.payOrderSum();
@@ -92,6 +111,8 @@ export default {
         },
         methods: {
                 toDetail(item) {
+                        // console.log(item);
+                        // return false;
                         this.$router.push({
                                 path: "/customer/payOrderDetail",
                                 query: item
@@ -225,7 +246,11 @@ export default {
                                 });
                         });
                 }
+        },
+        watch:{
+             
         }
+        
 };
 </script>
 

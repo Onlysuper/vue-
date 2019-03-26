@@ -11,7 +11,7 @@
       </div>
       <div class="footer">
         <p class="time mar-l">{{time}}</p>
-        <p class="status red" v-if="statusClass != 'SUCCESS'" :class="{success:statusClass == 'SUCCESS'}">{{status}}</p>
+        <p class="status red" v-if="statusClass&&statusClass != 'SUCCESS'" :class="{success:statusClass == 'SUCCESS'}">{{status}}</p>
       </div>
     </div>
   </div>

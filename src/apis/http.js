@@ -3,9 +3,9 @@ import qs from "qs";
 import { Indicator } from 'mint-ui'
 
 //全局请求拦截器
+axios.defaults.withCredentials = true;
 axios.interceptors.request.use(function (config) {
         config.isLoading && Indicator.open();
-        config.headers.common['iToken'] = localStorage.getItem("token") || "";
         return config;
 }, function (error) {
         return Promise.reject(error);
@@ -50,19 +50,19 @@ axios.interceptors.response.use(function (response) {
 })
 
 export default {
-        post: function (baseURL, url, data, isLoading) {
+
+        post: function (baseURL, url, data) {
                 return axios({
                         method: "post",
                         url: url,
                         baseURL: baseURL,
                         data: qs.stringify(data),
                         timeout: 10000,
-                        isLoading: isLoading == false ? false : true,
                         headers: {
-                                // "X-requested-With": "XMLHttpRequest",
-                                //使用form表单进行数据交互
-                                "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-                        },
+                        "X-requested-With": "XMLHttpRequest",
+                        //使用form表单进行数据交互
+                        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+                        }
                 })
         },
         postJSON: function (baseURL, url, data, isLoading) {
@@ -76,7 +76,9 @@ export default {
                         headers: {
                                 // "X-requested-With": "XMLHttpRequest",
                                 //使用form表单进行数据交互
-                                "Content-Type": "application/json"
+                                // "X-requested-With": "XMLHttpRequest",
+                                "Cache-Control": "no-cache",
+                                "Content-Type": "application/json;charset=UTF-8"
                         },
                 })
         },
