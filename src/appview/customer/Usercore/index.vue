@@ -199,10 +199,12 @@ export default {
                 },
                 exit() {
                         MessageBox.confirm("确定退出登录？").then(action => {
+                                let token = utils.storage.getStorage("token");
+                                let phone = utils.storage.getStorage("telePhone");
                                 logout()({
-                                        token:utils.storage.getStorage("token"),
-                                        telePhone:"",
-                                        md5Data:""
+                                        token:token,
+                                        telePhone:phone,
+                                        md5Data:md5Encrypt(`${phone+token+base.md5Data}`)
                                 }).then(res => {
                                         if(res.code=='001'){
                                                 utils.storage.removeStorage("token");
