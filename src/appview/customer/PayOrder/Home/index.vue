@@ -43,6 +43,7 @@
 import PayItem from "@src/appcomponents/PayItem";
 import utils from "@src/common/utils.js";
 import base from "@src/apis/base.js";
+import {md5Encrypt} from "@src/common/secret.js";
 import Loadmore from "@src/appcomponents/Loadmore";
 import CONST from "@src/const";
 import { Toast } from "mint-ui";
@@ -93,24 +94,34 @@ export default {
                         this.payTotal();
                 },
                 payTotal() {
+                        let phone = utils.storage.getStorage("telePhone");
+                        let token = utils.storage.getStorage("token");
+                        let merCode = utils.storage.getStorage("merCode");
+                        let startTime=utils.formatDate(new Date(), "yyyy-MM-dd");
+                        let endTime=utils.formatDate(new Date(), "yyyy-MM-dd");
                         payOrderTodayTotal(this.openId)({
-                                token: utils.storage.getStorage("token"),
-                                merCode: utils.storage.getStorage("merCode"),
-                                telePhone: utils.storage.getStorage("telePhone"),
-                                md5Data: base.md5Data,
-                                startTime:utils.formatDate(new Date(), "yyyy-MM-dd"),
-                                endTime:utils.formatDate(new Date(), "yyyy-MM-dd"),
-                                payType: this.payType
+                                telePhone: phone,
+                                token: token,
+                                merCode: merCode,
+                                startTime:startTime,
+                                endTime:endTime,
+                                payType: this.payType,
+                                md5Data:md5Encrypt(`${phone+merCode+startTime+endTime+token+base.md5Data}`)
                         }).then(res => {
                                 if (res.code === "001") {
-                                        let data = res.result.data.merTodayTranAllInfo;
-                                        this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
-                                        this.totalAllCount = data.totalCount; //  当天总交易条数
-
-                                        this.totalWechatCount = data.wxCount; //  当天微信交易条数
-                                        this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
-                                        this.totalSkCount = data.skCount; // 当前刷卡交易条数
-                                        this.ylCount = data.ylCount; // 当前刷卡交易条数
+                                        try{
+                                                let data = res.result.data.merTodayTranAllInfo;
+                                                this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
+                                                this.totalAllCount = data.totalCount; //  当天总交易条数
+                                                this.totalWechatCount = data.wxCount; //  当天微信交易条数
+                                                this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
+                                                this.totalSkCount = data.skCount; // 当前刷卡交易条数
+                                                this.ylCount = data.ylCount; // 当前刷卡交易条数
+                                        }catch(err){
+                                                console.log(err);
+                                                // this.Toast('暂无数据');
+                                        }
+                                        
                                 } else {
                                         this.Toast(data.resultMsg);
                                 }

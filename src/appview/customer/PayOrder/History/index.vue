@@ -61,6 +61,10 @@ export default {
         },
         data() {
                 return {
+                        token:utils.storage.getStorage("token"),
+                 merCode:utils.storage.getStorage("merCode"),
+                 phone:utils.storage.getStorage("telePhone"),
+
                         hidden: false,
                         showTip: false,
                         api: payOrderQueryList,
@@ -71,14 +75,16 @@ export default {
                         payStatus: CONST.payStatus,
                         payType:"",
                         searchQuery: {
+                                startTime: "",
+                                endTime:"",
                                 payType:"",
-                                token: utils.storage.getStorage("token"),
-                                merCode: utils.storage.getStorage("merCode"),
-                                telePhone: utils.storage.getStorage("telePhone"),
+                                token:"",
+                                merCode:"",
+                                telePhone: "",
+                                tranType:"0",
                                 md5Data: base.md5Data,
-                                tranType:"",
-                                startTime: utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd"),
-                                endTime: utils.formatDate(new Date(Date.now() - 0 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd")
+                                currentPage:"1",
+                                pageSize:"20",
                         }
                 };
         },
@@ -98,28 +104,54 @@ export default {
                             // 银联
                             return "wechat";
                     }
-                }
+                },
+                currentPage(){
+                        if(this.searchQuery.currentPage){
+                             return this.searchQuery.currentPage   
+                        }else{
+                             return "1";
+                        }
+                },
+                pageSize(){
+                        if(this.searchQuery.pageSize){
+                             return this.searchQuery.pageSize   
+                        }else{
+                             return "20";
+                        }
+                },
+        },
+        created(){
+                let startTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
+                let endTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
+                this.$set(this.searchQuery,"token",this.token)
+                this.$set(this.searchQuery,"merCode",this.merCode)
+                this.$set(this.searchQuery,"telePhone",this.phone)
+                this.$set(this.searchQuery,"startTime",startTime)
+                this.$set(this.searchQuery,"endTime",endTime)
+                this.setQueryMd5Data();
         },
         mounted() {
-                // this.payOrderSum();
                 this.$refs.MypLoadmoreApi.load({
-                        // token: utils.storage.getStorage("token"),
                         ...this.searchQuery
                 });
 
                 this.initSearch();
         },
         methods: {
+                setQueryMd5Data(){
+                        let md5data = `${this.phone+this.merCode+this.searchQuery.startTime+this.searchQuery.endTime+this.searchQuery.currentPage+this.searchQuery.pageSize+this.token+base.md5Data}`;
+                        this.$set(this.searchQuery,"md5Data",`${md5data}`)
+                },
                 toDetail(item) {
-                        // console.log(item);
-                        // return false;
                         this.$router.push({
                                 path: "/customer/payOrderDetail",
                                 query: item
                         });
                 },
                 formatList(list) {
-                        this.newlist = [...list];
+                        if(list.length>0){
+                                this.newlist = [...list];
+                        }
                         // console.log(this.newlist);
                         // for (let i = 0; i < this.newlist.length; i++) {
                         //         let currentDate = this.newlist[i].tranDateTime.split(" ")[0];
@@ -235,6 +267,7 @@ export default {
                                         id: "startTime",
                                         cb: value => {
                                                 this.searchQuery.startTime = value;
+                                                this.setQueryMd5Data()
                                         }
                                 });
                                 this.searchConfig.push({
@@ -243,6 +276,7 @@ export default {
                                         defaultValue: this.searchQuery.endTime,
                                         cb: value => {
                                                 this.searchQuery.endTime = value;
+                                                this.setQueryMd5Data()
                                         }
                                 });
                         });

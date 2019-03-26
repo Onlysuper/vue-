@@ -1,6 +1,6 @@
 
 import utils from "@src/common/utils";
-import formetDate from "@src/common/formetDate";
+// import formetDate from "@src/common/formetDate";
 import CONSTS from "@src/const/index.json";
 let mypFilters = new Object();
 mypFilters.install = function (Vue, options) {
@@ -77,7 +77,7 @@ mypFilters.install = function (Vue, options) {
         // 时间戳转字符串
         Vue.filter('datenumFormatCN', function (dateTimeNum, type) {
                 // var date = new Date(dateTimeNum);
-                return formetDate.formatDate(dateTimeNum, type);
+                return utils.formatDate(dateTimeNum, type);
         });
 
         Vue.filter('myDataFilter', function (dataTimeStr, type) {

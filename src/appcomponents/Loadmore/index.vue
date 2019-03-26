@@ -103,7 +103,15 @@ export default {
 
         methods: {
                 loadData(query) {
-                        return this.api(this.openId)(query).then(res => {
+                        console.log('哈哈哈哈');
+                        console.log(query);
+                        if(query.startTime){
+                                query.startTime=query.startTime.replace(/\/|\-/gi,"")
+                        }
+                        if(query.endTime){
+                                query.endTime=query.endTime.replace(/\/|\-/gi,"")
+                        }
+                        return this.api()(query).then(res => {
                                 if (res.code === "001") {
                                         let data = res.result.data.merTranList.resultList;
                                         this.count = data.totalRows;

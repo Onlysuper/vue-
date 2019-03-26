@@ -44,8 +44,8 @@
 <script>
 import validator from "@src/common/validator.js";
 import base from "@src/apis/base.js";
-import utils from "@src/common/utils.js";
 import {md5Encrypt} from "@src/common/secret.js";
+import utils from "@src/common/utils.js";
 import TimerBtn from "@src/appcomponents/TimerBtn";
 import Buttonr from "@src/appcomponents/Button";
 import {
@@ -94,7 +94,7 @@ export default {
         return;
       }
       let phone = this.$refs.phone.value.trim();
-      getVerificationCode()({
+      getVerificationCode()({ 
         telePhone: phone,
         md5Data:md5Encrypt(`${phone+base.md5Data}`),
       }).then(res => {
