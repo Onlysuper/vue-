@@ -59,6 +59,8 @@ import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import InputWrapper from "@src/appcomponents/InputWrapper";
 import ViewRadius from "@src/appcomponents/ViewRadius";
 import Mask from "@src/appcomponents/Mask";
+import MCell from "@src/appcomponents/MCell";
+Vue.component(MCell.name, MCell);
 Vue.component(FullPage.name, FullPage);
 Vue.component(FullPagePopup.name, FullPagePopup);
 Vue.component(InputWrapper.name, InputWrapper);
