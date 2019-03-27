@@ -4,7 +4,7 @@
                 <!-- <mt-cell title="收款方式">{{payTypeDetail | analy("payTypeDetail")}}</mt-cell> -->
                 <mt-cell title="商户号">{{merCode}}</mt-cell>
                 <mt-cell title="商户名">{{merName}}</mt-cell>
-                <mt-cell title="交易参考号或订单号">{{retrivlRefNnum}}</mt-cell>
+                <mt-cell title="交易订单/参考号">{{retrivlRefNnum}}</mt-cell>
                 <mt-cell title="商户手续费">{{merCommisionValue}}</mt-cell>
                 <mt-cell title="">{{maxFee}}</mt-cell>
 

@@ -14,7 +14,7 @@
         <p class="status red" v-if="statusClass != 'SUCCESS'" :class="{success:statusClass == 'SUCCESS'}">{{status}}</p>
       </div>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>

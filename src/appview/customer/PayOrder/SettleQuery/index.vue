@@ -2,7 +2,6 @@
         <div class="settle-query-page page">
                 <full-page ref="FullPage">
                         <div class="m-page-header search-box clear" slot="header">
-                                <!-- <div class="page-title">结算</div> -->
                                  <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="searchVisible = true">筛选</div>
                         </div>
@@ -27,7 +26,7 @@
 
         </div>
 </template>
-
+ 
 <script>
 import SettleItem from "@src/appcomponents/SettleItem";
 import FullPagePopup from "@src/appcomponents/FullPagePopup";
