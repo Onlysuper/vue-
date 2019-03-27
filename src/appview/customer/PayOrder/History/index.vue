@@ -1,7 +1,6 @@
 <template>
         <div class="pay-order-history page">
                 <full-page ref="FullPage">
-
                         <div class="search-box clear" slot="header">
                                 <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="hidden = true">筛选</div>
@@ -9,15 +8,14 @@
                         <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
                                 {{searchQuery.status | analy('payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
                         </tip>
-                      
                         <!-- <div class="history-list"> -->
-                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="payOrderSum" :handeleResault="handeleResault" ref="MypLoadmoreApi">
+                        <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" @currentPageChange="currentPageChange" ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
                                         <pay-item  
                                         @click.native="toDetail(item)" 
-                                        :entName="payType | analy('payType')"
+                                        :entName="tranType | analy('payType')"
                                         :time="item.tranDateTime | datenumFormatCN('yyyy-MM-dd hh:mm')" 
                                         :amount="item.tranAmt | moneyFormatCN"
                                         >
@@ -43,7 +41,7 @@ import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import SearchPage from "@src/appcomponents/SearchPage";
 import Tip from "@src/appcomponents/Tip";
 import base from "@src/apis/base.js";
-import { payOrderQueryList, payOrderSum } from "@src/apis";
+import { payOrderQueryList } from "@src/apis";
 import utils from "@src/common/utils.js";
 import { mapState } from "vuex";
 import CONST from "@src/const";
@@ -74,48 +72,42 @@ export default {
                         amountCount: "",
                         amountSum: "",
                         payStatus: CONST.payStatus,
-                        payType:"",
+                        tranType:"",
+                        currentPage:1,
                         searchQuery: {
                                 startTime: "",
                                 endTime:"",
-                                payType:"",
+                                tranType:"3",
                                 token:"",
                                 merCode:"",
                                 telePhone: "",
-                                tranType:"0",
                                 md5Data: "",
                                 currentPage:0,
                                 pageSize:20
                         },
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
-                                return res.result.data.merTranList.resultList
+                                console.log(res.result.data.merTranList);
+                                return res.result.data.merTranList
                         }
                 };
         },
         computed:{
                 iconname(){
-                    let payType =this.searchQuery.payType;
-                    if(payType=='0'){
+                    let tranType =this.searchQuery.tranType;
+                    if(tranType=='0'){
                             // 刷卡
                             return "wechat";
-                    }if(payType=='1'){
+                    }if(tranType=='1'){
                             // 微信
                             return "wechat";
-                    }if(payType=='2'){
+                    }if(tranType=='2'){
                             // 支付宝
                             return "alipay";
-                    }if(payType=='3'){
+                    }if(tranType=='3'){
                             // 银联
                             return "wechat";
                     }
-                },
-                currentPage(){
-                        if(this.searchQuery.currentPage){
-                             return this.searchQuery.currentPage   
-                        }else{
-                             return "1";
-                        }
                 },
                 pageSize(){
                         if(this.searchQuery.pageSize){
@@ -146,8 +138,9 @@ export default {
                 
                 setQueryMd5Data(){
                         let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
-                        let endTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
-                        let sendData = `${this.phone+this.merCode+startTime+endTime+this.token+base.md5Data}`;
+                        let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
+                        let sendData=[this.phone,this.merCode,startTime,endTime,this.currentPage,this.searchQuery.pageSize,this.token+base.md5Data];
+                        sendData =sendData.join('');
                         let md5data = md5Encrypt(sendData);
                         this.$set(this.searchQuery,"md5Data",md5data)
                 },
@@ -161,19 +154,6 @@ export default {
                         if(list.length>0){
                                 this.newlist = [...list];
                         }
-                        // console.log(this.newlist);
-                        // for (let i = 0; i < this.newlist.length; i++) {
-                        //         let currentDate = this.newlist[i].tranDateTime.split(" ")[0];
-                        //         if (i === 0) {
-                        //                 this.newlist[i]["date"] = currentDate;
-                        //         } else {
-                        //                 let preDate = this.newlist[i - 1].tranDateTime.split(" ")[0];
-                        //                 this.newlist[i]["date"] = "";
-                        //                 if (currentDate !== preDate) {
-                        //                         this.newlist[i]["date"] = currentDate;
-                        //                 }
-                        //         }
-                        // }
                 },
                 watchDataList(list) {
                         this.formatList(list);
@@ -187,24 +167,6 @@ export default {
                                 token: utils.storage.getStorage("token"),
                                 ...this.searchQuery
                         });
-                        // this.payOrderSum();
-                },
-                // 合计
-                payOrderSum() {
-                        // this.showTip = false;
-                        // payOrderSum(utils.getOpenId())({
-                        //         token: utils.storage.getStorage("token"),
-                        //         ...this.searchQuery
-                        // }).then(data => {
-                        //         if (data.resultCode == "0") {
-                        //                 this.amountCount = data.data.amountCount;
-                        //                 // this.amountSum = utils.accMul(data.data.amountSum, 0.01);
-                        //                 this.amountSum = data.data.amountSum;
-                        //                 this.showTip = true;
-                        //         } else {
-                        //                 this.Toast(data.resultMsg);
-                        //         }
-                        // })
                 },
                 setDate(type) {
                         switch (type) {
@@ -230,52 +192,44 @@ export default {
                                 this.searchConfig.push({
                                         title: "交易类型",
                                         type: "v-radio-list",
-                                        defaultValue: this.searchQuery.payType,
+                                        defaultValue: this.searchQuery.tranType,
                                         values: utils.constToArr(CONST.payType),
                                         cb: value => {
-                                                this.searchQuery.payType = value;
+                                                this.searchQuery.tranType = value;
                                         }
                                 });
 
-                                this.searchConfig.push({
-                                        title: "交易状态",
-                                        type: "v-radio-list",
-                                        defaultValue: this.searchQuery.status,
-                                        values: utils.constToArr(CONST.payStatus),
-                                        cb: value => {
-                                                this.searchQuery.status = value;
-                                        }
-                                });
-
-                                this.searchConfig.push({
-                                        title: "快捷查询",
-                                        type: "v-radio-list",
-                                        defaultValue: "1",
-                                        values: [
-                                                {
-                                                        name: "近7日交易",
-                                                        code: "1"
-                                                },
-                                                {
-                                                        name: "昨日交易",
-                                                        code: "2"
-                                                },
-                                                {
-                                                        name: "近30天交易",
-                                                        code: "3"
-                                                }
-                                        ],
-                                        cb: value => {
-                                                this.setDate(value);
-                                        }
-                                });
+        
+                                // this.searchConfig.push({
+                                //         title: "快捷查询",
+                                //         type: "v-radio-list",
+                                //         defaultValue: "1",
+                                //         values: [
+                                //                 {
+                                //                         name: "近7日交易",
+                                //                         code: "1"
+                                //                 },
+                                //                 {
+                                //                         name: "昨日交易",
+                                //                         code: "2"
+                                //                 },
+                                //                 {
+                                //                         name: "近30天交易",
+                                //                         code: "3"
+                                //                 }
+                                //         ],
+                                //         cb: value => {
+                                //                 this.setDate(value);
+                                //                 this.setQueryMd5Data()
+                                //         }
+                                // });
                                 this.searchConfig.push({
                                         title: "交易起始时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.startTime,
                                         id: "startTime",
                                         cb: value => {
-                                                this.searchQuery.startTime = value;
+                                                this.$set(this.searchQuery,"startTime",value)
                                                 this.setQueryMd5Data()
                                         }
                                 });
@@ -284,15 +238,16 @@ export default {
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.endTime,
                                         cb: value => {
-                                                this.searchQuery.endTime = value;
+                                                 this.$set(this.searchQuery,"endTime",value)
                                                 this.setQueryMd5Data()
                                         }
                                 });
                         });
+                },
+                currentPageChange(val){
+                       this.currentPage=val;
+                       this.setQueryMd5Data();
                 }
-        },
-        watch:{
-             
         }
         
 };

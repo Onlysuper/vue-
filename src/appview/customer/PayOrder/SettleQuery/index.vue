@@ -3,6 +3,7 @@
                 <full-page ref="FullPage">
                         <div class="m-page-header search-box clear" slot="header">
                                 <!-- <div class="page-title">结算</div> -->
+                                 <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="searchVisible = true">筛选</div>
                         </div>
                         <div class="wrapper" ref="wrapper" :style="{ height: ($store.state.winH - 40) + 'px' }">

@@ -116,6 +116,7 @@ export default {
                         if(query.endTime){
                                 query.endTime=query.endTime.replace(/\/|\-/gi,"")
                         }
+                        console.log(query);
                         return this.api()(query).then(res => {
                                 if (res.code === "001") {
                                         let data =this.handeleResault(res);
@@ -129,7 +130,6 @@ export default {
                 },
                 //首次加载和搜索加载操作
                 load(searchQuery) {
-
                         this.allLoaded = false;
                         this.searchQuery = searchQuery || {};
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
@@ -147,6 +147,7 @@ export default {
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
 
                         this.loadQuery.currentPage = 1;
+                        this.$emit("currentPageChange",this.loadQuery.currentPage)
                         this.loadData(this.loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = list;
@@ -163,7 +164,8 @@ export default {
                                 done(true)
                                 return;
                         };
-                        this.loadQuery.currentPage++;
+                         this.loadQuery.currentPage++;
+                         this.$emit("currentPageChange",this.loadQuery.currentPage)
                         this.loadData(this.loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = this.list.concat(list);
