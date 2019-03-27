@@ -6,7 +6,7 @@
                                 <div class="search-btn" @click="hidden = true">筛选</div>
                         </div>
                         <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
-                                {{searchQuery.status | analy('payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
+                                {{searchQuery.status | analyFilter(CONST,'payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
                         </tip>
                         <!-- <div class="history-list"> -->
                         <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" @currentPageChange="currentPageChange" ref="MypLoadmoreApi">
@@ -19,8 +19,6 @@
                                         :time="item.tranDate" 
                                         :amount="item.tranAmt | moneyFormatCN"
                                         >
-                                        <!-- :entName="item.tranType | analy('payType')" -->
-                                                <!-- <i :class="`icon-${iconname}`" slot="icon"></i> -->
                                         </pay-item>
                                 </div>
                         </loadmore>
@@ -45,7 +43,7 @@ import base from "@src/apis/base.js";
 import { payOrderQueryList } from "@src/apis";
 import utils from "@src/common/utils.js";
 import { mapState } from "vuex";
-import CONST from "@src/const";
+import CONST from "@src/appview/customer/PayOrder/state.json";
 import { scrollBehavior } from "@src/common/mixins";
 import {md5Encrypt} from "@src/common/secret.js";
 
@@ -61,7 +59,7 @@ export default {
         },
         data() {
                 return {
-                      
+                       CONST:CONST,
                         token:utils.storage.getStorage("token"),
                         merCode:utils.storage.getStorage("merCode"),
                         phone:utils.storage.getStorage("telePhone"),

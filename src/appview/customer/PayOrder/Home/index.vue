@@ -2,7 +2,7 @@
         <div class="pay-order-container page">
                 <div class="pay-order-open">
                         <div class="today-total-box" ref="header" v-if="scroll < 10">
-                                <div class="income-today-title">今日{{payType | analy('payType')}}收入(元)</div>
+                                <div class="income-today-title">今日{{payType | analyFilter(CONST,'payType')}}收入(元)</div>
                                 <div class="income-today-amount">
                                         <span>{{totalAmount | moneyFormatCN}}</span>
                                 </div>
@@ -24,17 +24,7 @@
                                         历史记录
                                 </div>
                         </div>
-                        <!-- <div class="today-pay-order-list" ref="scrollWarpper" v-if="false"> -->
-                                <!-- <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
-                                        <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" 
-                                        :entName="payType | analy('payType')" 
-                                        :time="item.tranDateTime | dateFormatCN('hhmm')" 
-                                        :amount="item.tranAmt | moneyFormatCN"
-                                        >
-                                                <i :class="`icon-${payType.toLowerCase()}`" slot="icon"></i>
-                                        </pay-item>
-                                </loadmore> -->
-                        <!-- </div> -->
+        
                 </div>
         </div>
 </template>
@@ -45,7 +35,7 @@ import utils from "@src/common/utils.js";
 import base from "@src/apis/base.js";
 import {md5Encrypt} from "@src/common/secret.js";
 import Loadmore from "@src/appcomponents/Loadmore";
-import CONST from "@src/const";
+import CONST from "@src/appview/customer/PayOrder/state.json";
 import { Toast } from "mint-ui";
 import {
         payOrderQuery,
@@ -59,6 +49,7 @@ export default {
         },
         data() {
                 return {
+                        CONST:CONST,
                         scroll: 0,
                         openId: utils.getOpenId(),
                          payType: "",
