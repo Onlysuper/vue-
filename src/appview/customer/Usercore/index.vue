@@ -277,8 +277,8 @@ export default {
                 }
                 // 社会统一信用代码
                 .icon-business-license{
-                         background-position: 0px -35px;
-                //    background-position: 0px -109px;
+                        //  background-position: 0px -35px;
+                   background-position: 0px -109px;
                 }
                 // 联系人
                 .icon-link-man{
@@ -290,7 +290,8 @@ export default {
                 }
                 // 商户编号
                 .icon-mer-code {
-                background-position: 0px -94px;
+                // background-position: 0px -94px;
+                background-position: 0px -35px;
                 }
                 .icon-mer-name {
                   background-position: 0px -94px;

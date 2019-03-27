@@ -15,11 +15,12 @@
                                         </banner-date>
                                         <pay-item  
                                         @click.native="toDetail(item)" 
-                                        :entName="tranType | analy('payType')"
-                                        :time="item.tranDateTime | datenumFormatCN('yyyy-MM-dd hh:mm')" 
+                                        :entName="item.merName"
+                                        :time="item.tranDate" 
                                         :amount="item.tranAmt | moneyFormatCN"
                                         >
-                                                <i :class="`icon-${iconname}`" slot="icon"></i>
+                                        <!-- :entName="item.tranType | analy('payType')" -->
+                                                <!-- <i :class="`icon-${iconname}`" slot="icon"></i> -->
                                         </pay-item>
                                 </div>
                         </loadmore>

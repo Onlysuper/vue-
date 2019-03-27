@@ -6,10 +6,10 @@
                 <mt-cell title="商户名">{{merName}}</mt-cell>
                 <mt-cell title="交易订单/参考号">{{retrivlRefNnum}}</mt-cell>
                 <mt-cell title="商户手续费">{{merCommisionValue}}</mt-cell>
-                <mt-cell title="">{{maxFee}}</mt-cell>
-
+                <mt-cell title="封顶费">{{maxFee}}</mt-cell>
                 <mt-cell title="交易金额">{{tranAmt}}</mt-cell>
-                <mt-cell title="交易时间">{{tranDateTime | datenumFormatCN('yyyy-MM-dd hh:mm')}}</mt-cell>
+                <mt-cell title="交易日期">{{tranDate}}</mt-cell>
+                <mt-cell title="交易时间">{{tranDateTime}}</mt-cell>
 
                 <!-- <mt-cell title="创建时间">{{createTime}}</mt-cell>
                 <mt-cell title="交易时间">{{paySuccTime || "无"}}</mt-cell>
@@ -40,9 +40,11 @@ export default {
                         merName:"", //商户名
                         retrivlRefNnum:"",//交易参考号或订单号
                         merCommisionValue:"",//商户手续费
-                        maxFee:"",
+                        maxFee:"",// 封顶费
                         tranAmt:"",//交易金额
+                        tranDate:"",// 交易日期
                         tranDateTime:""// 交易时间
+
                 };
         },
         mounted() {
@@ -55,8 +57,9 @@ export default {
                         this.merName = item.merName;//商户名
                         this.retrivlRefNnum = item.retrivlRefNnum;//交易参考号或订单号
                         this.merCommisionValue = item.merCommisionValue;//商户手续费
-                        this.maxFee = item.maxFee;
+                        this.maxFee = item.maxFee;//封顶费
                         this.tranAmt = item.tranAmt;//交易金额
+                        this.tranDate = item.tranDate;//交易日期
                         this.tranDateTime = item.tranDateTime;//交易时间
                 }
         }
