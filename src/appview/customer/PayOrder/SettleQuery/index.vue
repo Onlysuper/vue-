@@ -1,32 +1,22 @@
 <template>
         <div class="settle-query-page page">
                 <full-page ref="FullPage">
-                         <div class="search-box clear" slot="header">
-                               <!-- <mt-button @click="$refs.datePicker.open()"><i class="icon-date date-icon"></i></mt-button> -->
-                              <div class="search-btn" @click="searchVisible = true">筛选</div>
+                        <div class="m-page-header search-box clear" slot="header">
+                                <!-- <div class="page-title">结算</div> -->
+                                <div class="search-btn" @click="searchVisible = true">筛选</div>
                         </div>
+                        <div class="wrapper" ref="wrapper" :style="{ height: ($store.state.winH - 40) + 'px' }">
+                                <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi" :handeleResault="handeleResault">
+                                        <settle-Item @click.native="toUrl(item)"
+                                        v-for="(item,index) in newlist" :key="index" 
+                                        :entName="item.merSettAcctName"
+                                        :time="item.settDate" 
+                                        :status="item.outState | analy('outMoneyStatus')"
+                                        :amount="item.settAmt | moneyFormatCN(true)">
+                                        </settle-Item>
+                                </loadmore>
 
-                <!-- <mt-header class="header" :fixed="false" :title="$route.meta.pageTitle">
-                        <mt-button slot="left" @click="$refs.datePicker.open()"><i class="icon-date date-icon"></i></mt-button>
-                        <mt-button slot="right" @click="searchVisible = true">筛选</mt-button>
-                </mt-header> -->
-
-                <div class="wrapper" ref="wrapper" :style="{ height: ($store.state.winH - 40) + 'px' }">
-                        <!-- <div class="settleCard border-bottom-1px">
-                                <panel-body-row title="商户名称" :desc="businessName"></panel-body-row>
-                                <panel-body-row title="账户名称" :desc="settleCard.accountName"></panel-body-row>
-                                <panel-body-row title="开户银行" :desc="settleCard.branchName"></panel-body-row>
-                                <panel-body-row title="结算帐号" :desc="settleCard.accountNo"></panel-body-row>
-                        </div> -->
-                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi" :handeleResault="handeleResault">
-                        <!-- <infinite-scroll :api="api" @watchDataList="watchDataList" ref="InfiniteScroll"> -->
-                                <!-- item -->
-                                <pay-item @click.native="toUrl(item)" v-for="(item,index) in newlist" :key="index" :entName="item.settleType" :time="item.lastUpdateTime" :status="item.outMoneyStatus | analy('outMoneyStatus')" :statusClass="item.outMoneyStatus == 'OUT_SUCCESS'?'SUCCESS':''" :amount="item.settleAmount | moneyFormatCN(true)">
-                                        <!-- <i slot="icon" class="icon-piao piao-icon" :class="{'red-icon':item.billAmount < 0}"></i> -->
-                                </pay-item>
-                        </loadmore>
-
-                </div>
+                        </div>
                 </full-page>
                 <full-page-popup class="search-popup" v-model="searchVisible" title="条件筛选" :showConfirm="true" @confirm="search">
                         <search-page :config="searchConfig"></search-page>
@@ -38,7 +28,7 @@
 </template>
 
 <script>
-import PayItem from "@src/appcomponents/PayItem";
+import SettleItem from "@src/appcomponents/SettleItem";
 import FullPagePopup from "@src/appcomponents/FullPagePopup";
 // import InfiniteScroll from "@src/appcomponents/InfiniteScroll";
 import Loadmore from "@src/appcomponents/Loadmore";
@@ -54,7 +44,7 @@ import PanelBodyRow from "@src/appcomponents/PanelBodyRow";
 import {md5Encrypt} from "@src/common/secret.js";
 export default {
         components: {
-                PayItem,
+                SettleItem,
                 FullPagePopup,
                 // InfiniteScroll,
                 Loadmore,
@@ -156,7 +146,7 @@ export default {
                         });
                 },
                 toUrl(item) {
-                        this.$router.push({ path: `/customer/settleDetail`, query: item })
+                        this.$router.push({ path: `/customer/payOrder/settleDetail`, query: item })
                 },
                 setDate(date) {
                         this.searchQuery.createTimeStart = utils.formatDate(date, "yyyy-MM-dd");
@@ -167,7 +157,7 @@ export default {
                                         title: "出款状态",
                                         type: "v-radio-list",
                                         defaultValue: this.searchQuery.outState,
-                                        values: utils.constToArr(this.outState),
+                                        values: utils.constToArr(this.outMoneyStatus),
                                         cb: value => {
                                                 this.searchQuery.outState = value;
                                                 this.setQueryMd5Data()
@@ -220,8 +210,9 @@ export default {
         .search-popup{
                 width:85%;
         }
-         .search-box {
-                // height: 100/@rem;
+        .m-page-header{
+                // .search-box {
+                        // height: 100/@rem;
                 line-height: 100 / @rem;
                 width: 100%;
                 font-size: 14px;
@@ -235,7 +226,12 @@ export default {
                         margin-right: 10px;
                         float: right;
                 }
+                .page-title{
+                        float: left;
+                }
+                // }
         }
+         
          .tip-color {
                 background: #0a70cc;
         }

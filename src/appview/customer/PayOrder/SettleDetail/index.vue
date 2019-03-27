@@ -1,19 +1,15 @@
 <template>
         <div class="pay-order-detail">
                 <input-wrapper>
-                        <mt-cell title="交易金额">{{item.payAmount}}元</mt-cell>
-                        <mt-cell title="手续费">{{item.proceduresFee}}元</mt-cell>
-                        <mt-cell title="出款手续费">{{item.outMoneyFee}}元</mt-cell>
-                        <mt-cell title="冻结金额">{{item.freezeAmount}}元</mt-cell>
-                        <mt-cell title="结算金额">{{item.settleAmount}}元</mt-cell>
-                        <mt-cell title="银行名称">{{item.bankName}}</mt-cell>
-                        <mt-cell title="银行帐号">{{item.accountNo}}</mt-cell>
-                        <!-- <mt-cell title="身份证号">{{item.settleIdCard}}</mt-cell> -->
-                        <mt-cell title="交易类型">{{item.settleType}}</mt-cell>
-                        <mt-cell title="交易时间">{{item.lastUpdateTime}}</mt-cell>
-                        <mt-cell title="创建时间">{{item.createTime}}</mt-cell>
-                        <mt-cell title="出款状态">{{item.outMoneyStatus | analy('outMoneyStatus')}}</mt-cell>
-                        <mt-cell title="备注">{{item.remark}}</mt-cell>
+                        <mt-cell title="商户号">{{item.merCode}}</mt-cell>
+                        <mt-cell title="商户名">{{item.merName}}</mt-cell>
+                        <mt-cell title="结算卡号">{{item.merSettAcct}}</mt-cell>
+                        <mt-cell title="结算银行">{{item.settBank}}</mt-cell>
+                        <mt-cell title="结算人名字">{{item.merSettAcctName}}</mt-cell>
+                        <mt-cell title="结算金额">{{item.settAmt}}元</mt-cell>
+                        <mt-cell title="结算日期">{{item.settDate}}</mt-cell>
+                        <mt-cell title="出款状态">{{item.outState}}</mt-cell>
+                        <mt-cell title="结算类型">{{item.settType}}</mt-cell>
                 </input-wrapper>
         </div>
 </template>
