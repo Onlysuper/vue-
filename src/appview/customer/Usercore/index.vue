@@ -4,66 +4,68 @@
                         <div class="block-container">
                                 <div class="block-title">商户基本信息</div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-mer-code"></i>
                                         <div class="info-title">商户编号</div>
                                         <div class="info-cont">{{detailData.merCode}}</div>
                                 </div>
-                                <div class="info-item">
-                                        <i class="icon"></i>
+                                <div class="info-item ">
+                                        <i class="icon icon-mer-name"></i>
                                         <div class="info-title">企业名称</div>
                                         <div class="info-cont">{{detailData.merName}}</div>
                                 </div>
                                 
-                                <div class="info-item">
-                                        <i class="icon"></i>
+                                <div class="info-item ">
+                                        <i class="icon icon-short-name"></i>
                                         <div class="info-title">经营名称</div>
                                         <div class="info-cont">{{detailData.merShortName}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-business-license"></i>
                                         <div class="info-title">社会统一信用代码</div>
                                         <div class="info-cont">{{detailData.businessLicense}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-link-man"></i>
                                         <div class="info-title">联系人</div>
                                         <div class="info-cont">{{detailData.merRelMan}}</div>
                                 </div>
-                                <div class="info-item">
-                                        <i class="icon"></i>
+                                <div class="info-item ">
+                                        <i class="icon icon-link-phone"></i>
                                         <div class="info-title">联系人电话</div>
                                         <div class="info-cont">{{detailData.merRelTel}}</div>
                                 </div>
                         </div>
+
+
                          <div class="block-container">
                                 <div class="block-title">费率结算信息</div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-wei-chat"></i>
                                         <div class="info-title">微信手续费</div>
                                         <div class="info-cont">{{detailData.qwxCommisionValue}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-ali-pay"></i>
                                         <div class="info-title">支付宝手续费率</div>
                                         <div class="info-cont">{{detailData.qzfCommisionValue}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-ali-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以下) </div>
                                         <div class="info-cont">{{detailData.qylCommisionValue}}</div>
                                 </div>
                                  <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-ali-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以上) </div>
                                         <div class="info-cont">{{detailData.qylThousandValue}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-pay-type"></i>
                                         <div class="info-title">结算类型</div>
                                         <div class="info-cont">{{detailData.merSettType}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon"></i>
+                                        <i class="icon icon-pay-number"></i>
                                         <div class="info-title">商户收款账号</div>
                                         <div class="info-cont">{{detailData.merSettAcct}}</div>
                                 </div>
@@ -262,10 +264,61 @@ export default {
                         height: 40 / @rem;
                         background-image: url("../../../assets/images/usercore-icon.png");
                         background-repeat: no-repeat;
-                        background-size: 40 / @rem 240 / @rem;
+                        // background-size: 40 / @rem 240 / @rem;
+                        background-size: 40 / @rem 454 / @rem;
                         vertical-align: middle;
                         margin-right: 20 / @rem;
                         overflow: hidden;
+                        
+                }
+                // 经营名称
+                .icon-short-name{
+                        background-position: 0px -179px;
+                }
+                // 社会统一信用代码
+                .icon-business-license{
+                         background-position: 0px -35px;
+                //    background-position: 0px -109px;
+                }
+                // 联系人
+                .icon-link-man{
+                         background-position: 0px -145px;
+                }
+                // 微信费率
+                .icon-wei-chat {
+                background-position: 0px 1px;
+                }
+                // 商户编号
+                .icon-mer-code {
+                background-position: 0px -94px;
+                }
+                .icon-mer-name {
+                  background-position: 0px -94px;
+                // background-position: 0px -35px;
+                }
+                  // 支付宝费率
+                .icon-ali-pay {
+                 background-position: 0px -54px;
+                }
+                // 结算类型
+                .icon-pay-type {
+                background-position: 0px -74px;
+                }
+                  // 结算账号
+                .icon-pay-number{
+                background-position: 0px -15px;
+                }
+              
+                // 联系人手机号
+                .icon-link-phone{
+                  background-position: 0px -128px;
+                }
+                .icon-link-man{
+
+                }
+               
+                .icon-usercore-icon {
+                background-position: 0px -214px;
                 }
                 .info-title {
                         min-width: 129 / @rem;
@@ -298,22 +351,7 @@ export default {
                         margin-right: 10 / @rem; // background: red;
                 }
         }
-        .info-item:nth-child(1) .icon {
-                background-position: 0 -0 / @rem;
-        }
-        .info-item:nth-child(2) .icon {
-                background-position: 0 -40 / @rem;
-        }
-        .info-item:nth-child(3) .icon {
-                background-position: 0 -80 / @rem;
-        }
-        .info-item:nth-child(4) .icon {
-                background-position: 0 -120 / @rem;
-        }
         .info-item:nth-child(5) {
-                .icon {
-                        background-position: 0 -160 / @rem;
-                }
                 border-bottom: none;
         }
         .ent-name {

@@ -63,6 +63,13 @@ export default {
                         type: Function,
                         default: () => { }
                 },
+                handeleResault: {
+                        type: Function,
+                        default: (res) => {
+                                return res.result.data;
+                        }
+                },
+                
                 //loadQuery默认值
                 defaultLoadQuery: {
                         type: Object,
@@ -103,8 +110,6 @@ export default {
 
         methods: {
                 loadData(query) {
-                        console.log('哈哈哈哈');
-                        console.log(query);
                         if(query.startTime){
                                 query.startTime=query.startTime.replace(/\/|\-/gi,"")
                         }
@@ -113,9 +118,9 @@ export default {
                         }
                         return this.api()(query).then(res => {
                                 if (res.code === "001") {
-                                        let data = res.result.data.merTranList.resultList;
+                                        let data =this.handeleResault(res);
                                         this.count = data.totalRows;
-                                        return data || [];
+                                        return data.resultList || [];
                                 } else {
                                         Toast(res.message);
                                         return [];

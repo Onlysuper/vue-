@@ -17,7 +17,7 @@ export default {
         //快速开票
         testIp: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? location.protocol + "//ti.yeepiao.com/" : location.protocol + "//i.yeepiao.com/",
         //开票码验签的Key
-        signKey: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? "1234QWER" : "",
+        // signKey: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? "1234QWER" : "",
         
         //展示商户服务
 

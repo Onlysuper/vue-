@@ -11,7 +11,7 @@
                         </tip>
                       
                         <!-- <div class="history-list"> -->
-                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="payOrderSum" ref="MypLoadmoreApi">
+                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="payOrderSum" :handeleResault="handeleResault" ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
@@ -48,6 +48,7 @@ import utils from "@src/common/utils.js";
 import { mapState } from "vuex";
 import CONST from "@src/const";
 import { scrollBehavior } from "@src/common/mixins";
+import {md5Encrypt} from "@src/common/secret.js";
 
 export default {
         mixins: [scrollBehavior],
@@ -61,10 +62,10 @@ export default {
         },
         data() {
                 return {
+                      
                         token:utils.storage.getStorage("token"),
-                 merCode:utils.storage.getStorage("merCode"),
-                 phone:utils.storage.getStorage("telePhone"),
-
+                        merCode:utils.storage.getStorage("merCode"),
+                        phone:utils.storage.getStorage("telePhone"),
                         hidden: false,
                         showTip: false,
                         api: payOrderQueryList,
@@ -82,9 +83,13 @@ export default {
                                 merCode:"",
                                 telePhone: "",
                                 tranType:"0",
-                                md5Data: base.md5Data,
-                                currentPage:"1",
-                                pageSize:"20",
+                                md5Data: "",
+                                currentPage:0,
+                                pageSize:20
+                        },
+                        // 处理loadMore返回的数据，返回列表
+                        handeleResault:(res)=>{
+                                return res.result.data.merTranList.resultList
                         }
                 };
         },
@@ -138,9 +143,13 @@ export default {
                 this.initSearch();
         },
         methods: {
+                
                 setQueryMd5Data(){
-                        let md5data = `${this.phone+this.merCode+this.searchQuery.startTime+this.searchQuery.endTime+this.searchQuery.currentPage+this.searchQuery.pageSize+this.token+base.md5Data}`;
-                        this.$set(this.searchQuery,"md5Data",`${md5data}`)
+                        let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
+                        let endTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
+                        let sendData = `${this.phone+this.merCode+startTime+endTime+this.token+base.md5Data}`;
+                        let md5data = md5Encrypt(sendData);
+                        this.$set(this.searchQuery,"md5Data",md5data)
                 },
                 toDetail(item) {
                         this.$router.push({
@@ -335,8 +344,6 @@ export default {
         }
         .search {
                 width: 85%;
-                .search-btn {
-                }
         }
 }
 </style>

@@ -1,19 +1,24 @@
 <template>
-        <div class="list">
+        <div class="settle-query-page page">
+                <full-page ref="FullPage">
+                         <div class="search-box clear" slot="header">
+                               <!-- <mt-button @click="$refs.datePicker.open()"><i class="icon-date date-icon"></i></mt-button> -->
+                              <div class="search-btn" @click="searchVisible = true">筛选</div>
+                        </div>
 
-                <mt-header class="header" :fixed="false" :title="$route.meta.pageTitle">
+                <!-- <mt-header class="header" :fixed="false" :title="$route.meta.pageTitle">
                         <mt-button slot="left" @click="$refs.datePicker.open()"><i class="icon-date date-icon"></i></mt-button>
                         <mt-button slot="right" @click="searchVisible = true">筛选</mt-button>
-                </mt-header>
+                </mt-header> -->
 
                 <div class="wrapper" ref="wrapper" :style="{ height: ($store.state.winH - 40) + 'px' }">
-                        <div class="settleCard border-bottom-1px">
+                        <!-- <div class="settleCard border-bottom-1px">
                                 <panel-body-row title="商户名称" :desc="businessName"></panel-body-row>
                                 <panel-body-row title="账户名称" :desc="settleCard.accountName"></panel-body-row>
                                 <panel-body-row title="开户银行" :desc="settleCard.branchName"></panel-body-row>
                                 <panel-body-row title="结算帐号" :desc="settleCard.accountNo"></panel-body-row>
-                        </div>
-                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi">
+                        </div> -->
+                        <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi" :handeleResault="handeleResault">
                         <!-- <infinite-scroll :api="api" @watchDataList="watchDataList" ref="InfiniteScroll"> -->
                                 <!-- item -->
                                 <pay-item @click.native="toUrl(item)" v-for="(item,index) in newlist" :key="index" :entName="item.settleType" :time="item.lastUpdateTime" :status="item.outMoneyStatus | analy('outMoneyStatus')" :statusClass="item.outMoneyStatus == 'OUT_SUCCESS'?'SUCCESS':''" :amount="item.settleAmount | moneyFormatCN(true)">
@@ -22,14 +27,12 @@
                         </loadmore>
 
                 </div>
-
-                <full-page-popup class="search-popup" v-model="searchVisible" title="条件筛选" :showConfirm="true" @confirm="confirmQuery">
+                </full-page>
+                <full-page-popup class="search-popup" v-model="searchVisible" title="条件筛选" :showConfirm="true" @confirm="search">
                         <search-page :config="searchConfig"></search-page>
                 </full-page-popup>
-
-                <v-mask class="v-mask" v-model="searchVisible"></v-mask>
-
                 <mt-datetime-picker v-model="showDate" :endDate="new Date()" type="date" @confirm="setDate" ref="datePicker" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日"></mt-datetime-picker>
+                 <v-mask v-model="searchVisible" class="z-index2"></v-mask>
 
         </div>
 </template>
@@ -41,11 +44,14 @@ import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import Loadmore from "@src/appcomponents/Loadmore";
 import SearchPage from "@src/appcomponents/SearchPage";
 import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
-import { settleQuery, getCustomerInfo } from "@src/apis";
+// import { settleQuery, getCustomerInfo } from "@src/apis";
+import { settleQuery } from "@src/apis";
 import utils from "@src/common/utils";
+import base from "@src/apis/base.js";
 import CONST from "@src/const";
 import ChangePanel from "@src/appcomponents/ChangePanel";
 import PanelBodyRow from "@src/appcomponents/PanelBodyRow";
+import {md5Encrypt} from "@src/common/secret.js";
 export default {
         components: {
                 PayItem,
@@ -59,6 +65,9 @@ export default {
         mixins: [listScrollFixedBanner, saveScrollPosition],
         data() {
                 return {
+                        token:utils.storage.getStorage("token"),
+                        phone:utils.storage.getStorage("telePhone"),
+                        merCode:utils.storage.getStorage("merCode"),
                         settleCard: {},
                         businessName: "",
                         showDate: new Date(),
@@ -69,61 +78,118 @@ export default {
                         list: [],
                         outMoneyStatus: CONST.outMoneyStatus,
                         searchQuery: {
-                                openId: utils.getOpenId(),
-                                token: utils.storage.getStorage("token"),
-                                outMoneyStatus: "OUT_SUCCESS"
+                                currentPage:0,
+                                pageSize:20,
+                                token: "",
+                                telePhone:"",
+                                startTime:"",
+                                endTime:"",
+                                merCode:"",
+                                outState:"",
+                                md5Data:""
                         },
                         searchConfig: [],
                         wrapperHeight: "",
-                        billTypes: CONST.billTypes
+                        billTypes: CONST.billTypes,
+                        // 处理loadMore返回的数据，返回列表
+                        handeleResault:(res)=>{
+                                console.log(res);
+                                return res.result.data.merSettList
+                        }
+                }
+        },
+        computed:{
+                currentPage(){
+                        if(this.searchQuery.currentPage){
+                             return this.searchQuery.currentPage   
+                        }else{
+                             return "1";
+                        }
+                },
+                pageSize(){
+                        if(this.searchQuery.pageSize){
+                             return this.searchQuery.pageSize   
+                        }else{
+                             return "20";
+                        }
                 }
         },
         created() {
-                getCustomerInfo(utils.getOpenId())().then(data => {
-                        if (data.resultCode == "0") {
-                                if (data.data.customerConverge)
-                                        this.settleCard = data.data.customerConverge.settleCard || {};
-                                this.businessName = data.data.businessName;
-                        } else {
-                                this.Toast(data.resultMsg);
-                        }
-                })
-
+                this.setSearchQuerys();
         },
         mounted() {
-                // this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
-
-                // this.$refs.InfiniteScroll.load({ ...this.searchQuery }); 
                 this.$refs.MypLoadmoreApi.load({
                         ...this.searchQuery
                 });
                 this.initSearch();
         },
         methods: {
+                // 初始化默认搜索
+                setSearchQuerys(){
+                        let startTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
+                        let endTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
+                        this.$set(this.searchQuery,"token",this.token)
+                        this.$set(this.searchQuery,"telePhone",this.phone)
+                        this.$set(this.searchQuery,"merCode",this.merCode)
+                        this.$set(this.searchQuery,"startTime",startTime)
+                        this.$set(this.searchQuery,"endTime",endTime)
+                        this.setQueryMd5Data();
+                },
+                //需要传送给后台的Md5Data 加密数据
+                setQueryMd5Data(){
+                        let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
+                        let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
+                        let md5data = md5Encrypt(`${this.phone+this.merCode+startTime+endTime+this.token+base.md5Data}`);
+                        this.$set(this.searchQuery,"md5Data",`${md5data}`)
+                },
                 watchDataList(list, count) {
-                        this.count = count || {};
+                        console.log(list);
+                        // this.count = count || {};
                         this.newlist = list;
                 },
-                confirmQuery() {
+                search() {
                         this.searchVisible = false;
-                        // this.$refs.InfiniteScroll.load({ ...this.searchQuery });
+                        console.log(this.searchQuery);
+                        // return false;
+                        this.$refs.MypLoadmoreApi.load({
+                                ...this.searchQuery
+                        });
                 },
                 toUrl(item) {
                         this.$router.push({ path: `/customer/settleDetail`, query: item })
                 },
                 setDate(date) {
                         this.searchQuery.createTimeStart = utils.formatDate(date, "yyyy-MM-dd");
-                        // this.$refs.InfiniteScroll.load({ ...this.searchQuery });
                 },
                 initSearch() {
                         this.$nextTick(() => {
                                 this.searchConfig.push({
-                                        title: "结算状态",
+                                        title: "出款状态",
                                         type: "v-radio-list",
-                                        defaultValue: this.searchQuery.outMoneyStatus,
-                                        values: utils.constToArr(this.outMoneyStatus),
+                                        defaultValue: this.searchQuery.outState,
+                                        values: utils.constToArr(this.outState),
                                         cb: value => {
-                                                this.searchQuery.outMoneyStatus = value;
+                                                this.searchQuery.outState = value;
+                                                this.setQueryMd5Data()
+                                        }
+                                });
+                                this.searchConfig.push({
+                                        title: "交易起始时间",
+                                        type: "myp-date",
+                                        defaultValue: this.searchQuery.startTime,
+                                        id: "startTime",
+                                        cb: value => {
+                                                this.searchQuery.startTime = value;
+                                                this.setQueryMd5Data()
+                                        }
+                                });
+                                this.searchConfig.push({
+                                        title: "交易结束时间",
+                                        type: "myp-date",
+                                        defaultValue: this.searchQuery.endTime,
+                                        cb: value => {
+                                                this.searchQuery.endTime = value;
+                                                this.setQueryMd5Data()
                                         }
                                 });
                         });
@@ -150,31 +216,64 @@ export default {
 
 <style lang="less" scoped>
 @import "../../../../assets/less/base.less";
-.list {
-        position: relative;
-        overflow: hidden;
+.settle-query-page{
+        .search-popup{
+                width:85%;
+        }
+         .search-box {
+                // height: 100/@rem;
+                line-height: 100 / @rem;
+                width: 100%;
+                font-size: 14px;
+                background: #0a7ae0;
+                color: #fafafa;
+                .search-info {
+                        margin-left: 10px;
+                        float: left;
+                }
+                .search-btn {
+                        margin-right: 10px;
+                        float: right;
+                }
+        }
+         .tip-color {
+                background: #0a70cc;
+        }
+
+        .history-list {
+                flex: 1;
+                // background: #fff;
+                position: relative;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
+                .list-item {
+                        width: 100%;
+                }
+        }
 }
 
-.header {
-        z-index: 3;
-}
 
-.search {
-        padding: 30 / @rem;
-        display: inline;
-        font-size: 32 / @rem;
-}
+// .header {
+//         z-index: 3;
+// }
 
-.fixed {
-        position: fixed;
-        top: 10 / @rem;
-        right: 10 / @rem;
-        z-index: 2;
-}
+// .search {
+//         padding: 30 / @rem;
+//         display: inline;
+//         font-size: 32 / @rem;
+// }
 
-.v-mask {
-        z-index: 10;
-}
+// .fixed {
+//         position: fixed;
+//         top: 10 / @rem;
+//         right: 10 / @rem;
+//         z-index: 2;
+// }
+
+// .v-mask {
+//         z-index: 10;
+// }
 
 .search-popup {
         width: 90%;
