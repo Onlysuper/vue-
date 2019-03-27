@@ -10,9 +10,11 @@
                                         <settle-Item @click.native="toUrl(item)"
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
-                                        :time="item.settDate" 
-                                        :status="item.outState | analy('outMoneyStatus')"
-                                        :amount="item.settAmt | moneyFormatCN(true)">
+                                        :time="item.settDate"
+                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus')"
+                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',item.outState)"
+                                        :amount="item.settAmt">
+                                        <p>{{utils.valToColor(CONST,'outMoneyStatus',item.outState)}}</p>
                                         </settle-Item>
                                 </loadmore>
 
@@ -28,6 +30,7 @@
 </template>
  
 <script>
+
 import SettleItem from "@src/appcomponents/SettleItem";
 import FullPagePopup from "@src/appcomponents/FullPagePopup";
 // import InfiniteScroll from "@src/appcomponents/InfiniteScroll";
@@ -38,7 +41,7 @@ import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
 import { settleQuery } from "@src/apis";
 import utils from "@src/common/utils";
 import base from "@src/apis/base.js";
-import CONST from "@src/const";
+import CONST from "@src/appview/customer/PayOrder/state.json";
 import ChangePanel from "@src/appcomponents/ChangePanel";
 import PanelBodyRow from "@src/appcomponents/PanelBodyRow";
 import {md5Encrypt} from "@src/common/secret.js";
@@ -81,6 +84,7 @@ export default {
                         searchConfig: [],
                         wrapperHeight: "",
                         billTypes: CONST.billTypes,
+                        CONST:CONST,
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
                                 console.log(res);

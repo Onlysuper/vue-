@@ -159,7 +159,8 @@ export default {
                         var arr = [];
                         for (var key in constObj) {
                                 var obj = {
-                                        name: constObj[key],
+                                        name: constObj[key].name||constObj[key],
+                                        color: constObj[key].color,
                                         code: key,
                                 };
                                 arr.push(obj);
@@ -167,6 +168,10 @@ export default {
                         return arr;
                 }
                 return [];
+        },
+        valToColor:function(json,type,val){
+                console.log(json);
+                return json[type][val].color;
         },
         numToChinese: function (section) {
                 let chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
