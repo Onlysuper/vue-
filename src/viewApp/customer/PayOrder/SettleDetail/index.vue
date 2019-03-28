@@ -8,13 +8,14 @@
                         <m-cell title="结算人名字">{{item.merSettAcctName}}</m-cell>
                         <m-cell title="结算金额">{{item.settAmt}}元</m-cell>
                         <m-cell title="结算日期">{{item.settDate}}</m-cell>
-                        <m-cell title="出款状态">{{item.outState}}</m-cell>
+                        <m-cell title="出款状态">{{item.outState | analyFilter(CONST,'outMoneyStatus')}}</m-cell>
                         <m-cell title="结算类型">{{item.settType}}</m-cell>
+                        <!-- <m-cell title="结算类型">{{item.settType || analyFilter(CONST,'settTypes')}}</m-cell> -->
                 </input-wrapper>
         </div>
 </template>
 
-<style lang="less" scoped>
+<style lang="less" scoped> 
 @import url(../../../../assets/less/base.less);
 
 .pay-order-detail {
@@ -23,9 +24,11 @@
 </style>
 
 <script>
+import CONST from "@src/viewApp/customer/PayOrder/state.json";
 export default {
         data() {
                 return {
+                        CONST:CONST,
                         item: this.$route.query
                 };
         },

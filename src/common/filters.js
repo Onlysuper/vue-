@@ -110,7 +110,7 @@ mypFilters.install = function (Vue, options) {
 
         Vue.filter('analyFilter', function (value,json, type) {
                 try{
-                        return json[type][value][name] || value;
+                        return json[type][value]['name'] || value;
                 }catch(error){
                         return value
                 }

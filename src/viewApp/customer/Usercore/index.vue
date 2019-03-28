@@ -222,18 +222,22 @@ export default {
         .transformPage();
         .user-info {
                 background: #fff;
-                padding: 0 30 / @rem;
-                // margin-top: 24 / @rem;
         }
         .block-container{
-                margin-bottom:  30 / @rem;
-                padding-top: 10 / @rem;
+                border-bottom: 10px solid @m-color5;
+                &:last-of-type{
+                        border: 0px;
+                }
         }
         .block-title{
-                font-size:32 / @rem;
-                padding: 10 / @rem 0;
+              
+                font-size:34 / @rem;
                 color:@m-color1;
                 font-weight: bold;
+                 padding: 30/@rem 30 / @rem 10/@rem 30/@rem;
+                //    background:@main-color;
+                // color:#fff;
+                // background:@m-color5;
         }
         .info-item {
                 height: 100 / @rem;
@@ -244,18 +248,7 @@ export default {
                 align-items: center;
                 position: relative;
                 color:@m-color1;
-                // &::before{
-                //         content: "";
-                //         display: block;
-                //         position: absolute;
-                //         height:1px;
-                //         left: 0;
-                //         bottom: 0;
-                //         right: 0;
-                //         background: #eee;
-                //         transform-origin: 0 0;
-                //         transform: scale(1, 0.5);
-                // }
+                padding: 0 30 / @rem;
                 &:after {
                         content: "";
                         display: inline-block;

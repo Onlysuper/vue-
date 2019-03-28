@@ -14,7 +14,6 @@
                                         :status="item.outState | analyFilter(CONST,'outMoneyStatus')"
                                         :statuscolor="utils.valToColor(CONST,'outMoneyStatus',item.outState)"
                                         :amount="item.settAmt">
-                                        <p>{{utils.valToColor(CONST,'outMoneyStatus',item.outState)}}</p>
                                         </settle-Item>
                                 </loadmore>
 

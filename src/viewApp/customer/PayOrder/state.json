@@ -1,15 +1,16 @@
 { 
         "payType": {
-                "0": {
-                        "name":"刷卡",
-                        "color":"red"
-                },
+               
                 "1": {
                         "name":"微信",
                         "color":"red"
                 },
                 "2":{
                         "name": "支付宝",
+                        "color":"red"
+                },
+                "0": {
+                        "name":"刷卡",
                         "color":"red"
                 },
                 "3": {
@@ -20,7 +21,7 @@
         "outMoneyStatus": {
                 "": {
                        "name": "全部",
-                       "color":"red"
+                       "color":"#E6A23C"
                 },
                 "1":{
                         "name": "待结算",
@@ -64,6 +65,12 @@
                 },
                 "77": {
                         "name":"已重出",
+                        "color":"#E6A23C"
+                }
+        },
+        "settTypes":{
+                "": {
+                        "name": "全部",
                         "color":"#E6A23C"
                 }
         }

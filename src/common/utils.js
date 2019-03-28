@@ -170,7 +170,6 @@ export default {
                 return [];
         },
         valToColor:function(json,type,val){
-                console.log(json);
                 return json[type][val].color;
         },
         numToChinese: function (section) {
