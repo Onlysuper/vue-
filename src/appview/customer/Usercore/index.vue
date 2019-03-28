@@ -50,12 +50,12 @@
                                         <div class="info-cont">{{detailData.qzfCommisionValue}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon icon-ali-pay"></i>
+                                        <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以下) </div>
                                         <div class="info-cont">{{detailData.qylCommisionValue}}</div>
                                 </div>
                                  <div class="info-item">
-                                        <i class="icon icon-ali-pay"></i>
+                                        <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以上) </div>
                                         <div class="info-cont">{{detailData.qylThousandValue}}</div>
                                 </div>
@@ -273,53 +273,51 @@ export default {
                 }
                 // 经营名称
                 .icon-short-name{
-                        background-position: 0px -179px;
+                        background-position: 0px -180px;
                 }
                 // 社会统一信用代码
                 .icon-business-license{
-                        //  background-position: 0px -35px;
-                   background-position: 0px -109px;
+                   background-position: 0px -116px;
                 }
                 // 联系人
                 .icon-link-man{
                          background-position: 0px -145px;
                 }
-                // 微信费率
-                .icon-wei-chat {
-                background-position: 0px 1px;
-                }
+               
                 // 商户编号
                 .icon-mer-code {
-                // background-position: 0px -94px;
-                background-position: 0px -35px;
+                background-position: 0px -45px;
                 }
+                // 企业名称
                 .icon-mer-name {
-                  background-position: 0px -94px;
-                // background-position: 0px -35px;
+                  background-position: 0px -100px;
                 }
-                  // 支付宝费率
-                .icon-ali-pay {
-                 background-position: 0px -54px;
-                }
+               
                 // 结算类型
                 .icon-pay-type {
-                background-position: 0px -74px;
+                background-position: 0px -82px;
                 }
                   // 结算账号
                 .icon-pay-number{
-                background-position: 0px -15px;
+                background-position: 0px -28px;
                 }
-              
+               .icon-link-man{
+                  background-position: 0px -148px;
+                }
                 // 联系人手机号
                 .icon-link-phone{
-                  background-position: 0px -128px;
+                  background-position: 0px -132px;
                 }
-                .icon-link-man{
-
+                // 微信费率
+                .icon-wei-chat {
+                background-position: 0px -12px;
                 }
-               
-                .icon-usercore-icon {
-                background-position: 0px -214px;
+                  // 支付宝费率
+                .icon-ali-pay {
+                 background-position: 0px -64px;
+                }
+                .icon-uni-pay{
+                  background-position: 0px 4px;
                 }
                 .info-title {
                         min-width: 129 / @rem;
