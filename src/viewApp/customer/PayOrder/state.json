@@ -1,6 +1,5 @@
 { 
         "payType": {
-               
                 "1": {
                         "name":"微信",
                         "color":"red"

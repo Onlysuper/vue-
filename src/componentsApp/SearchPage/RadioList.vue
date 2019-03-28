@@ -42,6 +42,7 @@ export default {
   .list {
     display: flex;
     flex-wrap: wrap;
+    padding: 10/@rem
   }
 
   .list:after {
@@ -53,23 +54,21 @@ export default {
 
   .radio {
     width: 31.33%;
-    // flex: 1;
-    // display: inline-block;
     align-items: center;
-    // float: left;
-    line-height: 1;
+    line-height: 1.2;
     padding: 30/@rem 10/@rem;
     box-sizing: border-box;
-    background: #a2a2a2;
+    background: @m-color5;
     margin: 1%;
-    color: #fff;
+    color: @m-color3;
     border-radius: 2px;
-    font-size: 30/@rem;
+    font-size: 28/@rem;
     text-align: center;
   }
 
   .active {
-    background-color: #26a2ff;
+    background: @main-color2;
+    color:@main-color
   }
 }
 </style>

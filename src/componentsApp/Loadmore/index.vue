@@ -1,5 +1,5 @@
 <template>
-        <scroller style="top: 0px" ref="loadmore" :snapping="false" :snap-height="50" :animationDuration="150" :on-refresh="loadTop" :on-infinite="loadBottom" refresh-layer-color="#4b8bf4" loading-layer-color="#ec4949">
+        <scroller style="top: 0px" ref="loadmore" :snapping="false" :snap-height="50" :animationDuration="150" :on-refresh="loadTop" :on-infinite="loadBottom" refresh-layer-color="#3c83cb" loading-layer-color="#3c83cb">
                 <!-- custom refresh spinner, use default `spinner` & viewBox 0,0,64,64 class -->
                 <svg class="spinner" style="stroke: #4b8bf4;" slot="refresh-spinner" viewBox="0 0 64 64">
                         <g stroke-width="7" stroke-linecap="round">
@@ -29,7 +29,7 @@
                 <slot></slot>
 
                 <!-- custom infinite spinner -->
-                <svg class="spinner" style="fill: #ec4949;" slot="infinite-spinner" viewBox="0 0 64 64">
+                <svg class="spinner" style="fill: #3c83cb;" slot="infinite-spinner" viewBox="0 0 64 64">
                         <g>
                                 <circle cx="16" cy="32" stroke-width="0" r="3">
                                         <animate attributeName="fill-opacity" dur="750ms" values=".5;.6;.8;1;.8;.6;.5;.5" repeatCount="indefinite"></animate>
@@ -187,4 +187,5 @@ export default {
 </script>
 
 <style lang="less">
+
 </style>

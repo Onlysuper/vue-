@@ -76,7 +76,7 @@ export default {
                         searchQuery: {
                                 startTime: "",
                                 endTime:"",
-                                tranType:"3",
+                                tranType:"1",
                                 token:"",
                                 merCode:"",
                                 telePhone: "",
