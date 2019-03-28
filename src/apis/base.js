@@ -20,6 +20,6 @@ export default {
         // signKey: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? "1234QWER" : "",
         
         //展示商户服务
-        oaIp: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? location.protocol + "//easy-mock.liuup.com/mock/5c98365fd360c27a130ae4bc/" : location.protocol + "//o.yeepiao.com/",
-        // oaIp: getUrl()
+        // oaIp: process.env.NODE_ENV == "development" || process.env.NODE_ENV == "productionTest" ? location.protocol + "//easy-mock.liuup.com/mock/5c98365fd360c27a130ae4bc/" : location.protocol + "//o.yeepiao.com/",
+        oaIp: getUrl()
 }

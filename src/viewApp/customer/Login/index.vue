@@ -191,7 +191,7 @@ export default {
   .login-logo {
     text-align: center;
     img {
-      height: 230 / @rem;
+      height: 180 / @rem;
     }
   }
   .login-form {

@@ -18,7 +18,8 @@ axios.interceptors.response.use(function (response) {
         //如果状态吗正常直接返回data中的数据
         if (response && response.status === 200) {
                 //如果登录过期了
-                if (response.data && response.data.resultCode === "002"||/token校验失败/g.test(response.data.message)) {
+                // if (response.data && response.data.resultCode === "002"||/token校验失败/g.test(response.data.message)) {
+                if (response.data && response.data.code === "002") {
                         utils.storage.removeStorage("token");
                         utils.storage.removeStorage("telePhone")
                         utils.storage.removeStorage("merCode")
