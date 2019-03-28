@@ -1,7 +1,7 @@
 <template>
 <div>
   <div :class="['myp-tr','border-1px',{'islink':islink}]">
-    <div class="td-justify">{{title}}:</div>
+    <div class="label-box">{{title}}:</div>
     <div class="content">
       <slot></slot>
     </div>
@@ -37,31 +37,36 @@ export default {
   user-select: auto;
   border-bottom: 1px solid #eee;
   display: flex;
+    height: 88 / @rem;
+    line-height: 88 / @rem;
+   font-size: 32 / @rem;
   // 可点击的样式
-  .td-justify {
+  .label-box {
+    font-size: 34 / @rem;
+    color:@m-color2;
     text-align: center;
     text-align: justify;
     text-justify: distribute-all-lines;
     text-align-last: justify;
     flex: 0 1;
-    font-size: 14px;
-    line-height: 24px;
+   
     white-space: nowrap;
     display: flex;
     justify-content: flex-start;
-     padding: 15 / @rem 30 / @rem;
+     padding: 0 / @rem 30 / @rem;
   }
   .content {
+     color: @m-color1;
     flex: 1;
-     padding: 15 / @rem 30 / @rem;
-     padding-left: 0;
+    padding: 0 / @rem 30 / @rem;
+    padding-left: 0;
     font-size: 14px;
-    line-height: 24px;
     padding-left: 10px;
     white-space: normal;
     word-break: break-all;
     width: 100%;
-    text-align: right
+    text-align: right;
+   
   }
   // &:last-of-type {
   //   // > td {

@@ -86,6 +86,7 @@ export default {
                         CONST:CONST,
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
+                                console.log('哈哈哈哈');
                                 console.log(res);
                                 return res.result.data.merSettList
                         }
@@ -214,12 +215,10 @@ export default {
                 width:85%;
         }
         .m-page-header{
-                // .search-box {
-                        // height: 100/@rem;
-                line-height: 100 / @rem;
+                line-height: 100 / @rem; 
                 width: 100%;
                 font-size: 14px;
-                background: #0a7ae0;
+                background: @main-color;
                 color: #fafafa;
                 .search-info {
                         margin-left: 10px;
@@ -232,7 +231,6 @@ export default {
                 .page-title{
                         float: left;
                 }
-                // }
         }
          
          .tip-color {

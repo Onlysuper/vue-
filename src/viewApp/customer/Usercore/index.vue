@@ -232,7 +232,7 @@ export default {
         .block-title{
                 font-size:32 / @rem;
                 padding: 10 / @rem 0;
-                color:@title-font-color;
+                color:@m-color1;
                 font-weight: bold;
         }
         .info-item {
@@ -243,7 +243,7 @@ export default {
                 font-size: 32 / @rem;
                 align-items: center;
                 position: relative;
-                color:@title-font-color;
+                color:@m-color1;
                 &::before{
                         content: "";
                         display: block;

@@ -7,7 +7,12 @@
     <div class="content">
       <div class="header">
         <p class="title">{{entName}}</p>
-        <p class="amount" :class="{'amount-success':statusClass == 'SUCCESS'}">{{amount}}元</p>
+        <p class="amount" :class="{'amount-success':statusClass == 'SUCCESS'}">
+          <span class="num">
+            {{amount}}
+          </span>
+          元
+        </p>
       </div>
       <div class="footer">
         <p class="time mar-l">{{time}}</p>
@@ -58,7 +63,6 @@ export default {
   display: flex;
   width: 100%;
   align-items: center;
-
   .icon {
     i {
       font-size: 80/@rem;
@@ -67,21 +71,26 @@ export default {
   }
 
   .content {
-    padding: 10/@rem 0;
+    padding: 30/@rem 0;
     flex: 1;
   }
 
   .header,
   .footer {
-    padding: 10/@rem 30/@rem;
+    padding: 0 30/@rem;
     box-sizing: border-box;
     display: flex;
     font-size: 32/@rem;
     position: relative;
   }
+  .footer{
+    margin-top: 10 / @rem;
+  }
 
   .title {
     flex: 1;
+    color:@m-color1;
+    font-size: 34 / @rem
   }
 
   .mar-l {
@@ -113,13 +122,16 @@ export default {
 
   .time {
     flex: 1;
-    color: #8e8e8e;
+    color: @m-color3;
   }
 
   .amount {
     text-align: right;
-    color: #ff5b5b;
-    font-weight: 600;
+    // color: #ff5b5b;
+    // font-weight: 600;
+        .num{
+ font-size: 36 / @rem
+    }
   }
 
   .amount-success {

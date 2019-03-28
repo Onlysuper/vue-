@@ -13,13 +13,13 @@
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
-                                        <pay-item  
+                                        <settle-item  
                                         @click.native="toDetail(item)" 
                                         :entName="item.merName"
                                         :time="item.tranDate" 
                                         :amount="item.tranAmt | moneyFormatCN"
                                         >
-                                        </pay-item>
+                                        </settle-item>
                                 </div>
                         </loadmore>
                         <!-- </div> -->
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import PayItem from "@src/componentsApp/PayItem";
+import settleItem from "@src/componentsApp/PayItem";
 import BannerDate from "@src/componentsApp/BannerDate";
 import Loadmore from "@src/componentsApp/Loadmore";
 import FullPagePopup from "@src/componentsApp/FullPagePopup";
@@ -50,7 +50,7 @@ import {md5Encrypt} from "@src/common/secret.js";
 export default {
         mixins: [scrollBehavior],
         components: {
-                PayItem,
+                settleItem,
                 BannerDate,
                 Loadmore,
                 FullPagePopup,
@@ -269,7 +269,7 @@ export default {
                 line-height: 100 / @rem;
                 width: 100%;
                 font-size: 14px;
-                background: #0a7ae0;
+                background: @main-color;
                 color: #fafafa;
                 .search-info {
                         margin-left: 10px;
@@ -282,7 +282,7 @@ export default {
         }
 
         .tip-color {
-                background: #0a70cc;
+                background: @main-color;
         }
 
         .history-list {

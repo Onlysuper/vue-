@@ -120,6 +120,7 @@ export default {
                         return this.api()(query).then(res => {
                                 if (res.code === "001") {
                                         let data =this.handeleResault(res);
+                                        console.log(data);
                                         this.count = data.totalRows;
                                         return data.resultList || [];
                                 }else {
