@@ -22,60 +22,60 @@ const router = new Router({
                                 isMustOpenid: true
                         }
                 },
-                {
-                        path: "/customer/register",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/Register")), "register"),
-                        meta: {
-                                pageTitle: "注册易票",
-                                isMustOpenid: true
-                        }
-                },
-                {
-                        path: "/customer/registerSuccess",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/RegisterSuccess")), "registerSuccess"),
-                        meta: {
-                                pageTitle: "注册成功",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
-                {
-                        name: "added",
-                        path: "/customer/added",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/Added")), "added"),
-                        meta: {
-                                pageTitle: "电子发票",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
-                {
-                        path: "/customer/code",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/Code")), "code"),
-                        meta: {
-                                pageTitle: "开票码",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
-                {
-                        path: "/customer/scan",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/Scan")), "scan"),
-                        meta: {
-                                pageTitle: "扫一扫",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
-                {
-                        path: "/customer/scanMoney",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/ScanMoney")), "scanMoney"),
-                        meta: {
-                                pageTitle: "收款",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
+                // {
+                //         path: "/customer/register",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Register")), "register"),
+                //         meta: {
+                //                 pageTitle: "注册易票",
+                //                 isMustOpenid: true
+                //         }
+                // },
+                // {
+                //         path: "/customer/registerSuccess",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/RegisterSuccess")), "registerSuccess"),
+                //         meta: {
+                //                 pageTitle: "注册成功",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
+                // {
+                //         name: "added",
+                //         path: "/customer/added",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Added")), "added"),
+                //         meta: {
+                //                 pageTitle: "电子发票",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
+                // {
+                //         path: "/customer/code",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Code")), "code"),
+                //         meta: {
+                //                 pageTitle: "开票码",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
+                // {
+                //         path: "/customer/scan",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Scan")), "scan"),
+                //         meta: {
+                //                 pageTitle: "扫一扫",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
+                // {
+                //         path: "/customer/scanMoney",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/ScanMoney")), "scanMoney"),
+                //         meta: {
+                //                 pageTitle: "收款",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
                 {
                         path: "/customer/usercore",
                         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Usercore")), "usercore"),
@@ -85,22 +85,22 @@ const router = new Router({
                                 isMustOpenid: true
                         }
                 },
-                {
-                        path: "/customer/help",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/Help")), "help"),
-                        meta: {
-                                pageTitle: "使用帮助",
-                        }
-                },
-                {
-                        path: "/customer/notPay",
-                        component: r => require.ensure([], () => r(require("@src/viewApp/customer/NotPay")), "notPay"),
-                        meta: {
-                                pageTitle: "暂未开通支付产品",
-                                requiresAuth: true,
-                                isMustOpenid: true
-                        }
-                },
+                // {
+                //         path: "/customer/help",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/Help")), "help"),
+                //         meta: {
+                //                 pageTitle: "使用帮助",
+                //         }
+                // },
+                // {
+                //         path: "/customer/notPay",
+                //         component: r => require.ensure([], () => r(require("@src/viewApp/customer/NotPay")), "notPay"),
+                //         meta: {
+                //                 pageTitle: "暂未开通支付产品",
+                //                 requiresAuth: true,
+                //                 isMustOpenid: true
+                //         }
+                // },
                 {
                         path: "/customer/pay/home", // 兼容老地址
                         redirect: "/customer/payOrder",
@@ -361,16 +361,15 @@ router.beforeEach((to, from, next) => {
         /**
          * 以下路由必须有openId才可进入，检查字符串参数或本地储存中是否有openId字段
          */
-        if (to.matched.some(record => record.meta.isMustOpenid)) {
-                let openId = to.query.openid || to.query.openId || utils.getOpenId();
-                if (openId) {
-                        utils.storage.saveStorage("openId", openId);
-                } else {
-                        Toast("参数缺失"); 
-                        return;
-                }
-        }
-
+        // if (to.matched.some(record => record.meta.isMustOpenid)) {
+        //         let openId = to.query.openid || to.query.openId || utils.getOpenId();
+        //         if (openId) {
+        //                 utils.storage.saveStorage("openId", openId);
+        //         } else {
+        //                 Toast("参数缺失"); 
+        //                 return;
+        //         }
+        // }
         /**
          * 这里遍历所有路由包括子路由，检查哪些路由需要 登录 验证。
          * 如果一个路由需要登录之后才能进入，可以直接在相应路由中的meta中配置requiresAuth属性即可。

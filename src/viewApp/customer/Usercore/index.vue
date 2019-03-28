@@ -14,7 +14,7 @@
                                         <div class="info-cont">{{detailData.merName}}</div>
                                 </div>
                                 
-                                <div class="info-item ">
+                                <div class="info-item">
                                         <i class="icon icon-short-name"></i>
                                         <div class="info-title">经营名称</div>
                                         <div class="info-cont">{{detailData.merShortName}}</div>
@@ -230,18 +230,32 @@ export default {
                 padding-top: 10 / @rem;
         }
         .block-title{
-                font-size:30 / @rem;
+                font-size:32 / @rem;
                 padding: 10 / @rem 0;
-                // text-align: center;
+                color:@title-font-color;
+                font-weight: bold;
         }
         .info-item {
                 height: 100 / @rem;
-                border-bottom: 1px solid #dedede;
+                // border-bottom: 1px solid #dedede;
                 display: flex;
                 line-height: 100 / @rem;
-                font-size: 30 / @rem;
-                color: #333;
+                font-size: 32 / @rem;
                 align-items: center;
+                position: relative;
+                color:@title-font-color;
+                &::before{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        height:1px;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        background: #eee;
+                        transform-origin: 0 0;
+                        transform: scale(1, 0.5);
+                }
                 &:after {
                         content: "";
                         display: inline-block;
@@ -312,10 +326,12 @@ export default {
                   background-position: 0px 4px;
                 }
                 .info-title {
+                        // color:@label-font-color;
                         min-width: 129 / @rem;
                         height: 100%;
                         position: relative;
                         margin-right: 50 / @rem;
+                        // color:@m-color1;
                         &:before {
                                 content: ":";
                                 position: absolute;
@@ -325,6 +341,7 @@ export default {
                 }
                 .info-cont {
                         flex: 1;
+                        text-align: right;
                         span {
                                 float: left;
                         }
@@ -342,8 +359,9 @@ export default {
                         margin-right: 10 / @rem; // background: red;
                 }
         }
-        .info-item:nth-child(5) {
+        .info-item:last-child {
                 border-bottom: none;
+
         }
         .ent-name {
                 background: #fff;

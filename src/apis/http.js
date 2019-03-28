@@ -22,32 +22,31 @@ axios.interceptors.response.use(function (response) {
                         utils.storage.removeStorage("token");
                         utils.storage.removeStorage("telePhone")
                         utils.storage.removeStorage("merCode")
-                        setTimeout(() => { location.reload() }, 2000);
+                        setTimeout(() => { location.reload() }, 2000); 
                         return {
                                 resultCode: -103,
-                                resultMsg: "请重新登录！"
+                                message: "请重新登录！"
                         };
                 }
                 return response.data;
         } else {
                 return {
                         resultCode: -102,
-                        resultMsg: "HTTP状态码：" + response.status
+                        message: "HTTP状态码：" + response.status
                 };
         }
 }, function (error) {
         Indicator.close();
-        console.dir(error);
         //请求超时
         if (error.code == "ECONNABORTED") {
                 return Promise.resolve({
                         resultCode: -100,
-                        resultMsg: "请求超时,请稍候再试！",
+                        message: "请求超时,请稍候再试！",
                 });
         } else {
                 return Promise.resolve({
                         resultCode: -100,
-                        resultMsg: "请求失败，请检查网络！",
+                        message: "请求失败，请检查网络！",
                 });
         }
 })

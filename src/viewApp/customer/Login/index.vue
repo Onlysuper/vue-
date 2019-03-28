@@ -3,6 +3,9 @@
     <div class="login-logo">
       <img :src="require('@src/assets/images/logo.png')" alt>
     </div>
+    <div class="company-title">
+      中付支付商户系统
+    </div>
     <div class="login-form">
       <div class="form-control border-bottom-1px">
         <input
@@ -35,7 +38,7 @@
         :disabled="isPhone || isCode"
         :click="submitGetCustomerList"
       >登录</Buttonr>
-      <Buttonr :type="'register-btn'" :click="register">立即注册</Buttonr>
+      <!-- <Buttonr :type="'register-btn'" :click="register">立即注册</Buttonr> -->
     </div>
     <!--<mt-button type="danger">danger</mt-button>-->
   </div>
@@ -86,6 +89,7 @@ export default {
       let value = e.target.value.trim();
       this.isCode = value ? !validator.verificationCode.reg.test(value) : true;
     },
+
     // 发送短信验证码
     sendCode() {
       if (this.isPhone) {
@@ -98,6 +102,8 @@ export default {
         telePhone: phone,
         md5Data:md5Encrypt(`${phone+base.md5Data}`),
       }).then(res => {
+        this.$refs.TimerBtn.disabled = true;
+        this.$refs.TimerBtn.timer();
         if (res.code == "001") {
           this.Toast("验证码发送成功！");
         } else {
@@ -208,6 +214,12 @@ export default {
     .btn {
       margin-bottom: 30 / @rem;
     }
+  }
+  .company-title{
+    text-align: center;
+    font-size: 52 / @rem;
+    margin-top: 30 / @rem;
+    color:#333;
   }
 }
 </style>
