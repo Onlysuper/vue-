@@ -38,10 +38,13 @@ background:#fff;
   user-select: auto;
   // border-bottom: 1px solid #eee;
   display: flex;
-  height: 88 / @rem;
-  line-height: 88 / @rem;
+  min-height: 88 / @rem;
+  // line-height: 88 / @rem;
   font-size: 32 / @rem;
   position: relative;
+  padding-top: 10/@rem;
+  padding-bottom: 10/@rem;
+  align-items: center;
   // 可点击的样式
   .label-box {
     font-size: 34 / @rem;

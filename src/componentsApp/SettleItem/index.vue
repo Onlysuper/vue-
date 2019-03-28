@@ -73,6 +73,7 @@ export default {
   .content {
     padding: 30/@rem 0;
     flex: 1;
+    word-break: break-all;
   }
 
   .header,

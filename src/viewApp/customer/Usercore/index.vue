@@ -3,33 +3,33 @@
                 <div class="user-info">
                         <div class="block-container">
                                 <div class="block-title">商户基本信息</div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-mer-code"></i>
                                         <div class="info-title">商户编号</div>
                                         <div class="info-cont">{{detailData.merCode}}</div>
                                 </div>
-                                <div class="info-item ">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-mer-name"></i>
                                         <div class="info-title">企业名称</div>
                                         <div class="info-cont">{{detailData.merName}}</div>
                                 </div>
                                 
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-short-name"></i>
                                         <div class="info-title">经营名称</div>
                                         <div class="info-cont">{{detailData.merShortName}}</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-business-license"></i>
                                         <div class="info-title">社会统一信用代码</div>
                                         <div class="info-cont">{{detailData.businessLicense}}</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-link-man"></i>
                                         <div class="info-title">联系人</div>
                                         <div class="info-cont">{{detailData.merRelMan}}</div>
                                 </div>
-                                <div class="info-item ">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-link-phone"></i>
                                         <div class="info-title">联系人电话</div>
                                         <div class="info-cont">{{detailData.merRelTel}}</div>
@@ -39,27 +39,27 @@
 
                          <div class="block-container">
                                 <div class="block-title">费率结算信息</div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-wei-chat"></i>
                                         <div class="info-title">微信手续费</div>
                                         <div class="info-cont">{{detailData.qwxCommisionValue}}</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-ali-pay"></i>
                                         <div class="info-title">支付宝手续费率</div>
                                         <div class="info-cont">{{detailData.qzfCommisionValue}}</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以下) </div>
                                         <div class="info-cont">{{detailData.qylCommisionValue}}</div>
                                 </div>
-                                 <div class="info-item">
+                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以上) </div>
                                         <div class="info-cont">{{detailData.qylThousandValue}}</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-pay-type"></i>
                                         <div class="info-title">结算类型</div>
                                         <div class="info-cont">{{detailData.merSettType}}</div>
@@ -244,18 +244,18 @@ export default {
                 align-items: center;
                 position: relative;
                 color:@m-color1;
-                &::before{
-                        content: "";
-                        display: block;
-                        position: absolute;
-                        height:1px;
-                        left: 0;
-                        bottom: 0;
-                        right: 0;
-                        background: #eee;
-                        transform-origin: 0 0;
-                        transform: scale(1, 0.5);
-                }
+                // &::before{
+                //         content: "";
+                //         display: block;
+                //         position: absolute;
+                //         height:1px;
+                //         left: 0;
+                //         bottom: 0;
+                //         right: 0;
+                //         background: #eee;
+                //         transform-origin: 0 0;
+                //         transform: scale(1, 0.5);
+                // }
                 &:after {
                         content: "";
                         display: inline-block;
