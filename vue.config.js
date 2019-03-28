@@ -16,14 +16,14 @@ module.exports = {
             chunks: []
         },
         pc: { // pc端
-          entry: './src/pcview/index/index.js',
-          template: './src/pcview/index/index.html',
+          entry: './src/viewPc/index/index.js',
+          template: './src/viewPc/index/index.html',
           filename: 'pc.html',
           title: 'pc端'
         },
         app: { // 手机端
-            entry: './src/appview/index/index.js',
-            template: './src/appview/index/index.html',
+            entry: './src/viewApp/index/index.js',
+            template: './src/viewApp/index/index.html',
             filename: 'app.html',
             title: '移动端'
           }
