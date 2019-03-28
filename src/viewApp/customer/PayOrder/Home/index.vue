@@ -90,7 +90,7 @@ export default {
       CONST: CONST,
       scroll: 0,
       openId: utils.getOpenId(),
-      payType: "",
+      payType: "1",
       payTypes: utils.constToArr(CONST.payType),
       totalCount: 0,
       totalAmount: 0,
