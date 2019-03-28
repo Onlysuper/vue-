@@ -204,6 +204,7 @@ export default {
         width: 100%;
         height: 100%;
         padding: 0 20 / @rem;
+         font-size: 36 / @rem;
         flex: 1;
       }
     }

@@ -1,9 +1,5 @@
 { 
         "payType": {
-                "": {
-                "name":"全部",
-                "color":"red"
-                },
                 "0": {
                         "name":"刷卡",
                         "color":"red"
