@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div :class="['myp-tr','border-1px',{'islink':islink}]">
+<div class="row-back">
+  <div :class="['row','border-bottom-1px',{'islink':islink}]">
     <div class="label-box">{{title}}:</div>
     <div class="content">
       <slot></slot>
@@ -32,14 +32,16 @@ export default {
 
 <style lang="less" scoped>
 @import url(../../assets/less/base.less);
-.myp-tr {
-  background: #fff;
+.row-back{
+background:#fff;
+.row {
   user-select: auto;
-  border-bottom: 1px solid #eee;
+  // border-bottom: 1px solid #eee;
   display: flex;
-    height: 88 / @rem;
-    line-height: 88 / @rem;
-   font-size: 32 / @rem;
+  height: 88 / @rem;
+  line-height: 88 / @rem;
+  font-size: 32 / @rem;
+  position: relative;
   // 可点击的样式
   .label-box {
     font-size: 34 / @rem;
@@ -49,7 +51,6 @@ export default {
     text-justify: distribute-all-lines;
     text-align-last: justify;
     flex: 0 1;
-   
     white-space: nowrap;
     display: flex;
     justify-content: flex-start;
@@ -60,23 +61,14 @@ export default {
     flex: 1;
     padding: 0 / @rem 30 / @rem;
     padding-left: 0;
-    font-size: 14px;
-    padding-left: 10px;
+    padding-left: 10 / @rem;
     white-space: normal;
     word-break: break-all;
     width: 100%;
     text-align: right;
-   
+      font-size: 32 / @rem;
   }
-  // &:last-of-type {
-  //   // > td {
-  //     padding-bottom: 100 / @rem;
-  //   // }
-  // }
-  // &:first-of-type {
-  //   // > td {
-  //     padding-top:100 / @rem;
-  //   // }
-  // }
 }
+}
+
 </style>
