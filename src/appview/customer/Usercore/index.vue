@@ -125,7 +125,6 @@ export default {
                 this.token = utils.storage.getStorage("token");
         },
         mounted() {
-                // $(".usercore-container").setHeightToWindow();
         },
         methods: {
                 getUserInfo(openId) {
@@ -143,16 +142,9 @@ export default {
                                          let data=res.result.data.merDetailInfo;
                                          this.detailData={...data};
                                 }else{ 
-                                            //用户未登录，请重新登录
+                                        // token过期 退出登录
                                         this.Toast(res.message);
-                                        this.$router.replace({
-                                                path: "/customer/login",
-                                                query: {
-                                                        redirect: this.$route.path
-                                                }
-                                        });
                                 }
-                              
                         });
                 },
                 changeName() {

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './index.vue';
-import router from '@src/approuter';
+import router from '@src/approuter'; 
 import store from "@src/appstore";
 import 'mint-ui/lib/style.css'
 import "@src/common/rem.js";

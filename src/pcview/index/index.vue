@@ -1,6 +1,6 @@
 <template>
 <div>
-  我是pc
+  请使用手机查看！
 </div>
 </template>
 

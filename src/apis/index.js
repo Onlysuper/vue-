@@ -1,6 +1,6 @@
 
 import http from "./http";
-import base from "./base";
+import base from "./base"; 
 
 
 // 登录获取验证码

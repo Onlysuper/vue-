@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import utils from "@src/common/utils.js";
 import { Indicator } from 'mint-ui'
 
 //全局请求拦截器
@@ -17,8 +18,10 @@ axios.interceptors.response.use(function (response) {
         //如果状态吗正常直接返回data中的数据
         if (response && response.status === 200) {
                 //如果登录过期了
-                if (response.data && response.data.resultCode === "01") {
-                        localStorage.removeItem("token");
+                if (response.data && response.data.resultCode === "002") {
+                        utils.storage.removeStorage("token");
+                        utils.storage.removeStorage("telePhone")
+                        utils.storage.removeStorage("merCode")
                         setTimeout(() => { location.reload() }, 2000);
                         return {
                                 resultCode: -103,

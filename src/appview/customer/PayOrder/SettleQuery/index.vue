@@ -37,7 +37,6 @@ import FullPagePopup from "@src/appcomponents/FullPagePopup";
 import Loadmore from "@src/appcomponents/Loadmore";
 import SearchPage from "@src/appcomponents/SearchPage";
 import { listScrollFixedBanner, saveScrollPosition } from "@src/common/mixins";
-// import { settleQuery, getCustomerInfo } from "@src/apis";
 import { settleQuery } from "@src/apis";
 import utils from "@src/common/utils";
 import base from "@src/apis/base.js";
