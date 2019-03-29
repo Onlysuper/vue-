@@ -39,7 +39,8 @@ module.exports = {
         hotOnly: false,
         //配置跨域处理,只有一个代理
         // proxy: 'http://test14.qtopay.cn',
-        proxy: 'http://test14.qtopay.cn',
+        // proxy: 'http://test14.qtopay.cn',
+        proxy: 'http://test39.qtopay.cn',
         //配置跨域处理,多个代理
         // disableHostCheck: true,
         // proxy: {

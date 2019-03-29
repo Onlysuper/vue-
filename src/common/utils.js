@@ -172,7 +172,11 @@ export default {
                 return [];
         },
         replaceSort(val){
-                return val.replace(/sort-/g,'') || val;
+                if(val!=undefined){
+                        return val.replace(/sort-/g,'');
+                }else{
+                        return "";
+                }
         },
         valToColor:function(json,type,val){
                 return json[type][val].color;

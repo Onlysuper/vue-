@@ -25,6 +25,7 @@ export default {
   methods: {
     select(item) {
       this.isActive = item.code;
+      console.log(item.code);
       this.config.cb && this.config.cb(item.code);
     }
   }
