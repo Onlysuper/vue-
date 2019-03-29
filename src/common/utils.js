@@ -179,7 +179,12 @@ export default {
                 }
         },
         valToColor:function(json,type,val){
-                return json[type][val].color;
+                if(json[type][val]&&json[type][val]['color']){
+                        return json[type][val].color;
+                }else{
+                        return "";
+                }
+               
         },
         numToChinese: function (section) {
                 let chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];

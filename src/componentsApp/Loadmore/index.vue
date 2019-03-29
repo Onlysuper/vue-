@@ -69,6 +69,12 @@ export default {
                                 return res.result.data;
                         }
                 },
+                currentPageFn: {
+                        type: Function,
+                        default: (count,query) => {
+                                return query
+                        }
+                },
                 
                 //loadQuery默认值
                 defaultLoadQuery: {
@@ -148,12 +154,11 @@ export default {
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
 
                         this.loadQuery.currentPage = 1;
-                        this.$emit("currentPageChange",this.loadQuery.currentPage)
-                        this.loadData(this.loadQuery).then(list => {
+                        let loadQuery= this.currentPageFn(this.loadQuery.currentPage,this.loadQuery);
+                        this.loadData(loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = list;
                                         done();
-                                        // this.$refs.loadmore.finishInfinite(false);
                                         this.isAllLoaded(list);
                                         this.$emit("refresh");
                                 }, 500);
@@ -166,8 +171,8 @@ export default {
                                 return;
                         };
                          this.loadQuery.currentPage++;
-                         this.$emit("currentPageChange",this.loadQuery.currentPage)
-                        this.loadData(this.loadQuery).then(list => {
+                        let loadQuery= this.currentPageFn(this.loadQuery.currentPage,this.loadQuery);
+                        this.loadData(loadQuery).then(list => {
                                 setTimeout(() => {
                                         this.list = this.list.concat(list);
                                         done();

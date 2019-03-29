@@ -9,7 +9,7 @@
                                 {{searchQuery.status | analyFilter(CONST,'payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
                         </tip>
                         <!-- <div class="history-list"> -->
-                        <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" @currentPageChange="currentPageChange" ref="MypLoadmoreApi">
+                        <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                                         </banner-date>
@@ -72,7 +72,6 @@ export default {
                         amountSum: "",
                         payStatus: CONST.payStatus,
                         tranType:"",
-                        currentPage:1,
                         searchQuery: {
                                 startTime: "",
                                 endTime:"",
@@ -88,7 +87,15 @@ export default {
                         handeleResault:(res)=>{
                                 console.log(res.result.data.merTranList);
                                 return res.result.data.merTranList
-                        }
+                        },
+                        currentPageFn:(currentPage,loadQuery)=>{
+                                 let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
+                                 let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
+                                let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,loadQuery.currentPage,loadQuery.pageSize,this.token+base.md5Data];
+                                let md5Data = md5Encrypt(sendData.join(''));
+                                loadQuery['md5Data']=md5Data;
+                                return loadQuery
+                        },
                 };
         },
         computed:{
@@ -138,7 +145,7 @@ export default {
                 setQueryMd5Data(){
                         let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
                         let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
-                        let sendData=[this.phone,this.merCode,startTime,endTime,this.currentPage,this.searchQuery.pageSize,this.token+base.md5Data];
+                        let sendData=[this.phone,this.merCode,startTime,endTime,this.searchQuery.currentPage,this.searchQuery.pageSize,this.token+base.md5Data];
                         sendData =sendData.join('');
                         let md5data = md5Encrypt(sendData);
                         this.$set(this.searchQuery,"md5Data",md5data)
@@ -243,10 +250,6 @@ export default {
                                         }
                                 });
                         });
-                },
-                currentPageChange(val){
-                       this.currentPage=val;
-                       this.setQueryMd5Data();
                 }
         }
         
