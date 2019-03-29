@@ -59,8 +59,6 @@ let defaultQuery = {
         status: "",
         limit: 20,
         page: 1
-        // createTimeStart: utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd"),
-        // createTimeEnd: utils.formatDate(new Date(Date.now() - 0 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd")
 };
 export default {
         components: {

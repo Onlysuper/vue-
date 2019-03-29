@@ -125,7 +125,7 @@ export default {
         },
         created(){
                 let startTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
-                let endTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
+                let endTime = utils.formatDate(new Date(), "yyyy-MM-dd");
                 this.$set(this.searchQuery,"token",this.token)
                 this.$set(this.searchQuery,"merCode",this.merCode)
                 this.$set(this.searchQuery,"telePhone",this.phone)
