@@ -194,7 +194,8 @@ export default {
                                         defaultValue: this.searchQuery.tranType,
                                         values: utils.constToArr(CONST.payType),
                                         cb: value => {
-                                                this.searchQuery.tranType = value;
+                                                this.searchQuery.tranType =utils.replaceSort(value);
+                                                console.log(this.searchQuery.tranType);
                                         }
                                 });
 

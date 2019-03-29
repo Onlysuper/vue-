@@ -11,8 +11,8 @@
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
                                         :time="item.settDate"
-                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus')"
-                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',item.outState)"
+                                        :status="'sort-'+item.outState | analyFilter(CONST,'outMoneyStatus')"
+                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',`${'sort-'+item.outState}`)"
                                         :amount="item.settAmt">
                                         </settle-Item>
                                 </loadmore>
@@ -85,8 +85,6 @@ export default {
                         CONST:CONST,
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
-                                console.log('哈哈哈哈');
-                                console.log(res);
                                 return res.result.data.merSettList
                         }
                 }
@@ -162,7 +160,7 @@ export default {
                                         defaultValue: this.searchQuery.outState,
                                         values: utils.constToArr(this.outMoneyStatus),
                                         cb: value => {
-                                                this.searchQuery.outState = value;
+                                                this.searchQuery.outState = utils.replaceSort(value);
                                                 this.setQueryMd5Data()
                                         }
                                 });

@@ -32,22 +32,6 @@
         </div>
       </div>
 
-      <!-- <div class="today-total-box" ref="header" v-if="scroll < 10">
-                                <div class="income-today-title">今日{{payType | analyFilter(CONST,'payType')}}收入(元)</div>
-                                <div class="income-today-amount">
-                                        <span>{{totalAmount | moneyFormatCN}}</span>
-                                </div>
-                                <div class="income-today-number">交易共 {{totalAllCount}} 笔</div>
-                                <div class="income-today-numbers clearfix">
-                                        <div class="income-today-weixin-number">微信 {{totalWechatCount}} 笔</div>
-                                        <div class="income-today-alipay-number">支付宝 {{totalAlipayCount}} 笔</div>
-                                </div>
-                                <div class="income-today-numbers clearfix">
-                                        <div class="income-today-alipay-number">刷卡 {{totalSkCount}} 笔</div>
-                                        <div class="income-today-alipay-number">银联二维码 {{totalSkCount}} 笔</div>
-                                </div>
-                        </div>
-      -->
       <div class="navbar-box">
         <div class="navbar-item _av">
           <select class="navbar-select" v-model="payType" @change="selectChange">
@@ -59,7 +43,6 @@
           </select>
         </div>
         <div class="line-split">
-
         </div>
         <div class="navbar-item navbar-line _av" @click="toHistory">历史记录</div>
       </div>
@@ -90,7 +73,7 @@ export default {
       CONST: CONST,
       scroll: 0,
       openId: utils.getOpenId(),
-      payType: "1",
+      payType: "sort-1",
       payTypes: utils.constToArr(CONST.payType),
       totalCount: 0,
       totalAmount: 0,
@@ -133,7 +116,7 @@ export default {
         merCode: merCode,
         startTime: startTime,
         endTime: endTime,
-        payType: this.payType,
+        payType: utils.replaceSort(this.payType),
         md5Data: md5Encrypt(
           `${phone + merCode + startTime + endTime + token + base.md5Data}`
         )

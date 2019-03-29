@@ -1,5 +1,3 @@
-
-
 function getUrl() {
         switch (process.env.VUE_APP_TITLE) {
             case "development":
@@ -12,5 +10,7 @@ function getUrl() {
     }
 export default {
         md5Data:"ZzJ2A2r_H1D9LJ589DY",
+        // oaIp:"http://easy-mock.liuup.com/mock/5c98365fd360c27a130ae4bc"
+        // http://easy-mock.liuup.com/mock/5c98365fd360c27a130ae4bc/ChnpayPubAcct/realMerPubNum/queryMerSettList.html
         oaIp: getUrl()
 }

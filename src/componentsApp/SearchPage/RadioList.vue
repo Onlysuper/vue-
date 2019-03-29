@@ -2,7 +2,8 @@
   <div class="v-radio-list">
     <div class="title" v-if="config.title">{{config.title}}</div>
     <div class="list">
-      <div class="radio" :class="{active:isActive == item.code}" v-for="(item,index) in config.values" :key="index" @click="select(item)">{{item.name}}</div>
+      <p></p>
+      <div class="radio" :class="{active:(isActive == item.code||'sort-'+isActive == item.code)}" v-for="(item,index) in config.values" :key="index" @click="select(item)">{{item.name}}</div>
     </div>
   </div>
 </template>

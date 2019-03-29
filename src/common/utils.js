@@ -155,6 +155,8 @@ export default {
                 }
         },
         constToArr: function (constObj) {
+                console.log('哈哈哈哈哈');
+                console.log(constObj);
                 if (constObj instanceof Object) {
                         var arr = [];
                         for (var key in constObj) {
@@ -168,6 +170,9 @@ export default {
                         return arr;
                 }
                 return [];
+        },
+        replaceSort(val){
+                return val.replace(/sort-/g,'') || val;
         },
         valToColor:function(json,type,val){
                 return json[type][val].color;
