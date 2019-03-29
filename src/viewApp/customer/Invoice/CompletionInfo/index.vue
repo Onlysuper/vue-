@@ -133,7 +133,7 @@ export default {
                                                 this.mounthCount = product.elecBillnum;
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
 
                         })
@@ -187,7 +187,7 @@ export default {
                                 if (data.resultCode == "0") {
                                         this.$router.replace({ path: "/customer/eicInTransitWait" });
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },

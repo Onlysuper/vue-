@@ -81,7 +81,7 @@ export default {
                                         this.content = {};
                                         this.addr = "";
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         })
 

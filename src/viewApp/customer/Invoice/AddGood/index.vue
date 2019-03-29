@@ -141,7 +141,7 @@ export default {
                                                 this.$router.back();
                                         }, 1000);
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },

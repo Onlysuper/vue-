@@ -159,11 +159,11 @@ export default {
                         };
                         electronicAddInvoiceConfig()(sendData).then(data => {
                                 if (data.resultCode == "0") {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                         //保存成功后储存用户填写的配置信息
                                         // localStorage.setItem("config", JSON.stringify(sendData));
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },
@@ -184,7 +184,7 @@ export default {
                                                 this.checkMan = data.data.checkMan;
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },

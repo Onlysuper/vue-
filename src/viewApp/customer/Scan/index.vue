@@ -60,13 +60,13 @@ export default {
                                         this.agentNo = data.data.agentNo;
                                 } else if (data.resultCode == "01") {
                                         //用户未登录，请重新登录
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                         this.$router.replace({
                                                 path: "/customer/login",
                                                 query: { redirect: this.$route.path }
                                         });
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },
@@ -92,7 +92,7 @@ export default {
                                                 }
                                         });
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                         // $.dialog.scanAlert({

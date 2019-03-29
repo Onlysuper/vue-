@@ -70,7 +70,7 @@ export default {
                                                 this.Toast("绑定成功");
                                                 this.$refs.loadmore.loadTop();
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         });

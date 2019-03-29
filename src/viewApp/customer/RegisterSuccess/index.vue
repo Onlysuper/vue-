@@ -53,7 +53,7 @@ export default {
                                 this.taxCode = data.data.taxNo;
                                 this.qr = data.data.imgPath;
                         } else {
-                                this.Toast(data.resultMsg);
+                                this.Toast(data.message);
                         }
                 }
         }

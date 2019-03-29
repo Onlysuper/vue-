@@ -160,7 +160,7 @@ export default {
                   this.Toast("请先注册");
                 }
               } else {
-                this.Toast(data.resultMsg);
+                this.Toast(data.message);
               }
             });
           } else {

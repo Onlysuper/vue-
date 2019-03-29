@@ -103,7 +103,7 @@ export default {
                                                 this.electronicQueryGoodsList();
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },
@@ -121,7 +121,7 @@ export default {
                                                 this.initPicker(this.goodsList);
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         })
                 },
@@ -290,7 +290,7 @@ export default {
                                                 this.Toast("数据接口异常！");
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         })
                 },

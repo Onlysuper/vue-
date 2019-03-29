@@ -99,7 +99,7 @@ export default {
           this.queryList = data.data;
         } else {
           this.queryList = [];
-          this.Toast(data.resultMsg);
+          this.Toast(data.message);
         }
         this.isNoSearchShow = true;
       });

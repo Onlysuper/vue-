@@ -86,9 +86,9 @@ export default {
                                         mailAddr: value
                                 }).then(data => {
                                         if (data.resultCode == "0") {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         });

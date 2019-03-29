@@ -135,7 +135,7 @@ export default {
             // this.Toast('暂无数据');
           }
         } else {
-          this.Toast(data.resultMsg);
+          this.Toast(data.message);
         }
       });
     },

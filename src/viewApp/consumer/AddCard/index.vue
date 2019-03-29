@@ -70,7 +70,7 @@ export default {
                                                         this.$router.replace({ path: "/consumer/mycard" });
                                                 }, 1000);
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         } else {
@@ -86,7 +86,7 @@ export default {
                                                         this.$router.replace({ path: "/consumer/mycard" });
                                                 }, 1000);
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         }

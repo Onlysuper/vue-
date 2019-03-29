@@ -172,7 +172,7 @@ export default {
                                                         iconClass: "mintui mintui-success"
                                                 });
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         });
@@ -206,7 +206,7 @@ export default {
                                                 utils.storage.removeStorage("merCode")
                                                 location.reload();
                                         }else{
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 });
                         });

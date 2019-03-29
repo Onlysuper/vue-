@@ -138,7 +138,7 @@ export default {
                                 if (data.resultCode == "0") {
                                         this.Toast("验证码发送成功！");
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },
@@ -173,7 +173,7 @@ export default {
                                         this.$router.push("/customer/registerSuccess");
 
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 }

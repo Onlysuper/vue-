@@ -85,7 +85,7 @@ export default {
                                         this.pageShow = true;
                                 }
                         } else {
-                                this.Toast(data.resultMsg);
+                                this.Toast(data.message);
                         }
                 });
         },
@@ -108,7 +108,7 @@ export default {
                                 goodsNo: goodsNo,
                                 defaultType: (this.goods[index].defaultType + "").toUpperCase()
                         }).then(data => {
-                                this.Toast(data.resultMsg);
+                                this.Toast(data.message);
                         });
                 },
                 //修改商品
@@ -135,12 +135,12 @@ export default {
                                                 goodsNo: goodsNo
                                         }).then(data => {
                                                 if (data.resultCode == "0") {
-                                                        this.Toast(data.resultMsg);
+                                                        this.Toast(data.message);
                                                         this.goods = this.goods.filter(item => {
                                                                 return item.goodsNo != goodsNo;
                                                         });
                                                 } else {
-                                                        this.Toast(data.resultMsg);
+                                                        this.Toast(data.message);
                                                 }
                                         });
                                 }

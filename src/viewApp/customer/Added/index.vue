@@ -73,7 +73,7 @@ export default {
                                                         break;
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 }

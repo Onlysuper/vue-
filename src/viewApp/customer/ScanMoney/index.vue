@@ -50,7 +50,7 @@ export default {
                                         this.randomCode = data.data.randomCode;
                                         this.customerNo = data.data.customerNo;
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         });
                 },
@@ -86,7 +86,7 @@ export default {
                                                 else this.Toast("签名有误！");
                                         }
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         })
                 },
@@ -138,7 +138,7 @@ export default {
                                                                 if (data.resultCode == "0") {
                                                                         this.$router.push({ path: "/customer/payOrder" });
                                                                 } else {
-                                                                        this.Toast(data.resultMsg);
+                                                                        this.Toast(data.message);
                                                                 }
                                                         })
 

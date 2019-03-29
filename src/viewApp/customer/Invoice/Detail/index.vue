@@ -74,7 +74,7 @@ export default {
                                         this.detail = data.data || {};
                                         this.pageShow = true;
                                 } else {
-                                        this.Toast(data.resultMsg);
+                                        this.Toast(data.message);
                                 }
                         })
                 }
@@ -103,7 +103,7 @@ export default {
                                                 this.btnDis = true;
                                                 this.Toast("提交成功");
                                         } else {
-                                                this.Toast(data.resultMsg);
+                                                this.Toast(data.message);
                                         }
                                 })
                         });
