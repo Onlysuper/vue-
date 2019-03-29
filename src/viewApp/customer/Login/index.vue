@@ -145,7 +145,7 @@ export default {
                 let { merList } = res.result.data; // 商户列表
                 let custoemrNo; // 希望登录的商户
                 if (merList.length == 1) {
-                  custoemrNo = merList[0].customerNo;
+                  custoemrNo = merList[0].merCode;
                   resolve(custoemrNo);
                 } else if (merList.length > 1) {
                   $.dialog.select({
