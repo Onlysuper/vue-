@@ -85,7 +85,7 @@ export default {
                         },
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
-                                console.log(res.result.data.merTranList);
+                                console.log(res);
                                 return res.result.data.merTranList
                         },
                         currentPageFn:(currentPage,loadQuery)=>{
@@ -157,17 +157,19 @@ export default {
                         });
                 },
                 formatList(list) {
-                        if(list.length>0){
-                                this.newlist = [...list];
-                        }
+                        // if(list.length>0){
+                        //         this.newlist = [...list];
+                        // }
                 },
                 watchDataList(list) {
-                        this.formatList(list);
+                        // this.formatList(list);
+                         this.newlist = list;
                 },
                 getDate(num) {
                         return utils.formatDate(new Date(Date.now() - num * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
                 },
                 search() {
+                        console.log('这里这里')
                         this.hidden = false;
                         this.$refs.MypLoadmoreApi.load({
                                 token: utils.storage.getStorage("token"),
@@ -202,7 +204,6 @@ export default {
                                         values: utils.constToArr(CONST.payType),
                                         cb: value => {
                                                 this.searchQuery.tranType =utils.replaceSort(value);
-                                                console.log(this.searchQuery.tranType);
                                         }
                                 });
 

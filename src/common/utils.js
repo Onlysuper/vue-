@@ -79,7 +79,6 @@ export default {
                         return ""
                 },
                 removeCookie(c_name){
-                        console.log(this);
                   this.saveCookie(c_name, "", -1);  
                 }
         },
@@ -155,8 +154,6 @@ export default {
                 }
         },
         constToArr: function (constObj) {
-                console.log('哈哈哈哈哈');
-                console.log(constObj);
                 if (constObj instanceof Object) {
                         var arr = [];
                         for (var key in constObj) {

@@ -95,7 +95,6 @@ export default {
         },
         watch: {
                 list(list) {
-                        console.log(list);
                         this.$emit("watchDataList", list, this.count, this.loadQuery.currentPage);
                 }
         },
@@ -122,11 +121,9 @@ export default {
                         if(query.endTime){
                                 query.endTime=query.endTime.replace(/\/|\-/gi,"")
                         }
-                        console.log(query);
                         return this.api()(query).then(res => {
                                 if (res.code === "001") {
                                         let data =this.handeleResault(res);
-                                        console.log(data);
                                         this.count = data.totalRows;
                                         return data.resultList || [];
                                 }else {
@@ -137,13 +134,14 @@ export default {
                 },
                 //首次加载和搜索加载操作
                 load(searchQuery) {
+                        console.log('zzzzz');
                         this.allLoaded = false;
                         this.searchQuery = searchQuery || {};
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
                         this.list = [];
                         this.$refs.loadmore.finishInfinite(false);
                         // this.loadQuery.currentPage++;
-                        // this.loadData(this.loadQuery).then(list => {
+                        // this.loadData(this.loadQuery).then(res => {
                         //   this.list = list;
                         //   this.isAllLoaded(list);
                         // });

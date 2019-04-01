@@ -134,14 +134,11 @@ export default {
                         this.$set(this.searchQuery,"md5Data",`${md5data}`)
                 },
                 watchDataList(list, count) {
-                        console.log(list);
                         // this.count = count || {};
                         this.newlist = list;
                 },
                 search() {
                         this.searchVisible = false;
-                        console.log(this.searchQuery);
-                        // return false;
                         this.$refs.MypLoadmoreApi.load({
                                 ...this.searchQuery
                         });

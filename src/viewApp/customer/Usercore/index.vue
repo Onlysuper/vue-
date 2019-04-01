@@ -67,7 +67,7 @@
                                 <div class="info-item">
                                         <i class="icon icon-pay-number"></i>
                                         <div class="info-title">商户收款账号</div>
-                                        <div class="info-cont">{{detailData.merSettAcct}}</div>
+                                        <div class="info-cont">{{detailData.merSettAcct | accountNum}}</div>
                                 </div>
                                 <div class="info-item">
                                         <i class="icon icon-pay-number"></i>
