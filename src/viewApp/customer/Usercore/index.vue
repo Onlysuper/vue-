@@ -70,17 +70,17 @@
                                         <div class="info-cont">{{detailData.merSettAcct | accountNum}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon icon-pay-number"></i>
+                                        <i class="icon icon-trande"></i>
                                         <div class="info-title">借记卡费率</div>
                                         <div class="info-cont">{{detailData.merCommisionValue}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon icon-pay-number"></i>
+                                        <i class="icon icon-max"></i>
                                         <div class="info-title">借记卡封顶费</div>
                                         <div class="info-cont">{{detailData.amount}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon icon-pay-number"></i>
+                                        <i class="icon icon-trande"></i>
                                         <div class="info-title">贷记卡费率</div>
                                         <div class="info-cont">{{detailData.daiCommisionValue}}</div>
                                 </div>
@@ -279,7 +279,7 @@ export default {
                         background-image: url("../../../assets/images/usercore-icon.png");
                         background-repeat: no-repeat;
                         // background-size: 40 / @rem 240 / @rem;
-                        background-size: 40 / @rem 454 / @rem;
+                        background-size: 40 / @rem 560 / @rem;
                         vertical-align: middle;
                         margin-right: 20 / @rem;
                         overflow: hidden;
@@ -314,6 +314,15 @@ export default {
                   // 结算账号
                 .icon-pay-number{
                 background-position: 0px -28px;
+                }
+                //费率
+                .icon-trande{
+                        background-position: 0px -198px;
+                }
+              
+                // 封顶
+                .icon-max{
+                        background-position: 0px -218px;
                 }
                .icon-link-man{
                   background-position: 0px -148px;
