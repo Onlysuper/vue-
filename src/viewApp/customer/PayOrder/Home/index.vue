@@ -73,8 +73,15 @@ export default {
       CONST: CONST,
       scroll: 0,
       openId: utils.getOpenId(),
-      payType: "sort-1",
-      payTypes: utils.constToArr(CONST.payType),
+      payType: "",
+      payTypes: {
+      
+        ...[{
+          name: "全部",
+          code: "",
+          color: "",
+        },...utils.constToArr(CONST.payType)]
+      },
       totalCount: 0,
       totalAmount: 0,
       totalAllCount: 0,

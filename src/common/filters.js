@@ -115,5 +115,29 @@ mypFilters.install = function (Vue, options) {
                         return value
                 }
         })
+        // 银行卡号码格式化
+        Vue.filter('accountNum', function (data) {
+                function spaceNum(replaceLen){
+                        let spaceStr = "";
+                        for(var i=0;i<replaceLen;i++){
+                                spaceStr+="*";
+                        }
+                        return spaceStr;
+                }
+                if(data){
+                        let strs = data.toString().replace(/\s/,"");
+                        let replaceLen=0;
+                        if(/^[0-9]{11,}/g.test(data)){
+                              replaceLen = strs.length-10;
+                              let spaceStr = spaceNum(replaceLen);
+                              strs=strs.replace(/(\d{6})\d+(\d{4})/, `${"$1"+spaceStr+"$2"}`)
+                        }else{
+                             strs=strs.substr(0,6)+ spaceNum(strs.length-6)
+                        }
+                        return strs
+                }else{
+                        return ""
+                }
+        })
 }
 export default mypFilters;

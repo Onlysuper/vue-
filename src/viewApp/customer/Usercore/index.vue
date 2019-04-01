@@ -69,6 +69,21 @@
                                         <div class="info-title">商户收款账号</div>
                                         <div class="info-cont">{{detailData.merSettAcct}}</div>
                                 </div>
+                                <div class="info-item">
+                                        <i class="icon icon-pay-number"></i>
+                                        <div class="info-title">借记卡费率</div>
+                                        <div class="info-cont">{{detailData.merCommisionValue}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon icon-pay-number"></i>
+                                        <div class="info-title">借记卡封顶费</div>
+                                        <div class="info-cont">{{detailData.amount}}</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon icon-pay-number"></i>
+                                        <div class="info-title">贷记卡费率</div>
+                                        <div class="info-cont">{{detailData.daiCommisionValue}}</div>
+                                </div>
                          </div>
                 </div>
                 <div class="info-item exit-login-btn" @click="exit">退出登录</div>
