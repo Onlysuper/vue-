@@ -40,8 +40,8 @@
                                 <div class="block-title">费率信息</div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-wei-chat"></i>
-                                        <div class="info-title">微信手续费</div>
-                                        <div class="info-cont">{{detailData.qwxCommisionValue}}</div>
+                                        <div class="info-title">微信手续费率</div>
+                                        <div class="info-cont">{{detailData.qwxCommisionValue}}%</div>
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-ali-pay"></i>
