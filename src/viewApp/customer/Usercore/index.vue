@@ -36,9 +36,8 @@
                                 </div>
                         </div>
 
-
-                         <div class="block-container">
-                                <div class="block-title">费率结算信息</div>
+                        <div class="block-container">
+                                <div class="block-title">费率信息</div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-wei-chat"></i>
                                         <div class="info-title">微信手续费</div>
@@ -47,18 +46,31 @@
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-ali-pay"></i>
                                         <div class="info-title">支付宝手续费率</div>
-                                        <div class="info-cont">{{detailData.qzfCommisionValue}}</div>
+                                        <div class="info-cont">{{detailData.qzfCommisionValue}}%</div>
+                                </div>
+                                 <div class="info-item">
+                                        <i class="icon icon-trande"></i>
+                                        <div class="info-title">借记卡费率</div>
+                                        <div class="info-cont">{{detailData.merCommisionValue}}%</div>
+                                </div>
+                                <div class="info-item">
+                                        <i class="icon icon-trande"></i>
+                                        <div class="info-title">贷记卡费率</div>
+                                        <div class="info-cont">{{detailData.daiCommisionValue}}%</div>
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以下) </div>
-                                        <div class="info-cont">{{detailData.qylCommisionValue}}</div>
+                                        <div class="info-cont">{{detailData.qylCommisionValue}}%</div>
                                 </div>
                                  <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
                                         <div class="info-title">银联二维码手续费率(一千元以上) </div>
-                                        <div class="info-cont">{{detailData.qylThousandValue}}</div>
+                                        <div class="info-cont">{{detailData.qylThousandValue}}%</div>
                                 </div>
+                        </div>
+                         <div class="block-container">
+                                <div class="block-title">结算信息</div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-pay-type"></i>
                                         <div class="info-title">结算类型</div>
@@ -70,20 +82,11 @@
                                         <div class="info-cont">{{detailData.merSettAcct | accountNum}}</div>
                                 </div>
                                 <div class="info-item">
-                                        <i class="icon icon-trande"></i>
-                                        <div class="info-title">借记卡费率</div>
-                                        <div class="info-cont">{{detailData.merCommisionValue}}</div>
-                                </div>
-                                <div class="info-item">
                                         <i class="icon icon-max"></i>
                                         <div class="info-title">借记卡封顶费</div>
                                         <div class="info-cont">{{detailData.amount}}</div>
                                 </div>
-                                <div class="info-item">
-                                        <i class="icon icon-trande"></i>
-                                        <div class="info-title">贷记卡费率</div>
-                                        <div class="info-cont">{{detailData.daiCommisionValue}}</div>
-                                </div>
+                                
                          </div>
                 </div>
                 <div class="info-item exit-login-btn" @click="exit">退出登录</div>
