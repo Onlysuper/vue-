@@ -60,12 +60,12 @@
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
-                                        <div class="info-title">银联二维码手续费率(一千元以下) </div>
+                                        <div class="info-title">银联二维码费率(一千元以下) </div>
                                         <div class="info-cont">{{detailData.qylCommisionValue}}%</div>
                                 </div>
                                  <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
-                                        <div class="info-title">银联二维码手续费率(一千元以上) </div>
+                                        <div class="info-title">银联二维码费率(一千元以上) </div>
                                         <div class="info-cont">{{detailData.qylThousandValue}}%</div>
                                 </div>
                         </div>
@@ -365,7 +365,7 @@ export default {
                         span {
                                 float: left;
                         }
-                        .text-ellipsis();
+                        // .text-ellipsis();
                         height: 100%;
                 }
                 .arrow {
