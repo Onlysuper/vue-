@@ -88,11 +88,14 @@ export default {
                                 console.log(res);
                                 return res.result.data.merTranList
                         },
+                        // 搜索条件处理
                         currentPageFn:(currentPage,loadQuery)=>{
-                                 let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
-                                 let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
+                                let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
+                                let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
                                 let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,loadQuery.currentPage,loadQuery.pageSize,this.token+base.md5Data];
                                 let md5Data = md5Encrypt(sendData.join(''));
+                                loadQuery['startTime']=startTime;
+                                loadQuery['endTime']=endTime;
                                 loadQuery['md5Data']=md5Data;
                                 return loadQuery
                         },

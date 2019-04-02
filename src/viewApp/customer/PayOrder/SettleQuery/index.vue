@@ -6,7 +6,7 @@
                                 <div class="search-btn" @click="searchVisible = true">筛选</div>
                         </div>
                         <div class="wrapper" ref="wrapper" :style="{ height: ($store.state.winH - 40) + 'px' }">
-                                <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi" :handeleResault="handeleResault">
+                                <loadmore :api="api" @watchDataList="watchDataList" @refresh="loadmordFinishedHand" ref="MypLoadmoreApi" :handeleResault="handeleResault" :currentPageFn="currentPageFn">
                                         <settle-Item @click.native="toUrl(item)"
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
@@ -29,7 +29,7 @@
 </template>
  
 <script>
-
+ 
 import SettleItem from "@src/componentsApp/SettleItem";
 import FullPagePopup from "@src/componentsApp/FullPagePopup";
 // import InfiniteScroll from "@src/componentsApp/InfiniteScroll";
@@ -86,7 +86,18 @@ export default {
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
                                 return res.result.data.merSettList
-                        }
+                        },
+                         // 搜索条件处理
+                        currentPageFn:(currentPage,loadQuery)=>{
+                                let startTime = loadQuery.startTime.replace(/\/|\-/g,"");;
+                                let endTime = loadQuery.endTime.replace(/\/|\-/g,"");;
+                                let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,this.token+base.md5Data];
+                                let md5Data = md5Encrypt(sendData.join(''));
+                                loadQuery['startTime']=startTime;
+                                loadQuery['endTime']=endTime;
+                                loadQuery['md5Data']=md5Data;
+                                return loadQuery
+                        },
                 }
         },
         computed:{
@@ -123,13 +134,13 @@ export default {
                         this.$set(this.searchQuery,"telePhone",this.phone)
                         this.$set(this.searchQuery,"merCode",this.merCode)
                         this.$set(this.searchQuery,"startTime",startTime)
-                        this.$set(this.searchQuery,"endTime",endTime)
+                        this.$set(this.searchQuery,"endTime",endTime) 
                         this.setQueryMd5Data();
                 },
                 //需要传送给后台的Md5Data 加密数据
                 setQueryMd5Data(){
-                        let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
-                        let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
+                        let startTime = this.searchQuery.startTime;
+                        let endTime = this.searchQuery.endTime;
                         let md5data = md5Encrypt(`${this.phone+this.merCode+startTime+endTime+this.token+base.md5Data}`);
                         this.$set(this.searchQuery,"md5Data",`${md5data}`)
                 },
@@ -167,6 +178,7 @@ export default {
                                         defaultValue: this.searchQuery.startTime,
                                         id: "startTime",
                                         cb: value => {
+                                                console.log(value);
                                                 this.searchQuery.startTime = value;
                                                 this.setQueryMd5Data()
                                         }

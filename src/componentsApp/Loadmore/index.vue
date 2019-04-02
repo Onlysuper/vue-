@@ -49,7 +49,7 @@
 </template>
   
 <script>
-import { Toast } from "mint-ui";
+import { Toast } from "mint-ui"; 
 import utils from "@src/common/utils.js";
 import Vue from 'vue'
 import VueScroller from 'vue-scroller'
@@ -115,13 +115,15 @@ export default {
 
         methods: {
                 loadData(query) {
-                        if(query.startTime){
-                                query.startTime=query.startTime.replace(/\/|\-/gi,"")
-                        }
-                        if(query.endTime){
-                                query.endTime=query.endTime.replace(/\/|\-/gi,"")
-                        }
-                        return this.api()(query).then(res => {
+                        console.log(query);
+                        // if(query.startTime){
+                        //         query.startTime=query.startTime.replace(/\/|\-/gi,"")
+                        // }
+                        // if(query.endTime){
+                        //         query.endTime=query.endTime.replace(/\/|\-/gi,"")
+                        // }
+                        let loadQuery= this.currentPageFn(query.currentPage,query);
+                        return this.api()(loadQuery).then(res => {
                                 if (res.code === "001") {
                                         let data =this.handeleResault(res);
                                         this.count = data.totalRows;

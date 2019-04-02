@@ -117,6 +117,12 @@ export default {
       let merCode = utils.storage.getStorage("merCode");
       let startTime = utils.formatDate(new Date(), "yyyy-MM-dd");
       let endTime = utils.formatDate(new Date(), "yyyy-MM-dd");
+      if(startTime){
+        startTime=startTime.replace(/\/|\-/gi,"")
+      }
+      if(endTime){
+        endTime=endTime.replace(/\/|\-/gi,"")
+      }
       payOrderTodayTotal(this.openId)({
         telePhone: phone,
         token: token,
