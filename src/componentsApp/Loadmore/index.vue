@@ -136,7 +136,6 @@ export default {
                 },
                 //首次加载和搜索加载操作
                 load(searchQuery) {
-                        console.log('zzzzz');
                         this.allLoaded = false;
                         this.searchQuery = searchQuery || {};
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };

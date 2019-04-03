@@ -16,8 +16,8 @@
                                         <settle-item  
                                         @click.native="toDetail(item)" 
                                         :entName="item.merName"
-                                        :time="item.tranDate" 
-                                        :amount="item.tranAmt | moneyFormatCN"
+                                        :time="item.tranDate | dateFilter" 
+                                        :amount="item.tranAmt"
                                         >
                                         </settle-item>
                                 </div>
@@ -85,7 +85,6 @@ export default {
                         },
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
-                                console.log(res);
                                 return res.result.data.merTranList
                         },
                         // 搜索条件处理
@@ -172,7 +171,6 @@ export default {
                         return utils.formatDate(new Date(Date.now() - num * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
                 },
                 search() {
-                        console.log('这里这里')
                         this.hidden = false;
                         this.$refs.MypLoadmoreApi.load({
                                 token: utils.storage.getStorage("token"),

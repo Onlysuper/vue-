@@ -13,7 +13,6 @@
                                         <div class="info-title">企业名称</div>
                                         <div class="info-cont">{{detailData.merName}}</div>
                                 </div>
-                                
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-short-name"></i>
                                         <div class="info-title">经营名称</div>
@@ -53,7 +52,12 @@
                                         <div class="info-title">借记卡费率</div>
                                         <div class="info-cont">{{detailData.merCommisionValue}}%</div>
                                 </div>
-                                <div class="info-item">
+                                <div class="info-item border-bottom-1px">
+                                        <i class="icon icon-max"></i>
+                                        <div class="info-title">借记卡封顶费</div>
+                                        <div class="info-cont">{{detailData.amount}}元</div>
+                                </div>
+                                <div class="info-item border-bottom-1px">
                                         <i class="icon icon-trande"></i>
                                         <div class="info-title">贷记卡费率</div>
                                         <div class="info-cont">{{detailData.daiCommisionValue}}%</div>
@@ -81,12 +85,6 @@
                                         <div class="info-title">商户收款账号</div>
                                         <div class="info-cont">{{detailData.merSettAcct | accountNum}}</div>
                                 </div>
-                                <div class="info-item">
-                                        <i class="icon icon-max"></i>
-                                        <div class="info-title">借记卡封顶费</div>
-                                        <div class="info-cont">{{detailData.amount}}</div>
-                                </div>
-                                
                          </div>
                 </div>
                 <div class="info-item exit-login-btn" @click="exit">退出登录</div>
@@ -223,9 +221,12 @@ export default {
                                                 utils.storage.removeStorage("telePhone")
                                                 utils.storage.removeStorage("merCode")
                                                 location.reload();
-                                        }else{
+                                        }else{  
                                                 this.Toast(data.message);
                                         }
+                                        this.$router.push({
+                                                path:"/customer/login"
+                                        })
                                 });
                         });
                 }

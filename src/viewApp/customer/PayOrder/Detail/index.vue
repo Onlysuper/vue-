@@ -6,8 +6,8 @@
                 <m-cell title="商户手续费">{{merCommisionValue}}</m-cell>
                 <m-cell title="封顶费">{{maxFee}}</m-cell>
                 <m-cell title="交易金额">{{tranAmt}}</m-cell>
-                <m-cell title="交易日期">{{tranDate}}</m-cell>
-                <m-cell title="交易时间">{{tranDateTime}}</m-cell>
+                <m-cell title="交易日期">{{tranDate | dateFilter}}</m-cell>
+                <m-cell title="交易时间">{{tranDateTime | timeFilter}}</m-cell>
         </div>
 </template>
 

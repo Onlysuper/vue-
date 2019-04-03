@@ -139,5 +139,23 @@ mypFilters.install = function (Vue, options) {
                         return ""
                 }
         })
+        // yymmdd日期格式化
+        Vue.filter('dateFilter', function (data) {
+                if(data&&data.length>=8){
+                        let strs = data.substring(0,4)+'-'+data.substring(4,6)+'-'+data.substring(6,8)
+                        return strs
+                }else{
+                        return data
+                }
+        })
+         // hhmmss时间格式化
+         Vue.filter('timeFilter', function (data) {
+                if(data&&data.length>=6){
+                        let strs = data.substring(0,2)+':'+data.substring(2,4)+':'+data.substring(4,6)
+                        return strs
+                }else{
+                        return data
+                }
+        })
 }
 export default mypFilters;

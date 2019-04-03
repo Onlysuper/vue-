@@ -10,7 +10,7 @@
                                         <settle-Item @click.native="toUrl(item)"
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
-                                        :time="item.settDate"
+                                        :time="item.settDate | dateFilter"
                                         :status="'sort-'+item.outState | analyFilter(CONST,'outMoneyStatus')"
                                         :statuscolor="utils.valToColor(CONST,'outMoneyStatus',`${'sort-'+item.outState}`)"
                                         :amount="item.settAmt">
