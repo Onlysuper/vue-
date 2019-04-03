@@ -5,10 +5,6 @@
                                 <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="hidden = true">筛选</div>
                         </div>
-                        <!-- <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
-                                {{searchQuery.status | analyFilter(CONST,'payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
-                        </tip> -->
-                        <!-- <div class="history-list"> -->
                         <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
@@ -22,21 +18,19 @@
                                         </settle-item>
                                 </div>
                         </loadmore>
-                        <!-- </div> -->
-
                 </full-page>
                 <full-page-popup class="search" v-model="hidden" title="条件筛选" :showConfirm="true" @confirm="search">
                         <search-page ref="searchPage" :config="searchConfig"></search-page>
                 </full-page-popup>
                 <v-mask v-model="hidden" class="z-index2"></v-mask>
-        </div>
+        </div> 
 </template>
 
 <script>
 import settleItem from "@src/componentsApp/PayItem";
 import BannerDate from "@src/componentsApp/BannerDate";
 import Loadmore from "@src/componentsApp/Loadmore";
-import FullPagePopup from "@src/componentsApp/FullPagePopup";
+import FullPagePopup from "@src/componentsApp/FullPagePopup"; 
 import SearchPage from "@src/componentsApp/SearchPage";
 import Tip from "@src/componentsApp/Tip";
 import base from "@src/apis/base.js";
@@ -127,7 +121,7 @@ export default {
         },
         created(){
                 let startTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
-                let endTime = utils.formatDate(new Date(), "yyyy-MM-dd");
+                let endTime = utils.formatDate(new Date(Date.now() - 1 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
                 this.$set(this.searchQuery,"token",this.token)
                 this.$set(this.searchQuery,"merCode",this.merCode)
                 this.$set(this.searchQuery,"telePhone",this.phone)
@@ -246,6 +240,9 @@ export default {
                                         title: "交易结束时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.endTime,
+                                        endTimeLimitFn:()=>{
+                                          return new Date(Date.now() - 1 * (24 * 60 * 60 * 1000))      
+                                        },
                                         cb: value => {
                                                  this.$set(this.searchQuery,"endTime",value)
                                                 this.setQueryMd5Data()

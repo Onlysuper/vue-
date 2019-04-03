@@ -2,11 +2,10 @@
         <div class="pay-order-detail">
                 <m-cell title="商户号" >{{merCode}}</m-cell>
                 <m-cell title="商户名">{{merName}}</m-cell>
-                <m-cell title="交易订单号" >{{retrivlRefNnum}}</m-cell>
-                <m-cell title="商户手续费">{{merCommisionValue | moneyFormatCN(true) }}元</m-cell>
-                <m-cell title="封顶费">{{maxFee | moneyFormatCN(true)}}元</m-cell>
                 <m-cell title="交易金额">{{tranAmt | moneyFormatCN(true)}}元</m-cell>
+                <m-cell title="商户手续费率">{{merCommisionValue}}%</m-cell>
                 <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
+                <m-cell title="交易订单号" >{{retrivlRefNnum}}</m-cell>
         </div>
 </template>
 
@@ -22,7 +21,6 @@ export default {
                         tranAmt:"",//交易金额
                         tranDate:"",// 交易日期
                         tranDateTime:""// 交易时间
-
                 };
         },
         mounted() {

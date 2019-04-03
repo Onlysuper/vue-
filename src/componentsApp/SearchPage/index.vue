@@ -46,18 +46,31 @@ const MypDate = Vue.extend({
         props: {
                 config: {
                         type: Object,
-                        default: {}
-                }
+                        default: {
+                               
+                        }
+                },
+               
         },
         data() {
                 return {
                         value: this.config.defaultValue,
                         currentDate: new Date(),
+                        endTimeLimitFn:""
                 };
         },
         watch: {
                 value(val) {
                         this.config.cb && this.config.cb(val);
+                }
+        },
+        created(){
+                if(this.config.endTimeLimitFn){
+                        this.endTimeLimitFn=this.config.endTimeLimitFn;
+                }else{
+                       this.endTimeLimitFn = ()=>{
+                               return new Date()
+                       }
                 }
         },
         mounted() {
@@ -79,7 +92,7 @@ const MypDate = Vue.extend({
               <mt-cell :title="config.title" is-link @click.native="showDate">
                 <span>{{value}}</span>
               </mt-cell>
-              <mt-datetime-picker v-model="currentDate" :endDate="new Date()" type="date" @confirm="setDate" ref="datePicker" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日"></mt-datetime-picker>
+              <mt-datetime-picker v-model="currentDate" :endDate="endTimeLimitFn()" type="date" @confirm="setDate" ref="datePicker" year-format="{value} 年" month-format="{value} 月" date-format="{value} 日"></mt-datetime-picker>
             </div>`
 });
 const MypChekList = Vue.extend({
