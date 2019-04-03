@@ -175,13 +175,24 @@ export default {
                         return "";
                 }
         },
-        valToColor:function(json,type,val){
-                if(json[type][val]&&json[type][val]['color']){
-                        return json[type][val].color;
+        valToColor:function(json,type,data,issort){
+                let value = data;
+                if(issort=='issort'){
+                        // 要求属性是sort-开头的 如果没有需要加上
+                        if(!(/sort-/g.test(value))){
+                                value=`${'sort-'+value}`
+                        }
+                }else{
+                        //要求属性不能是sort-开头的 如果有需要去掉
+                        if(/sort-/g.test(value)){
+                                value=value.replace('sort-','');
+                        }
+                }
+                if(json[type][value]&&json[type][value]['color']){
+                        return json[type][value].color;
                 }else{
                         return "";
                 }
-               
         },
         numToChinese: function (section) {
                 let chnNumChar = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];

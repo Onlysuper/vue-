@@ -11,9 +11,9 @@
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
                                         :time="item.settDate | dateFilter"
-                                        :status="'sort-'+item.outState | analyFilter(CONST,'outMoneyStatus')"
-                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',`${'sort-'+item.outState}`)"
-                                        :amount="item.settAmt">
+                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus','issort')"
+                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',`${item.outState}`,'issort')"
+                                        :amount="item.settAmt | moneyFormatCN(true)">
                                         </settle-Item>
                                 </loadmore>
 

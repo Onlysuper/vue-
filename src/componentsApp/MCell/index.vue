@@ -47,7 +47,7 @@ background:#fff;
   align-items: center;
   // 可点击的样式
   .label-box {
-    font-size: 34 / @rem;
+    font-size: 32 / @rem;
     color:@m-color2;
     text-align: center;
     text-align: justify;
@@ -58,6 +58,7 @@ background:#fff;
     display: flex;
     justify-content: flex-start;
      padding: 0 / @rem 30 / @rem;
+     padding-right: 0 / @rem;
   }
   .content {
      color: @m-color1;

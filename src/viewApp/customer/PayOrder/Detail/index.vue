@@ -3,11 +3,10 @@
                 <m-cell title="商户号" >{{merCode}}</m-cell>
                 <m-cell title="商户名">{{merName}}</m-cell>
                 <m-cell title="交易订单号" >{{retrivlRefNnum}}</m-cell>
-                <m-cell title="商户手续费">{{merCommisionValue}}</m-cell>
-                <m-cell title="封顶费">{{maxFee}}</m-cell>
-                <m-cell title="交易金额">{{tranAmt}}</m-cell>
-                <m-cell title="交易日期">{{tranDate | dateFilter}}</m-cell>
-                <m-cell title="交易时间">{{tranDateTime | timeFilter}}</m-cell>
+                <m-cell title="商户手续费">{{merCommisionValue | moneyFormatCN(true) }}元</m-cell>
+                <m-cell title="封顶费">{{maxFee | moneyFormatCN(true)}}元</m-cell>
+                <m-cell title="交易金额">{{tranAmt | moneyFormatCN(true)}}元</m-cell>
+                <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
         </div>
 </template>
 

@@ -108,12 +108,25 @@ mypFilters.install = function (Vue, options) {
                 return CONSTS[type][value] || value;
         })
 
-        Vue.filter('analyFilter', function (value,json, type) {
-                try{
-                        return json[type][value]['name'] || value;
-                }catch(error){
-                        return value
+        Vue.filter('analyFilter', function (data,json, type,issort) {
+                let value = data;
+                if(issort=='issort'){
+                        // 要求属性是sort-开头的 如果没有需要加上
+                        if(!(/sort-/g.test(value))){
+                                value=`${'sort-'+value}`
+                        }
+                }else{
+                        //要求属性不能是sort-开头的 如果有需要去掉
+                        if(/sort-/g.test(value)){
+                                value=value.replace('sort-','');
+                        }
                 }
+                try{
+                    return json[type][value]['name'] || value;
+                }catch(error){
+                    return value=='sort-'? "":value;
+                }
+                
         })
         // 银行卡号码格式化
         Vue.filter('accountNum', function (data) {
@@ -152,6 +165,18 @@ mypFilters.install = function (Vue, options) {
          Vue.filter('timeFilter', function (data) {
                 if(data&&data.length>=6){
                         let strs = data.substring(0,2)+':'+data.substring(2,4)+':'+data.substring(4,6)
+                        return strs
+                }else{
+                        return data
+                }
+        })
+        // yymmddhhmmss时间格式化
+        Vue.filter('dateTimeFilter', function (data) {
+                if(data&&data.length>=14){
+                        let strs =`${
+                                data.substring(0,4)+'-'+data.substring(4,6)+'-'+data.substring(6,8)+" "
+                                +data.substring(8,10)+':'+data.substring(10,12)+':'+data.substring(12,14)
+                        }`
                         return strs
                 }else{
                         return data

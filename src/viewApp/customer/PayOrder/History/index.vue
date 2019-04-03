@@ -5,9 +5,9 @@
                                 <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="hidden = true">筛选</div>
                         </div>
-                        <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
+                        <!-- <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
                                 {{searchQuery.status | analyFilter(CONST,'payStatus')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
-                        </tip>
+                        </tip> -->
                         <!-- <div class="history-list"> -->
                         <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
@@ -17,7 +17,7 @@
                                         @click.native="toDetail(item)" 
                                         :entName="item.merName"
                                         :time="item.tranDate | dateFilter" 
-                                        :amount="item.tranAmt"
+                                        :amount="item.tranAmt | moneyFormatCN(true)"
                                         >
                                         </settle-item>
                                 </div>

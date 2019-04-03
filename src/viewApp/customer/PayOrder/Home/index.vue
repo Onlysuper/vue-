@@ -4,8 +4,8 @@
       <div class="top-back-box">
         <div class="row-box-one">
           <div class="item">
-            <div class="item-label">今日{{payType | analyFilter(CONST,'payType')}}收入(元)</div>
-            <div class="item-content">{{totalAmount | moneyFormatCN}}</div>
+            <div class="item-label">今日{{payType | analyFilter(CONST,'payType','issort')}}收入(元)</div>
+            <div class="item-content">{{totalAmount | moneyFormatCN(true)}}</div>
           </div>
           <div class="item">
             <div class="item-label">交易共(笔)</div>
@@ -21,7 +21,7 @@
             <div class="item-label">支付宝(笔)</div>
             <div class="item-content">{{totalAlipayCount}}</div>
           </div>
-          <div class="item">
+          <div class="item"> 
             <div class="item-label">刷卡(笔)</div>
             <div class="item-content">{{totalSkCount}}</div>
           </div>
