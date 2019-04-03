@@ -56,7 +56,7 @@ export default {
         },
         data() {
                 return {
-                       CONST:CONST,
+                        CONST:CONST,
                         token:utils.storage.getStorage("token"),
                         merCode:utils.storage.getStorage("merCode"),
                         phone:utils.storage.getStorage("telePhone"),

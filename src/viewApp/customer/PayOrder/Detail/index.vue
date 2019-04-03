@@ -4,15 +4,18 @@
                 <m-cell title="商户名">{{merName}}</m-cell>
                 <m-cell title="订单编号" >{{retrivlRefNnum}}</m-cell>
                 <m-cell title="订单金额">{{tranAmt | moneyFormatCN(true)}}元</m-cell>
+                <m-cell title="交易类型">{{tranType |  analyFilter(CONST,'payType-show','issort')}}</m-cell>
                 <!-- <m-cell title="商户手续费率">{{merCommisionValue}}%</m-cell> -->
                 <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
         </div>
 </template>
 
 <script>
+import CONST from "@src/viewApp/customer/PayOrder/state.json";
 export default {
         data() {
                 return {
+                        CONST:CONST,
                         merCode:"", //商户号
                         merName:"", //商户名
                         retrivlRefNnum:"",//交易参考号或订单号
@@ -20,7 +23,8 @@ export default {
                         maxFee:"",// 封顶费
                         tranAmt:"",//交易金额
                         tranDate:"",// 交易日期
-                        tranDateTime:""// 交易时间
+                        tranDateTime:"",// 交易时间
+                        tranType:""// 交易类型
                 };
         },
         mounted() {
@@ -37,6 +41,7 @@ export default {
                         this.tranAmt = item.tranAmt;//交易金额
                         this.tranDate = item.tranDate;//交易日期
                         this.tranDateTime = item.tranDateTime;//交易时间
+                        this.tranType = item.tranType;//交易类型
                 }
         }
 };
