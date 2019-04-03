@@ -137,7 +137,6 @@ export default {
                 this.initSearch();
         },
         methods: {
-                
                 setQueryMd5Data(){
                         let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
                         let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");

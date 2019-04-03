@@ -4,7 +4,7 @@
       <div class="top-back-box">
         <div class="row-box-one">
           <div class="item">
-            <div class="item-label">今日{{payType | analyFilter(CONST,'payType','issort')}}收入(元)</div>
+            <div class="item-label">今日{{searchQuery.tranType | analyFilter(CONST,'payType','issort')}}收入(元)</div>
             <div class="item-content">{{totalAmount | moneyFormatCN(true)}}</div>
           </div>
           <div class="item">
@@ -34,7 +34,7 @@
 
       <div class="navbar-box">
         <div class="navbar-item _av">
-          <select class="navbar-select" v-model="payType" @change="selectChange">
+          <select class="navbar-select" v-model="searchQuery.tranType" @change="selectChange">
             <option
               v-for="(item,index) in payTypes"
               :key="index"
@@ -45,6 +45,26 @@
         <div class="line-split">
         </div>
         <div class="navbar-item navbar-line _av" @click="toHistory">历史记录</div>
+      </div>
+       <div class="today-pay-order-list" ref="scrollWarpper">
+          <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
+                  <div class="list-item" v-for="(item,index) in list" :key="index">
+                          <!-- <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
+                          </banner-date> -->
+                          <settle-item  
+                          @click.native="toDetail(item)" 
+                          :entName="item.merName"
+                          :time="item.tranDate | dateFilter" 
+                          :amount="item.tranAmt | moneyFormatCN(true)"
+                          >
+                          </settle-item>
+                  </div>
+          </loadmore>
+                <!-- <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
+                        <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" :entName="item.payType | analy('payType')" :time="item.createTime | dateFormatCN('hhmm')" :status="item.status | analy('payStatus')" :statusClass="item.status" :amount="item.amount | moneyFormatCN">
+                                <i :class="`icon-${item.payType.toLowerCase()}`" slot="icon"></i>
+                        </pay-item>
+                </loadmore> -->
       </div>
     </div>
   </div>
@@ -73,14 +93,9 @@ export default {
       CONST: CONST,
       scroll: 0,
       openId: utils.getOpenId(),
-      payType: "",
+    
       payTypes: {
-      
-        ...[{
-          name: "全部",
-          code: "",
-          color: "",
-        },...utils.constToArr(CONST.payType)]
+        ...utils.constToArr(CONST.payType)
       },
       totalCount: 0,
       totalAmount: 0,
@@ -90,24 +105,82 @@ export default {
       totalSkCount: 0,
       ylCount: 0,
       api: payOrderQueryList,
-      list: []
+      list: [],
+      token:utils.storage.getStorage("token"),
+      merCode:utils.storage.getStorage("merCode"),
+      phone:utils.storage.getStorage("telePhone"),
+      searchQuery: {
+              startTime: "",
+              endTime:"",
+              tranType:"sort-all",
+              token:"",
+              merCode:"",
+              telePhone: "",
+              md5Data: "",
+              currentPage:0,
+              pageSize:20
+      },
+        // 处理loadMore返回的数据，返回列表
+        handeleResault:(res)=>{
+                return res.result.data.merTranList
+        },
+        // 搜索条件处理
+        currentPageFn:(currentPage,loadQuery)=>{
+                let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
+                let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
+                let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,loadQuery.currentPage,loadQuery.pageSize,this.token+base.md5Data];
+                let md5Data = md5Encrypt(sendData.join(''));
+                loadQuery['startTime']=startTime;
+                loadQuery['endTime']=endTime;
+                loadQuery['tranType']= utils.replaceSort(loadQuery.tranType);
+                loadQuery['md5Data']=md5Data;
+                return loadQuery
+        },
     };
+  },
+  created(){
+    this.setSearchQuery();
   },
   mounted() {
     this.init();
   },
   computed: {},
   methods: {
+    // 设置搜索参数
+    setSearchQuery(){
+      let startTime = utils.formatDate(new Date(), "yyyy-MM-dd");
+      let endTime = utils.formatDate(new Date(), "yyyy-MM-dd");
+      this.$set(this.searchQuery,"token",this.token)
+      this.$set(this.searchQuery,"merCode",this.merCode)
+      this.$set(this.searchQuery,"telePhone",this.phone)
+      this.$set(this.searchQuery,"startTime",startTime)
+      this.$set(this.searchQuery,"endTime",endTime)
+      this.setQueryMd5Data();
+    },
+     setQueryMd5Data(){
+            let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
+            let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
+            let sendData=[this.phone,this.merCode,startTime,endTime,this.searchQuery.currentPage,this.searchQuery.pageSize,this.token+base.md5Data];
+            sendData =sendData.join('');
+            let md5data = md5Encrypt(sendData);
+            this.$set(this.searchQuery,"md5Data",md5data)
+    },
     scrollChanged() {
       this.scroll = this.$refs.scrollWarpper.scrollTop;
     },
     selectChange(e) {
+      
+      this.setSearchQuery();
       this.init();
     },
     refresh() {
       this.payTotal();
     },
     init() {
+       this.$refs.MypLoadmoreApi.load({
+                ...this.searchQuery
+        });
+        
       this.scroll = 0;
       this.payTotal();
     },
@@ -129,7 +202,7 @@ export default {
         merCode: merCode,
         startTime: startTime,
         endTime: endTime,
-        payType: utils.replaceSort(this.payType),
+        payType: utils.replaceSort(this.searchQuery.tranType),
         md5Data: md5Encrypt(
           `${phone + merCode + startTime + endTime + token + base.md5Data}`
         )
@@ -164,33 +237,23 @@ export default {
     watchDataList(list) {
       // lists.pop();
       this.list = list;
-      /*
-       * 根据判断在“全屏模式下”是否否和监听事件的条件，控制header显示隐藏。解决ios滚动时抖动的BUG。
-       */
-      this.$refs.scrollWarpper.removeEventListener(
-        "scroll",
-        this.scrollChanged
-      );
-      this.$nextTick(() => {
-        //定时器是解决下拉刷新时，等顶部loadingd元素的归位动画完毕后在注册事件，否则会计算出误。
-        setTimeout(() => {
-          let items = this.$refs.scrollWarpper.querySelectorAll(".list-item");
-          let lastItem = items[items.length - 1];
-          let headerHeight = this.$refs.header.getBoundingClientRect().height;
-          //判断条件：数组中最后一项元素距离顶部的距离 必须大于 window的高度的时候在监听滚动事件。
-          //减去header的高度是要考虑全屏模式下的高度
-          if (
-            lastItem &&
-            lastItem.getBoundingClientRect().top - headerHeight >
-              window.innerHeight
-          ) {
-            this.$refs.scrollWarpper.addEventListener(
-              "scroll",
-              this.scrollChanged
-            );
-          }
-        }, 500);
-      });
+     /*
+      * 根据判断在“全屏模式下”是否否和监听事件的条件，控制header显示隐藏。解决ios滚动时抖动的BUG。
+      */
+      // this.$refs.scrollWarpper.removeEventListener("scroll", this.scrollChanged);
+      // this.$nextTick(() => {
+      //         //定时器是解决下拉刷新时，等顶部loadingd元素的归位动画完毕后在注册事件，否则会计算出误。
+      //         setTimeout(() => {
+      //                 let items = this.$refs.scrollWarpper.querySelectorAll(".list-item");
+      //                 let lastItem = items[items.length - 1];
+      //                 let headerHeight = this.$refs.header.getBoundingClientRect().height;
+      //                 //判断条件：数组中最后一项元素距离顶部的距离 必须大于 window的高度的时候在监听滚动事件。
+      //                 //减去header的高度是要考虑全屏模式下的高度
+      //                 if (lastItem && lastItem.getBoundingClientRect().top - headerHeight > window.innerHeight) {
+      //                         this.$refs.scrollWarpper.addEventListener("scroll", this.scrollChanged);
+      //                 }
+      //         }, 500)
+      // })
     }
   }
 };
@@ -310,6 +373,17 @@ export default {
         
       }
     }
+  }
+  .today-pay-order-list {
+          position: relative;
+          background: #fff;
+          flex: 1;
+          overflow-x: hidden;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          .list-item:last-child {
+                  border: 0px;
+          }
   }
 }
 </style>

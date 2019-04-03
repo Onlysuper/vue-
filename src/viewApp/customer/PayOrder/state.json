@@ -1,5 +1,9 @@
 { 
         "payType": {
+                "sort-all": {
+                        "name": "全部",
+                        "color":"#409EFF"
+                },
                 "sort-1": {
                         "name":"微信",
                         "color":"red"
