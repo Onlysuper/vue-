@@ -4,9 +4,11 @@
                 <m-cell title="商户名">{{merName}}</m-cell>
                 <m-cell title="订单编号" >{{retrivlRefNnum}}</m-cell>
                 <m-cell title="订单金额">{{tranAmt | moneyFormatCN(true)}}元</m-cell>
+                <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
+                <m-cell title="交易手续费">{{amount}}</m-cell>
                 <m-cell title="交易类型">{{tranType |  analyFilter(CONST,'payType-show','issort')}}</m-cell>
                 <!-- <m-cell title="商户手续费率">{{merCommisionValue}}%</m-cell> -->
-                <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
+               
         </div>
 </template>
 
@@ -24,6 +26,7 @@ export default {
                         tranAmt:"",//交易金额
                         tranDate:"",// 交易日期
                         tranDateTime:"",// 交易时间
+                        amount:"",// 手续费
                         tranType:""// 交易类型
                 };
         },
@@ -42,6 +45,7 @@ export default {
                         this.tranDate = item.tranDate;//交易日期
                         this.tranDateTime = item.tranDateTime;//交易时间
                         this.tranType = item.tranType;//交易类型
+                        this.amount = item.amount;//手续费
                 }
         }
 };
