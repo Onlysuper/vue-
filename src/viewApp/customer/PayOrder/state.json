@@ -6,19 +6,74 @@
                 },
                 "sort-1": {
                         "name":"微信",
-                        "color":"red"
+                        "color":"#67C23A"
                 },
                 "sort-2":{
                         "name": "支付宝",
-                        "color":"red"
+                        "color":"#E6A23C"
                 },
                 "sort-0": {
                         "name":"刷卡",
-                        "color":"red"
+                        "color":"#F56C6C"
                 },
                 "sort-3": {
                         "name":"银联二维码",
-                        "color":"red"
+                        "color":"#409EFF"
+                }
+        },
+        "payType-show": {
+                "sort-00": {
+                        "name": "刷卡",
+                        "color":"#409EFF"
+                },
+                "sort-01": {
+                        "name":"微信",
+                        "color":"#67C23A"
+                },
+                "sort-03": {
+                        "name":"微信",
+                        "color":"#67C23A"
+                },
+                "sort-15": {
+                        "name":"微信",
+                        "color":"#67C23A"
+                },
+                "sort-04":{
+                        "name": "支付宝",
+                        "color":"#E6A23C"
+                },
+                "sort-16":{
+                        "name": "支付宝",
+                        "color":"#E6A23C"
+                },
+                "sort-06": {
+                        "name":"银联二维码",
+                        "color":"#409EFF"
+                },
+                "sort-17": {
+                        "name":"银联二维码",
+                        "color":"#409EFF"
+                },
+                "sort-07": {
+                        "name":"QQ",
+                        "color":"#F56C6C"
+                },
+
+                "sort-05": {
+                        "name":"无卡快捷",
+                        "color":"#409EFF"
+                },
+                "sort-12": {
+                        "name":"无卡快捷",
+                        "color":"#409EFF"
+                },
+                "sort-08": {
+                        "name":"无卡快捷",
+                        "color":"#409EFF"
+                },
+                "sort-09": {
+                        "name":"无卡快捷",
+                        "color":"#409EFF"
                 }
         },
         "outMoneyStatus": {

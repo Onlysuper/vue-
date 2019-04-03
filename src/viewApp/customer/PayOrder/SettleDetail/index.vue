@@ -1,7 +1,7 @@
 <template>
         <div class="pay-order-detail">
                 <input-wrapper>
-                        <m-cell title="商户号">{{item.merCode}}</m-cell>   
+                        <m-cell title="商户号">{{item.merCode}}</m-cell>
                         <m-cell title="商户名">{{item.merName}}</m-cell>
                         <m-cell title="结算卡号">{{item.merSettAcct | accountNum}}</m-cell>
                         <m-cell title="结算银行">{{item.settBank}}</m-cell>

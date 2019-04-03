@@ -14,6 +14,8 @@
                                         :entName="item.merName"
                                         :time="item.tranDate | dateFilter" 
                                         :amount="item.tranAmt | moneyFormatCN(true)"
+                                        :status="item.tranType | analyFilter(CONST,'payType-show','issort')"
+                                        :statuscolor="utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')"
                                         >
                                         </settle-item>
                                 </div>
@@ -27,7 +29,8 @@
 </template>
 
 <script>
-import settleItem from "@src/componentsApp/PayItem";
+// import settleItem from "@src/componentsApp/PayItem";
+import SettleItem from "@src/componentsApp/SettleItem";
 import BannerDate from "@src/componentsApp/BannerDate";
 import Loadmore from "@src/componentsApp/Loadmore";
 import FullPagePopup from "@src/componentsApp/FullPagePopup"; 
@@ -44,7 +47,7 @@ import {md5Encrypt} from "@src/common/secret.js";
 export default {
         mixins: [scrollBehavior],
         components: {
-                settleItem,
+                SettleItem,
                 BannerDate,
                 Loadmore,
                 FullPagePopup,

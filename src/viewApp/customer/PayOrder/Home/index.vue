@@ -52,6 +52,8 @@
                           <!-- <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
                           </banner-date> -->
                           <settle-item  
+                          :status="item.tranType | analyFilter(CONST,'payType-show','issort')"
+                           :statuscolor="utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')"
                           @click.native="toDetail(item)" 
                           :entName="item.merName"
                           :time="item.tranDate | dateFilter" 
@@ -66,7 +68,8 @@
 </template>
 
 <script>
-import PayItem from "@src/componentsApp/PayItem";
+// import PayItem from "@src/componentsApp/PayItem";
+import SettleItem from "@src/componentsApp/SettleItem";
 import utils from "@src/common/utils.js";
 import base from "@src/apis/base.js";
 import { md5Encrypt } from "@src/common/secret.js";
@@ -80,7 +83,7 @@ import {
 } from "@src/apis";
 export default {
   components: {
-    PayItem,
+    SettleItem,
     Loadmore
   },
   data() {
