@@ -357,19 +357,19 @@ router.beforeEach((to, from, next) => {
         if(!isMobile()){
                 window.location.href="/app.html#/"
                 return
-        }
+        } 
         /**
          * 以下路由必须有openId才可进入，检查字符串参数或本地储存中是否有openId字段
          */
-        // if (to.matched.some(record => record.meta.isMustOpenid)) {
-        //         let openId = to.query.openid || to.query.openId || utils.getOpenId();
-        //         if (openId) {
-        //                 utils.storage.saveStorage("openId", openId);
-        //         } else {
-        //                 Toast("参数缺失"); 
-        //                 return;
-        //         }
-        // }
+        if (to.matched.some(record => record.meta.isMustOpenid)) {
+                let openId = to.query.openid || to.query.openId || utils.getOpenId();
+                if (openId) {
+                        utils.storage.saveStorage("openId", openId);
+                } else {
+                        Toast("参数缺失"); 
+                        return;
+                }
+        }
         /**
          * 这里遍历所有路由包括子路由，检查哪些路由需要 登录 验证。
          * 如果一个路由需要登录之后才能进入，可以直接在相应路由中的meta中配置requiresAuth属性即可。

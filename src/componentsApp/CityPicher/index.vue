@@ -134,7 +134,6 @@ export default {
       this.sheng = values[0];
       this.shi = values[1];
       this.xian = values[2];
-      console.log(values);
       if (this.sheng) {
         picker.setSlotValues(1, Object.keys(json[this.sheng]));
         if (this.shi) {

@@ -60,11 +60,6 @@
                           </settle-item>
                   </div>
           </loadmore>
-                <!-- <loadmore :api="api" @watchDataList="watchDataList" @refresh="refresh" ref="MypLoadmoreApi">
-                        <pay-item v-for="(item,index) in list" :key="index" @click.native="toDetail(item)" :entName="item.payType | analy('payType')" :time="item.createTime | dateFormatCN('hhmm')" :status="item.status | analy('payStatus')" :statusClass="item.status" :amount="item.amount | moneyFormatCN">
-                                <i :class="`icon-${item.payType.toLowerCase()}`" slot="icon"></i>
-                        </pay-item>
-                </loadmore> -->
       </div>
     </div>
   </div>
@@ -210,12 +205,14 @@ export default {
         if (res.code === "001") {
           try {
             let data = res.result.data.merTodayTranAllInfo;
-            this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
-            this.totalAllCount = data.totalCount; //  当天总交易条数
-            this.totalWechatCount = data.wxCount; //  当天微信交易条数
-            this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
-            this.totalSkCount = data.skCount; // 当前刷卡交易条数
-            this.ylCount = data.ylCount; // 当前银联二维码交易条数
+            if(data){
+              this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
+              this.totalAllCount = data.totalCount; //  当天总交易条数
+              this.totalWechatCount = data.wxCount; //  当天微信交易条数
+              this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
+              this.totalSkCount = data.skCount; // 当前刷卡交易条数
+              this.ylCount = data.ylCount; // 当前银联二维码交易条数
+            }
           } catch (err) {
             console.log(err);
             // this.Toast('暂无数据');

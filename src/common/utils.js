@@ -49,13 +49,13 @@ export default {
                 },
                 saveStorage: function (key, value) {
                         localStorage.setItem(key, value);
-                        if(key=='token'||key=='telePhone'|| key=='merCode'){
+                        if(key=='token'||key=='telePhone'|| key=='merCode' || key=='openId'){
                                 this.saveCookie(key, value,365);
                         }
                 },
                 removeStorage: function (key) {
                         localStorage.removeItem(key);
-                        if(key=='token'|| key=='telePhone'|| key=='merCode'){
+                        if(key=='token'|| key=='telePhone'|| key=='merCode' || key=='openId'){
                                 this.removeCookie(key);
                         }
                 },

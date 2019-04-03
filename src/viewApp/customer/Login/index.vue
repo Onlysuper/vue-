@@ -61,6 +61,7 @@ import {
 export default {
   data() {
     return {
+      openId:"",
       isPhone: true,
       isCode: true,
       valiCode:"", // 验证码
@@ -120,7 +121,7 @@ export default {
       return showList;
     },
     // 登录
-    submitGetCustomerList() {
+    submitGetCustomerList() { 
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       let token;
       let phone = this.$refs.phone.value.trim(); // 电话号码
@@ -130,7 +131,8 @@ export default {
       login()({
         telePhone: phone,
         msgValiCode: msgValiCode,
-        md5Data: md5Data
+        // openId:openId,
+        md5Data: md5Data,
       }).then(res => {
         return new Promise((resolve, reject) => {
           if (res.code == "001") {

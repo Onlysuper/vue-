@@ -65,11 +65,10 @@ export default {
                         amountCount: "",
                         amountSum: "",
                         payStatus: CONST.payStatus,
-                        tranType:"",
                         searchQuery: {
                                 startTime: "",
                                 endTime:"",
-                                tranType:"1",
+                                tranType:"all",
                                 token:"",
                                 merCode:"",
                                 telePhone: "",
