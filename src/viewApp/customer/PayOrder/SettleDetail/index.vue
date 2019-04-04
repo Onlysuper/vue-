@@ -4,8 +4,8 @@
                         <!-- <m-cell title="商户号">{{item.merCode}}</m-cell>
                         <m-cell title="商户名">{{item.merName}}</m-cell> -->
                         <m-cell title="结算日期">{{item.settDate | dateFilter}}</m-cell>
-                        <m-cell title="共收款">{{}}元</m-cell>
-                        <m-cell title="手续费">{{}}元</m-cell>
+                        <!-- <m-cell title="共收款">{{}}元</m-cell>
+                        <m-cell title="手续费">{{}}元</m-cell> -->
                         <m-cell title="结算金额">{{item.settAmt | moneyFormatCN(true)}}元</m-cell>
                         <m-cell title="账户名称">{{item.merSettAcctName}}</m-cell>
                         <m-cell title="结算卡号">{{item.merSettAcct | accountNum}}</m-cell>

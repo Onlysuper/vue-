@@ -362,9 +362,9 @@ router.beforeEach((to, from, next) => {
          * 以下路由必须有openId才可进入，检查字符串参数或本地储存中是否有openId字段
          */
         // if (to.matched.some(record => record.meta.isMustOpenid)) {
-        //         let openId = to.query.openid || to.query.openId || utils.getOpenId();
-        //         if (openId) {
-        //                 utils.storage.saveStorage("openId", openId);
+        //         let openid = to.query.openid || to.query.openId || utils.getOpenId();
+        //         if (openid) {
+        //                 utils.storage.saveStorage("openid", openid);
         //         } else {
         //                 Toast("参数缺失"); 
         //                 return;

@@ -38,9 +38,7 @@
         :disabled="isPhone || isCode"
         :click="submitGetCustomerList"
       >登录</Buttonr>
-      <!-- <Buttonr :type="'register-btn'" :click="register">立即注册</Buttonr> -->
     </div>
-    <!--<mt-button type="danger">danger</mt-button>-->
   </div>
 </template>
 
@@ -61,7 +59,7 @@ import {
 export default {
   data() {
     return {
-      openId:"",
+      openid:"",
       isPhone: true,
       isCode: true,
       valiCode:"", // 验证码
@@ -69,8 +67,8 @@ export default {
   },
   props: {},
   created() {
-    let openId = utils.getOpenId();
-    this.openId = openId;
+    let openid = utils.getOpenId();
+    this.openid = openid;
   },
   mounted() {},
   components: {
@@ -80,7 +78,6 @@ export default {
   methods: {
     register() {
       this.$router.push({ path: "/customer/register" });
-      //       window.location.href = "https://weidian.com/item.html?itemID=2257806570";
     },
     isPhoneReg(e) {
       let value = e.target.value.trim();
@@ -101,6 +98,7 @@ export default {
       let phone = this.$refs.phone.value.trim();
       getVerificationCode()({ 
         telePhone: phone,
+        openid:this.openid,
         md5Data:md5Encrypt(`${phone+base.md5Data}`),
       }).then(res => {
         this.$refs.TimerBtn.disabled = true;
@@ -124,6 +122,7 @@ export default {
     submitGetCustomerList() { 
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       let token;
+      let openid = this.openid;
       let phone = this.$refs.phone.value.trim(); // 电话号码
       let msgValiCode=this.valiCode;   // 验证码
       let allData = `${phone+msgValiCode+base.md5Data}`; // 需要加密的数据;
@@ -131,7 +130,7 @@ export default {
       login()({
         telePhone: phone,
         msgValiCode: msgValiCode,
-        // openId:openId,
+        openid:openid,
         md5Data: md5Data,
       }).then(res => {
         return new Promise((resolve, reject) => {
@@ -141,6 +140,7 @@ export default {
             getCustomerList()({
               token: token,
               telePhone: phone,
+              openid:openid,
               md5Data: md5Encrypt(phone+token+base.md5Data)
             }).then(res => {
               if (res.code == "001") {

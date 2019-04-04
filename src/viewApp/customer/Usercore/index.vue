@@ -104,10 +104,18 @@ export default {
         components: {},
         data() {
                 return {
+                        openid:"",
                         pageShow: false,
                         switchr: false,
                         switchrShow: false, //是否显示支付完成后开票
                         entNameShow: true, //是否显示经验名称项
+                        entName: "",
+                        seriaNumber: "",
+                        businessName: "",
+                        telephone: "",
+                        taxNo: "",
+                        randomCode: "",
+                        linkMan: "",
                         detailData:{
                                 merName:"",
                                 merCode:"",
@@ -119,14 +127,7 @@ export default {
                                 merSettType:"",
                                 qwxCommisionValue:"",
                                 qzfCommisionValue:""
-                        },
-                        entName: "",
-                        seriaNumber: "",
-                        businessName: "",
-                        telephone: "",
-                        taxNo: "",
-                        randomCode: "",
-                        linkMan: ""
+                        }
                 };
         },
         props: {
@@ -135,21 +136,22 @@ export default {
                 }
         },
         created() {
-                let openId = utils.getOpenId();
-                this.getUserInfo(openId);
-                this.openId = openId;
+                let openid = utils.getOpenId();
+                this.getUserInfo(openid);
+                // this.openid = openid;
                 this.token = utils.storage.getStorage("token");
         },
         mounted() {
         },
         methods: {
-                getUserInfo(openId) {
+                getUserInfo(openid) {
                         let token = utils.storage.getStorage("token");
                         let phone = utils.storage.getStorage("telePhone");
                         let merCode = utils.storage.getStorage("merCode");
                         getCustomerInfo()({
                                 token: token,
                                 telePhone:phone,
+                                openid:openid,
                                 merCode:merCode,// 商户编号
                                 md5Data:md5Encrypt(`${phone+merCode+token+base.md5Data}`)
                         }).then(res => {
@@ -211,15 +213,20 @@ export default {
                         MessageBox.confirm("确定退出登录？").then(action => {
                                 let token = utils.storage.getStorage("token");
                                 let phone = utils.storage.getStorage("telePhone");
+                                let merCode = utils.storage.getStorage("merCode");
+                                // telePhone+token+merCode+加密串
                                 logout()({
+                                        openid:openid,
+                                        merCode:merCode,
                                         token:token,
                                         telePhone:phone,
-                                        md5Data:md5Encrypt(`${phone+token+base.md5Data}`)
+                                        md5Data:md5Encrypt(`${phone+token+merCode+base.md5Data}`)
                                 }).then(res => {
                                         if(res.code=='001'){
                                                 utils.storage.removeStorage("token");
                                                 utils.storage.removeStorage("telePhone")
                                                 utils.storage.removeStorage("merCode")
+                                                utils.storage.removeStorage("openid")
                                                 location.reload();
                                         }else{  
                                                 this.Toast(data.message);

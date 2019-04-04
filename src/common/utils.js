@@ -8,7 +8,7 @@ export default {
                 return Object.prototype.toString.call(obj) == "[object " + type + "]";
         },
         getOpenId: function () {
-                return this.storage.getStorage("openId");
+                return this.storage.getStorage("openid");
         },
         randomString: function (len) {
                 len = len || 32;
@@ -49,13 +49,13 @@ export default {
                 },
                 saveStorage: function (key, value) {
                         localStorage.setItem(key, value);
-                        if(key=='token'||key=='telePhone'|| key=='merCode' || key=='openId'){
+                        if(key=='token'||key=='telePhone'|| key=='merCode' || key=='openid'){
                                 this.saveCookie(key, value,365);
                         }
                 },
                 removeStorage: function (key) {
                         localStorage.removeItem(key);
-                        if(key=='token'|| key=='telePhone'|| key=='merCode' || key=='openId'){
+                        if(key=='token'|| key=='telePhone'|| key=='merCode' || key=='openid'){
                                 this.removeCookie(key);
                         }
                 },
