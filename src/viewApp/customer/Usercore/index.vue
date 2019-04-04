@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-business-license"></i>
-                                        <div class="info-title">统一社会<br/>信用代码</div>
+                                        <div class="info-title">统一社会信用代码</div>
                                         <div class="info-cont">{{detailData.businessLicense}}</div>
                                 </div>
                                 <div class="info-item border-bottom-1px">
@@ -279,7 +279,7 @@ export default {
                 align-items: center;
                 position: relative;
                 color:@m-color1;
-                padding: 20/@rem 30 / @rem;
+                padding: 25/@rem 30 / @rem;
                 &:after {
                         content: "";
                         display: inline-block;
