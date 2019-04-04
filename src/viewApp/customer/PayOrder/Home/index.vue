@@ -195,6 +195,7 @@ export default {
         endTime=endTime.replace(/\/|\-/gi,"")
       }
       payOrderTodayTotal(this.openId)({
+        openid:this.openid,
         telePhone: phone,
         token: token,
         merCode: merCode,

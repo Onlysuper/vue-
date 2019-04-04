@@ -41,7 +41,7 @@ export default {
         },
         storage: {
                 getStorage: function (key) {
-                        if(key=='token'||key=='telePhone'|| key=='merCode'){
+                        if(key=='token'||key=='telePhone'|| key=='merCode'|| key=='openid'){
                                 return localStorage.getItem(key)||this.getCookie(key);
                         }else{
                                 return localStorage.getItem(key);
@@ -49,7 +49,7 @@ export default {
                 },
                 saveStorage: function (key, value) {
                         localStorage.setItem(key, value);
-                        if(key=='token'||key=='telePhone'|| key=='merCode' || key=='openid'){
+                        if(key=='token'||key=='telePhone'|| key=='merCode'|| key=='openid'){
                                 this.saveCookie(key, value,365);
                         }
                 },

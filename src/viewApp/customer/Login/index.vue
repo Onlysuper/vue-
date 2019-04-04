@@ -59,7 +59,7 @@ import {
 export default {
   data() {
     return {
-      openid:"",
+      openid:utils.getOpenId(),
       isPhone: true,
       isCode: true,
       valiCode:"", // 验证码

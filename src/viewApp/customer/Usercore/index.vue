@@ -104,7 +104,7 @@ export default {
         components: {},
         data() {
                 return {
-                        openid:"",
+                        openid:utils.getOpenId(),
                         pageShow: false,
                         switchr: false,
                         switchrShow: false, //是否显示支付完成后开票
@@ -214,9 +214,8 @@ export default {
                                 let token = utils.storage.getStorage("token");
                                 let phone = utils.storage.getStorage("telePhone");
                                 let merCode = utils.storage.getStorage("merCode");
-                                // telePhone+token+merCode+加密串
                                 logout()({
-                                        openid:openid,
+                                        openid:this.openid,
                                         merCode:merCode,
                                         token:token,
                                         telePhone:phone,
@@ -226,14 +225,14 @@ export default {
                                                 utils.storage.removeStorage("token");
                                                 utils.storage.removeStorage("telePhone")
                                                 utils.storage.removeStorage("merCode")
-                                                utils.storage.removeStorage("openid")
                                                 location.reload();
-                                        }else{  
+                                        }else{ 
                                                 this.Toast(data.message);
+                                                this.$router.push({
+                                                        path:"/customer/login"
+                                                })
                                         }
-                                        this.$router.push({
-                                                path:"/customer/login"
-                                        })
+                                        
                                 });
                         });
                 }
