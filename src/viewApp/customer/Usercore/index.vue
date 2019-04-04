@@ -20,7 +20,7 @@
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-business-license"></i>
-                                        <div class="info-title">社会统一信用代码</div>
+                                        <div class="info-title">统一社会<br/>信用代码</div>
                                         <div class="info-cont">{{detailData.businessLicense}}</div>
                                 </div>
                                 <div class="info-item border-bottom-1px">
@@ -39,12 +39,12 @@
                                 <div class="block-title">费率信息</div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-wei-chat"></i>
-                                        <div class="info-title">微信手续费率</div>
+                                        <div class="info-title">微信费率</div>
                                         <div class="info-cont">{{detailData.qwxCommisionValue}}%</div>
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-ali-pay"></i>
-                                        <div class="info-title">支付宝手续费率</div>
+                                        <div class="info-title">支付宝费率</div>
                                         <div class="info-cont">{{detailData.qzfCommisionValue}}%</div>
                                 </div>
                                  <div class="info-item">
@@ -64,12 +64,18 @@
                                 </div>
                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
-                                        <div class="info-title">银联二维码费率(一千元以下) </div>
+                                        <div class="info-title">
+                                                银联二维码费率<br/>
+                                                <span class="light-text">(一千元以下) </span>
+                                        </div>
                                         <div class="info-cont">{{detailData.qylCommisionValue}}%</div>
                                 </div>
                                  <div class="info-item border-bottom-1px">
                                         <i class="icon icon-uni-pay"></i>
-                                        <div class="info-title">银联二维码费率(一千元以上) </div>
+                                        <div class="info-title">
+                                                银联二维码费率<br/>
+                                                <span class="light-text">(一千元以上) </span>
+                                        </div>
                                         <div class="info-cont">{{detailData.qylThousandValue}}%</div>
                                 </div>
                         </div>
@@ -265,15 +271,15 @@ export default {
                 // background:@m-color5;
         }
         .info-item {
-                height: 100 / @rem;
+                // height: 100 / @rem;
                 // border-bottom: 1px solid #dedede;
                 display: flex;
-                line-height: 100 / @rem;
+                // line-height: 100 / @rem;
                 font-size: 32 / @rem;
                 align-items: center;
                 position: relative;
                 color:@m-color1;
-                padding: 0 30 / @rem;
+                padding: 20/@rem 30 / @rem;
                 &:after {
                         content: "";
                         display: inline-block;
@@ -355,20 +361,21 @@ export default {
                 .info-title {
                         // color:@label-font-color;
                         min-width: 129 / @rem;
-                        height: 100%;
-                        position: relative;
-                        margin-right: 50 / @rem;
-                        // color:@m-color1;
-                        &:before {
-                                content: ":";
-                                position: absolute;
-                                right: -20 / @rem;
-                        }
-                        .text-align-justify();
+                        // height: 100%;
+                        // position: relative;
+                        // margin-right: 50 / @rem;
+                        // // color:@m-color1;
+                        // &:before {
+                        //         content: ":";
+                        //         position: absolute;
+                        //         right: -20 / @rem;
+                        // }
+                        // .text-align-justify();
                 }
                 .info-cont {
                         flex: 1;
                         text-align: right;
+                        word-break: break-all;
                         span {
                                 float: left;
                         }

@@ -68,8 +68,10 @@ export default {
   }
 
   .active {
-    background: @main-color2;
-    color:@main-color
+    background:#50b2fc;
+    color:#fff;
+    // background: @main-color2;
+    // color:@main-color
   }
 }
 </style>

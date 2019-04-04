@@ -58,7 +58,6 @@
                         "name":"QQ",
                         "color":"#F56C6C"
                 },
-
                 "sort-05": {
                         "name":"无卡快捷",
                         "color":"#409EFF"
@@ -150,18 +149,6 @@
                 "sort-77": {
                         "name":"已重出",
                         "color":"#409EFF"
-                },
-                "sort-00": {
-                        "name":"出款成功",
-                        "color":"#67C23A"
-                },
-                "sort-11": {
-                        "name":"出款中",
-                        "color":"#E6A23C"
-                },
-                "sort-99": {
-                        "name":"出款失败",
-                        "color":"#F56C6C"
                 }
         },
         "settTypes":{

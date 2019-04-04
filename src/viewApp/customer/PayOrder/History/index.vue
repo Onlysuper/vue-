@@ -12,7 +12,7 @@
                                         <settle-item  
                                         @click.native="toDetail(item)" 
                                         :entName="item.merName"
-                                        :time="item.tranDate | dateFilter" 
+                                        :time="item.tranDateTime | dateTimeFilter"
                                         :amount="item.tranAmt | moneyFormatCN(true)"
                                         :status="item.tranType | analyFilter(CONST,'payType-show','issort')"
                                         :statuscolor="utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')"

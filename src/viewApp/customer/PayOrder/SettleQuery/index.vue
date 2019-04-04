@@ -11,8 +11,8 @@
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
                                         :time="item.settDate | dateFilter"
-                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus-show','issort')"
-                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus-show',`${item.outState}`,'issort')"
+                                        :status="item.outState | analyFilter()"
+                                        :statuscolor="valToColor(`${item.outState}`)"
                                         :amount="item.settAmt | moneyFormatCN(true)">
                                         </settle-Item>
                                 </loadmore>
@@ -119,6 +119,19 @@ export default {
                         }
                 }
         },
+        filters: {
+                analyFilter: function (value) {
+                       if(value=='55'){
+                               // 成功
+                               return "出款成功"
+                       }else if(value=='44'){
+                               // 失败
+                               return "出款失败"
+                       }else{
+                                return "出款中"
+                       }
+                }
+        },
         created() {
                 this.setSearchQuerys();
         },
@@ -129,6 +142,17 @@ export default {
                 this.initSearch();
         },
         methods: {
+                valToColor(value){
+                        if(value=='55'){
+                               // 成功
+                               return "#67C23A"
+                       }else if(value=='44'){
+                               // 失败
+                              return "#909399"
+                       }else{
+                                return "#E6A23C"
+                       }
+                },
                 // 初始化默认搜索
                 setSearchQuerys(){
                         let startTime = utils.formatDate(new Date(Date.now() - 7 * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
