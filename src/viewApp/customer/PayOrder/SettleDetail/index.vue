@@ -9,7 +9,7 @@
                         <m-cell title="结算金额">{{item.settAmt | moneyFormatCN(true)}}元</m-cell>
                         <m-cell title="账户名称">{{item.merSettAcctName}}</m-cell>
                         <m-cell title="结算卡号">{{item.merSettAcct | accountNum}}</m-cell>
-                        <m-cell title="出款状态">{{item.outState | analyFilter(CONST,'outMoneyStatus','issort')}}</m-cell>
+                        <m-cell title="出款状态">{{item.outState | analyFilter(CONST,'outMoneyStatus-show','issort')}}</m-cell>
                         <!-- <m-cell title="结算银行">{{item.settBank}}</m-cell> -->
                         <!-- <m-cell title="结算类型">{{item.settType}}</m-cell> -->
                         <!-- <m-cell title="结算类型">{{item.settType || analyFilter(CONST,'settTypes','issort')}}</m-cell> -->

@@ -57,6 +57,7 @@ export default {
         data() {
                 return {
                         CONST:CONST,
+                        openid: utils.getOpenId(),
                         token:utils.storage.getStorage("token"),
                         merCode:utils.storage.getStorage("merCode"),
                         phone:utils.storage.getStorage("telePhone"),
@@ -91,6 +92,7 @@ export default {
                                 let md5Data = md5Encrypt(sendData.join(''));
                                 loadQuery['startTime']=startTime;
                                 loadQuery['endTime']=endTime;
+                                loadQuery['openid']=this.openid;
                                 loadQuery['md5Data']=md5Data;
                                 return loadQuery
                         },
@@ -153,13 +155,7 @@ export default {
                                 query: item
                         });
                 },
-                formatList(list) {
-                        // if(list.length>0){
-                        //         this.newlist = [...list];
-                        // }
-                },
                 watchDataList(list) {
-                        // this.formatList(list);
                          this.newlist = list;
                 },
                 getDate(num) {
@@ -202,31 +198,6 @@ export default {
                                                 this.searchQuery.tranType =utils.replaceSort(value);
                                         }
                                 });
-
-        
-                                // this.searchConfig.push({
-                                //         title: "快捷查询",
-                                //         type: "v-radio-list",
-                                //         defaultValue: "1",
-                                //         values: [
-                                //                 {
-                                //                         name: "近7日交易",
-                                //                         code: "1"
-                                //                 },
-                                //                 {
-                                //                         name: "昨日交易",
-                                //                         code: "2"
-                                //                 },
-                                //                 {
-                                //                         name: "近30天交易",
-                                //                         code: "3"
-                                //                 }
-                                //         ],
-                                //         cb: value => {
-                                //                 this.setDate(value);
-                                //                 this.setQueryMd5Data()
-                                //         }
-                                // });
                                 this.searchConfig.push({
                                         title: "交易起始时间",
                                         type: "myp-date",
@@ -258,12 +229,6 @@ export default {
 
 <style lang="less" scoped>
 @import url(../../../../assets/less/base.less);
-// html,
-// body,
-// #app,
-// #customer {
-//   height: 100%;
-// }
 .pay-order-history {
         .transformPage();
         display: flex;
@@ -291,7 +256,6 @@ export default {
 
         .history-list {
                 flex: 1;
-                // background: #fff;
                 position: relative;
                 overflow-x: hidden;
                 overflow-y: scroll;

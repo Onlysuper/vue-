@@ -68,7 +68,6 @@
 </template>
 
 <script>
-// import PayItem from "@src/componentsApp/PayItem";
 import SettleItem from "@src/componentsApp/SettleItem";
 import utils from "@src/common/utils.js";
 import base from "@src/apis/base.js";
@@ -90,8 +89,7 @@ export default {
     return {
       CONST: CONST,
       scroll: 0,
-      openId: utils.getOpenId(),
-    
+      openid: utils.getOpenId(),
       payTypes: {
         ...utils.constToArr(CONST.payType)
       },
@@ -108,6 +106,7 @@ export default {
       merCode:utils.storage.getStorage("merCode"),
       phone:utils.storage.getStorage("telePhone"),
       searchQuery: {
+              openid:"",
               startTime: "",
               endTime:"",
               tranType:"sort-all",
@@ -131,6 +130,7 @@ export default {
                 loadQuery['startTime']=startTime;
                 loadQuery['endTime']=endTime;
                 loadQuery['tranType']= utils.replaceSort(loadQuery.tranType);
+                loadQuery['openid']=this.openid;
                 loadQuery['md5Data']=md5Data;
                 return loadQuery
         },

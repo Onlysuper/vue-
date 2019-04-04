@@ -11,8 +11,8 @@
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
                                         :time="item.settDate | dateFilter"
-                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus','issort')"
-                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus',`${item.outState}`,'issort')"
+                                        :status="item.outState | analyFilter(CONST,'outMoneyStatus-show','issort')"
+                                        :statuscolor="utils.valToColor(CONST,'outMoneyStatus-show',`${item.outState}`,'issort')"
                                         :amount="item.settAmt | moneyFormatCN(true)">
                                         </settle-Item>
                                 </loadmore>
@@ -59,6 +59,7 @@ export default {
                         token:utils.storage.getStorage("token"),
                         phone:utils.storage.getStorage("telePhone"),
                         merCode:utils.storage.getStorage("merCode"),
+                        openid: utils.getOpenId(),
                         settleCard: {},
                         businessName: "",
                         showDate: new Date(),
@@ -69,6 +70,7 @@ export default {
                         list: [],
                         outMoneyStatus: CONST.outMoneyStatus,
                         searchQuery: {
+                                openid:"",
                                 currentPage:0,
                                 pageSize:20,
                                 token: "",
@@ -95,6 +97,7 @@ export default {
                                 let md5Data = md5Encrypt(sendData.join(''));
                                 loadQuery['startTime']=startTime;
                                 loadQuery['endTime']=endTime;
+                                loadQuery['openid']=this.openid;
                                 loadQuery['md5Data']=md5Data;
                                 return loadQuery
                         },
