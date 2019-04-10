@@ -47,7 +47,7 @@
                                         <div class="info-title">支付宝费率</div>
                                         <div class="info-cont">{{detailData.qzfCommisionValue}}%</div>
                                 </div>
-                                 <div class="info-item">
+                                 <div class="info-item border-bottom-1px">
                                         <i class="icon icon-trande"></i>
                                         <div class="info-title">借记卡费率</div>
                                         <div class="info-cont">{{detailData.merCommisionValue}}%</div>
