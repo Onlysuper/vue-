@@ -320,7 +320,7 @@ export default {
                 }
                 // 企业名称
                 .icon-mer-name {
-                  background-position: 0px -100px;
+                  background-position: 0px -99px;
                 }
                
                 // 结算类型
