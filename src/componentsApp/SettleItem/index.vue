@@ -16,7 +16,9 @@
       </div>
       <div class="footer">
         <p class="time mar-l">{{time}}</p>
-        <p v-for="(item,index) in status" :key="index" class="status" :style="{'background':item.color}">{{item.name}}</p>
+        <template v-for="(item,index) in status">
+         <p :key="index" v-if="item.name==''?false:true" :class="'status'" :style="styleHandle(item)">{{item.name}}</p>
+        </template>
       </div>
     </div>
   </div> 
@@ -51,6 +53,22 @@ export default {
     statusClass: {
       type: [String, Number],
       default: ""
+    }
+  },
+  methods:{
+    styleHandle(item){
+      if(item.border){
+        return {
+          border:`1px solid ${item.color}`,
+          color:item.color
+        }
+      }else{
+          return {
+            background:item.color,
+            color:'#fff'
+          }
+      }
+      
     }
   }
 }
@@ -102,11 +120,17 @@ export default {
   }
 
   .status {
-    // background: #48af12;
     color: #fff;
     border-radius: 10/@rem;
     padding: 2/@rem 8/@rem;
-    // position: absolute;
+    right: 30/@rem;
+    font-size: 26/@rem;
+    margin-left: 10/@rem;
+  }
+    .status-border {
+    color: #fff;
+    border-radius: 10/@rem;
+    padding: 2/@rem 8/@rem;
     right: 30/@rem;
     font-size: 26/@rem;
     margin-left: 10/@rem;

@@ -191,7 +191,8 @@ export default {
                 try{
                     return json[type][value]['name'] || value;
                 }catch(error){
-                    return value=='sort-'? "":value;
+                        return "";
+                //     return value=='sort-'? "":value;
                 }
         },
         valToColor:function(json,type,data,issort){

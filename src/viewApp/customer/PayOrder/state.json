@@ -26,8 +26,8 @@
                         "name": "全部",
                         "color":"#409EFF"
                 },
-                "sort-0": {
-                        "name":"正常",
+                "sort-0":{
+                        "name": "成功",
                         "color":"#67C23A"
                 },
                 "sort-1":{

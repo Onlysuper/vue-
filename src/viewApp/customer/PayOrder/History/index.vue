@@ -17,8 +17,13 @@
                                         :status="[{
                                                 name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
                                                 color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                                        }]"
-                                        >
+                                                },
+                                                {
+                                                name:utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                                color:utils.valToColor(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                                border:true
+                                                }
+                                        ]">
                                         </settle-item>
                                 </div>
                         </loadmore>

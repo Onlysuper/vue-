@@ -50,10 +50,19 @@
           <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                   <div class="list-item" v-for="(item,index) in list" :key="index">
                           <settle-item  
-                          :status="[{
+                          :status="[
+                                 
+                                  {
                                   name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
                                   color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                          }]"
+                                  },
+                                  {
+                                  name:utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                  color:utils.valToColor(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                  border:true
+                                  }
+                                 
+                          ]"
                           @click.native="toDetail(item)" 
                           :entName="item.merName"
                           :time="item.tranDateTime | dateTimeFilter"
@@ -212,19 +221,19 @@ export default {
             if(data){
               let tranType=this.searchQuery.tranType; // 交易类型类型
               this.totalAmount="";
-              if(tranType=='all'){
+              if(tranType=='sort-all'){
                 // 全部
                 this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
-              }else if(tranType=='1'){
+              }else if(tranType=='sort-1'){
                 // 微信
                 this.totalAmount = data.wxTranAmtSum;
-              }else if(tranType=='2'){
+              }else if(tranType=='sort-2'){
                 // 支付宝
                 this.totalAmount = data.zfbTranAmtSum;
-              }else if(tranType=='0'){
+              }else if(tranType=='sort-0'){
                 // 刷卡
                   this.totalAmount = data.skTranAmtSum;
-              }else if(tranType=='3'){
+              }else if(tranType=='sort-3'){
                 // 银联二维码
                 this.totalAmount = data.ylTranAmtSum;
               }
