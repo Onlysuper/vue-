@@ -7,6 +7,7 @@
                 <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
                 <m-cell title="交易手续费">{{amount}}元</m-cell>
                 <m-cell title="交易类型">{{tranType |  analyFilter(CONST,'payType-show','issort')}}</m-cell>
+                <m-cell title="交易状态">{{revFlag |  analyFilter(CONST,'revFlag','issort')}}</m-cell>
                 <!-- <m-cell title="商户手续费率">{{merCommisionValue}}%</m-cell> -->
                
         </div>
@@ -27,7 +28,8 @@ export default {
                         tranDate:"",// 交易日期
                         tranDateTime:"",// 交易时间
                         amount:"",// 手续费
-                        tranType:""// 交易类型
+                        tranType:"",// 交易类型
+                        revFlag:""// 交易状态
                 };
         },
         mounted() {
@@ -46,6 +48,7 @@ export default {
                         this.tranDateTime = item.tranDateTime;//交易时间
                         this.tranType = item.tranType;//交易类型
                         this.amount = item.amount;//手续费
+                        this.revFlag = item.revFlag;//交易状态
                 }
         }
 };

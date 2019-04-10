@@ -191,7 +191,7 @@ export default {
                 try{
                     return json[type][value]['name'] || value;
                 }catch(error){
-                        return "";
+                        return "其他";
                 //     return value=='sort-'? "":value;
                 }
         },
