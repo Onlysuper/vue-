@@ -14,17 +14,23 @@
                                         :entName="item.merName"
                                         :time="item.tranDateTime | dateTimeFilter"
                                         :amount="item.tranAmt | moneyFormatCN(true)"
-                                        :status="[{
-                                                name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
-                                                color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                                                },
+                                        :status="[
                                                 {
-                                                name:utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                                name:(utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort')=='成功'?'':utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort')),
                                                 color:utils.valToColor(CONST,'revFlag',`${item.revFlag}`,'issort'),
                                                 border:true
                                                 }
                                         ]">
+                                        <!-- {
+                                                name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
+                                                color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
+                                                }, -->
+                                            <!-- <i slot="icon" :class="iconHandle(item.tranType)"></i>     -->
+                             
+                                         <!-- <span slot="icon"  :class="'icon-qq'"></span> -->
+                                         <span slot="icon"  :class="iconHandle(item.tranType)"></span>
                                         </settle-item>
+                                        
                                 </div>
                         </loadmore>
                 </full-page>
@@ -148,6 +154,27 @@ export default {
                 this.initSearch();
         },
         methods: {
+                iconHandle(item){
+                        if(item=='00'){
+                                // 刷卡
+                                return "icon-shuaka";
+                        }else if(item=='01'||item=='03'||item=='15'){
+                                // 微信
+                                return "icon-wechat";
+                        }else if(item=='04'||item=='16'){
+                                // 支付宝
+                                 return "icon-alipay";
+                        }else if(item=='06'||item=='17'){
+                                //银联二维码
+                                return "icon--1";
+                        }else if(item=='07'){
+                                // qq
+                                return "icon-qq";
+                        }else if(item=='05'||item=='12'||item=='08'||item=='09'){
+                                // 无卡快捷
+                                return "icon-untitled";
+                        }
+                },
                 setQueryMd5Data(){
                         let startTime = this.searchQuery.startTime.replace(/\/|\-/g,"");
                         let endTime = this.searchQuery.endTime.replace(/\/|\-/g,"");
@@ -283,5 +310,6 @@ export default {
         .search {
                 width: 85%;
         }
+        
 }
 </style>

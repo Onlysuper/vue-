@@ -85,7 +85,7 @@ export default {
   width: 100%;
   align-items: center;
   .icon {
-    i {
+    span,i {
       font-size: 80/@rem;
       margin-left: 30/@rem;
     }
