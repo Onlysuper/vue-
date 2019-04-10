@@ -115,7 +115,7 @@ export default {
 
         methods: {
                 loadData(query) {
-                        console.log(query);
+                        // console.log(query);
                         // if(query.startTime){
                         //         query.startTime=query.startTime.replace(/\/|\-/gi,"")
                         // }

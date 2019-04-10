@@ -5,7 +5,7 @@
                 <m-cell title="订单编号" >{{retrivlRefNnum}}</m-cell>
                 <m-cell title="订单金额">{{tranAmt | moneyFormatCN(true)}}元</m-cell>
                 <m-cell title="交易时间">{{tranDateTime | dateTimeFilter}}</m-cell>
-                <m-cell title="交易手续费">{{amount}}</m-cell>
+                <m-cell title="交易手续费">{{amount}}元</m-cell>
                 <m-cell title="交易类型">{{tranType |  analyFilter(CONST,'payType-show','issort')}}</m-cell>
                 <!-- <m-cell title="商户手续费率">{{merCommisionValue}}%</m-cell> -->
                

@@ -200,18 +200,17 @@ export default {
                                         }
                                 });
                                 this.searchConfig.push({
-                                        title: "交易起始时间",
+                                        title: "起始时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.startTime,
                                         id: "startTime",
                                         cb: value => {
-                                                console.log(value);
                                                 this.searchQuery.startTime = value;
                                                 this.setQueryMd5Data()
                                         }
                                 });
                                 this.searchConfig.push({
-                                        title: "交易结束时间",
+                                        title: "结束时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.endTime,
                                         cb: value => {

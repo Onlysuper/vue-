@@ -199,7 +199,7 @@ export default {
                                         }
                                 });
                                 this.searchConfig.push({
-                                        title: "交易起始时间",
+                                        title: "起始时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.startTime,
                                         id: "startTime",
@@ -209,7 +209,7 @@ export default {
                                         }
                                 });
                                 this.searchConfig.push({
-                                        title: "交易结束时间",
+                                        title: "结束时间",
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.endTime,
                                         endTimeLimitFn:()=>{
