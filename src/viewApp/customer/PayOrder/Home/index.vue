@@ -49,14 +49,14 @@
        <div class="today-pay-order-list" ref="scrollWarpper">
           <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                   <div class="list-item" v-for="(item,index) in list" :key="index">
-                          <!-- <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
-                          </banner-date> -->
                           <settle-item  
-                          :status="item.tranType | analyFilter(CONST,'payType-show','issort')"
-                           :statuscolor="utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')"
+                          :status="[{
+                                  name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
+                                  color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
+                          }]"
                           @click.native="toDetail(item)" 
                           :entName="item.merName"
-                          :time="item.tranDate | dateFilter" 
+                          :time="item.tranDateTime | dateTimeFilter"
                           :amount="item.tranAmt | moneyFormatCN(true)"
                           >
                           </settle-item>
@@ -210,7 +210,24 @@ export default {
           try {
             let data = res.result.data.merTodayTranAllInfo;
             if(data){
-              this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
+              let tranType=this.searchQuery.tranType; // 交易类型类型
+              this.totalAmount="";
+              if(tranType=='all'){
+                // 全部
+                this.totalAmount = data.totalTranAmtSum; // 今日微信交易金额
+              }else if(tranType=='1'){
+                // 微信
+                this.totalAmount = data.wxTranAmtSum;
+              }else if(tranType=='2'){
+                // 支付宝
+                this.totalAmount = data.zfbTranAmtSum;
+              }else if(tranType=='0'){
+                // 刷卡
+                  this.totalAmount = data.skTranAmtSum;
+              }else if(tranType=='3'){
+                // 银联二维码
+                this.totalAmount = data.ylTranAmtSum;
+              }
               this.totalAllCount = data.totalCount; //  当天总交易条数
               this.totalWechatCount = data.wxCount; //  当天微信交易条数
               this.totalAlipayCount = data.zfbCount; // 当前支付宝交易条数
@@ -218,8 +235,7 @@ export default {
               this.ylCount = data.ylCount; // 当前银联二维码交易条数
             }
           } catch (err) {
-            console.log(err);
-            // this.Toast('暂无数据');
+            this.Toast('今日暂无交易');
           }
         } else {
           this.Toast(data.message);

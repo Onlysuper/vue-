@@ -14,8 +14,10 @@
                                         :entName="item.merName"
                                         :time="item.tranDateTime | dateTimeFilter"
                                         :amount="item.tranAmt | moneyFormatCN(true)"
-                                        :status="item.tranType | analyFilter(CONST,'payType-show','issort')"
-                                        :statuscolor="utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')"
+                                        :status="[{
+                                                name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
+                                                color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
+                                        }]"
                                         >
                                         </settle-item>
                                 </div>
@@ -198,6 +200,15 @@ export default {
                                                 this.searchQuery.tranType =utils.replaceSort(value);
                                         }
                                 });
+                                // this.searchConfig.push({
+                                //         title: "交易状态",
+                                //         type: "v-radio-list",
+                                //         defaultValue: this.searchQuery.revFlag,
+                                //         values: utils.constToArr(CONST.revFlag),
+                                //         cb: value => {
+                                //                 this.searchQuery.revFlag =utils.replaceSort(value);
+                                //         }
+                                // });
                                 this.searchConfig.push({
                                         title: "起始时间",
                                         type: "myp-date",

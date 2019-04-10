@@ -11,8 +11,10 @@
                                         v-for="(item,index) in newlist" :key="index" 
                                         :entName="item.merSettAcctName"
                                         :time="item.settDate | dateFilter"
-                                        :status="item.outState | analyFilter()"
-                                        :statuscolor="valToColor(`${item.outState}`)"
+                                        :status="[{
+                                                name:valToName(`${item.outState}`),
+                                                color:valToColor(`${item.outState}`)
+                                        }]"
                                         :amount="item.settAmt | moneyFormatCN(true)">
                                         </settle-Item>
                                 </loadmore>
@@ -151,6 +153,17 @@ export default {
                               return "#909399"
                        }else{
                                 return "#E6A23C"
+                       }
+                },
+                 valToName: function (value) {
+                       if(value=='55'){
+                               // 成功
+                               return "出款成功"
+                       }else if(value=='44'){
+                               // 失败
+                               return "出款失败"
+                       }else{
+                                return "出款中"
                        }
                 },
                 // 初始化默认搜索

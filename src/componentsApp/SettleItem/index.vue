@@ -16,7 +16,7 @@
       </div>
       <div class="footer">
         <p class="time mar-l">{{time}}</p>
-        <p :class="['status']" :style="{'background':statuscolor}" v-if="statusClass != 'SUCCESS'">{{status}}</p>
+        <p v-for="(item,index) in status" :key="index" class="status" :style="{'background':item.color}">{{item.name}}</p>
       </div>
     </div>
   </div> 
@@ -34,13 +34,16 @@ export default {
       default: ""
     },
     status: {
-      type: String,
-      default: ""
+      type: Array,
+      default: [{
+        name:"",
+        color:""
+      }]
     },
-    statuscolor: {
-      type: String,
-      default: ""
-    },
+    // statuscolor: {
+    //   type: String,
+    //   default: ""
+    // },
     amount: {
       type: [String, Number],
       default: ""
@@ -103,9 +106,10 @@ export default {
     color: #fff;
     border-radius: 10/@rem;
     padding: 2/@rem 8/@rem;
-    position: absolute;
+    // position: absolute;
     right: 30/@rem;
     font-size: 26/@rem;
+    margin-left: 10/@rem;
   }
 
   .red {

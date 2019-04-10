@@ -21,6 +21,28 @@
                         "color":"#409EFF"
                 }
         },
+        "revFlag": {
+                "sort-all": {
+                        "name": "全部",
+                        "color":"#409EFF"
+                },
+                "sort-0": {
+                        "name":"正常",
+                        "color":"#67C23A"
+                },
+                "sort-1":{
+                        "name": "已冲正",
+                        "color":"#E6A23C"
+                },
+                "sort-2": {
+                        "name":"已撤销",
+                        "color":"#F56C6C"
+                },
+                "sort-3": {
+                        "name":"已退货",
+                        "color":"#409EFF"
+                }
+        },
         "payType-show": {
                 "sort-00": {
                         "name": "刷卡",

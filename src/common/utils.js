@@ -175,6 +175,25 @@ export default {
                         return "";
                 }
         },
+        valToName:function(json,type,data,issort){
+                let value = data;
+                if(issort=='issort'){
+                        // 要求属性是sort-开头的 如果没有需要加上
+                        if(!(/sort-/g.test(value))){
+                                value=`${'sort-'+value}`
+                        }
+                }else{
+                        //要求属性不能是sort-开头的 如果有需要去掉
+                        if(/sort-/g.test(value)){
+                                value=value.replace('sort-','');
+                        }
+                }
+                try{
+                    return json[type][value]['name'] || value;
+                }catch(error){
+                    return value=='sort-'? "":value;
+                }
+        },
         valToColor:function(json,type,data,issort){
                 let value = data;
                 if(issort=='issort'){
