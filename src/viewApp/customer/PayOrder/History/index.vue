@@ -251,6 +251,9 @@ export default {
                                         type: "myp-date",
                                         defaultValue: this.searchQuery.startTime,
                                         id: "startTime",
+                                        endTimeLimitFn:()=>{
+                                          return new Date(Date.now() - 1 * (24 * 60 * 60 * 1000))      
+                                        },
                                         cb: value => {
                                                 this.$set(this.searchQuery,"startTime",value)
                                                 this.setQueryMd5Data()
