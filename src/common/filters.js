@@ -162,7 +162,8 @@ mypFilters.install = function (Vue, options) {
                 }
         })
          // hhmmss时间格式化
-         Vue.filter('timeFilter', function (data) {
+         Vue.filter('timeFilter', function (res) {
+                let data =  res.replace(/\D/g,"");
                 if(data&&data.length>=6){
                         let strs = data.substring(0,2)+':'+data.substring(2,4)+':'+data.substring(4,6)
                         return strs
@@ -171,12 +172,12 @@ mypFilters.install = function (Vue, options) {
                 }
         })
         // yymmddhhmmss时间格式化
-        Vue.filter('dateTimeFilter', function (data) {
+        Vue.filter('dateTimeFilter', function (res) {
+                let data =  res.replace(/\D/g,"");
                 if(data&&data.length>=14){
                         let strs =`${
                                 data.substring(0,4)+'年'+data.substring(4,6)+'月'+data.substring(6,8)+"日 "
                                 + data.substring(8,10)+':'+data.substring(10,12)
-                                // +':'+data.substring(12,14)
                         }`
                         return strs
                 }else{
