@@ -175,7 +175,8 @@ mypFilters.install = function (Vue, options) {
                 if(data&&data.length>=14){
                         let strs =`${
                                 data.substring(0,4)+'年'+data.substring(4,6)+'月'+data.substring(6,8)+"日 "
-                                +data.substring(8,10)+':'+data.substring(10,12)+':'+data.substring(12,14)
+                                + data.substring(8,10)+':'+data.substring(10,12)
+                                // +':'+data.substring(12,14)
                         }`
                         return strs
                 }else{

@@ -32,15 +32,15 @@
                 },
                 "sort-1":{
                         "name": "已冲正",
-                        "color":"#E6A23C"
+                        "color":"#409EFF"
                 },
                 "sort-2": {
                         "name":"已撤销",
-                        "color":"#F56C6C"
+                        "color":"#909399"
                 },
                 "sort-3": {
                         "name":"已退货",
-                        "color":"#409EFF"
+                        "color":"#E6A23C"
                 }
         },
         "payType-show": {
