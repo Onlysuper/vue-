@@ -144,7 +144,6 @@ export default {
         created() {
                 let openid = utils.getOpenId();
                 this.getUserInfo(openid);
-                // this.openid = openid;
                 this.token = utils.storage.getStorage("token");
         },
         mounted() {

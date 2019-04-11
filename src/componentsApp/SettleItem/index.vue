@@ -10,9 +10,8 @@
         <p class="title">{{entName}}</p>
         <p class="amount" :class="{'amount-success':statusClass == 'SUCCESS'}">
           <span class="num">
-            {{amount}}
+            {{amount}}元
           </span>
-          元
         </p>
       </div>
       <div class="footer">
@@ -170,10 +169,9 @@ export default {
 
   .amount {
     text-align: right;
-    // color: #ff5b5b;
-    // font-weight: 600;
-        .num{
- font-size: 36 / @rem
+    padding-left: 20 / @rem;
+    .num{
+      font-size: 36 / @rem
     }
   }
 

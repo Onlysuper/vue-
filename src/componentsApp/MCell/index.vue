@@ -64,13 +64,13 @@ background:#fff;
      color: @m-color1;
     flex: 1;
     padding: 0 / @rem 30 / @rem;
-    padding-left: 0;
-    padding-left: 10 / @rem;
+    padding-left: 20 / @rem;
+    padding-left: 20 / @rem;
     white-space: normal;
     word-break: break-all;
     width: 100%;
     text-align: right;
-      font-size: 32 / @rem;
+    font-size: 32 / @rem;
   }
 }
 }
