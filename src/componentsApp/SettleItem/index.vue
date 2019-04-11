@@ -1,8 +1,9 @@
 <template>
   <div class="eic-item border-bottom-1px _av">
     <slot name="top"></slot>
-    <div class="icon">
+    <div class="icon-box">
       <slot name="icon"></slot>
+      <slot name="iconname"></slot>
     </div>
     <div class="content">
       <div class="header">
@@ -84,9 +85,22 @@ export default {
   display: flex;
   width: 100%;
   align-items: center;
-  .icon {
+  .icon-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     span,i {
-      font-size: 80/@rem;
+      
+      padding: 3/@rem 0;
+      &.icon{
+        // font-size: 80/@rem;
+        font-size: 80/@rem;
+      }
+      &.iconname{
+        color:@m-color2;
+        font-size: 12/@rem;
+      }
       margin-left: 30/@rem;
     }
   }

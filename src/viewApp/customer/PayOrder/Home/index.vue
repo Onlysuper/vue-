@@ -51,23 +51,24 @@
                   <div class="list-item" v-for="(item,index) in list" :key="index">
                           <settle-item  
                           :status="[
-                                 
                                   {
-                                  name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
-                                  color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                                  },
-                                  {
-                                  name:utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort'),
+                                  name:(utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort')=='成功'?'':utils.valToName(CONST,'revFlag',`${item.revFlag}`,'issort')),
                                   color:utils.valToColor(CONST,'revFlag',`${item.revFlag}`,'issort'),
                                   border:true
                                   }
                                  
                           ]"
+                          
                           @click.native="toDetail(item)" 
                           :entName="item.merName"
                           :time="item.tranDateTime | dateTimeFilter"
                           :amount="item.tranAmt | moneyFormatCN(true)"
                           >
+                           <!-- {
+                                  name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
+                                  color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
+                                  }, -->
+                          <span slot="icon"  :class="'icon '+iconHandle(item.tranType)"></span>
                           </settle-item>
                   </div>
           </loadmore>
@@ -153,6 +154,27 @@ export default {
   },
   computed: {},
   methods: {
+     iconHandle(item){
+              if(item=='00'){
+                      // 刷卡
+                      return "icon-shuaka";
+              }else if(item=='01'||item=='03'||item=='15'){
+                      // 微信
+                      return "icon-wechat";
+              }else if(item=='04'||item=='16'){
+                      // 支付宝
+                        return "icon-alipay";
+              }else if(item=='06'||item=='17'){
+                      //银联二维码
+                      return "icon--1";
+              }else if(item=='07'){
+                      // qq
+                      return "icon-qq";
+              }else if(item=='05'||item=='12'||item=='08'||item=='09'){
+                      // 无卡快捷
+                      return "icon-untitled";
+              }
+      },
     // 设置搜索参数
     setSearchQuery(){
       let startTime = utils.formatDate(new Date(), "yyyy-MM-dd");

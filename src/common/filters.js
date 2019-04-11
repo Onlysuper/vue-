@@ -155,7 +155,7 @@ mypFilters.install = function (Vue, options) {
         // yymmdd日期格式化
         Vue.filter('dateFilter', function (data) {
                 if(data&&data.length>=8){
-                        let strs = data.substring(0,4)+'-'+data.substring(4,6)+'-'+data.substring(6,8)
+                        let strs = data.substring(0,4)+'年'+data.substring(4,6)+'月'+data.substring(6,8)+"日"
                         return strs
                 }else{
                         return data
@@ -174,7 +174,7 @@ mypFilters.install = function (Vue, options) {
         Vue.filter('dateTimeFilter', function (data) {
                 if(data&&data.length>=14){
                         let strs =`${
-                                data.substring(0,4)+'-'+data.substring(4,6)+'-'+data.substring(6,8)+" "
+                                data.substring(0,4)+'年'+data.substring(4,6)+'月'+data.substring(6,8)+"日 "
                                 +data.substring(8,10)+':'+data.substring(10,12)+':'+data.substring(12,14)
                         }`
                         return strs

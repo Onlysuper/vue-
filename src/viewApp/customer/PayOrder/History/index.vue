@@ -28,7 +28,11 @@
                                             <!-- <i slot="icon" :class="iconHandle(item.tranType)"></i>     -->
                              
                                          <!-- <span slot="icon"  :class="'icon-qq'"></span> -->
-                                         <span slot="icon"  :class="iconHandle(item.tranType)"></span>
+                                        <span slot="icon"  :class="'icon '+iconHandle(item.tranType)"></span>
+                                        <!-- <span slot="iconname" class="iconname">
+                                                无卡快捷
+                                        </span> -->
+                                        
                                         </settle-item>
                                         
                                 </div>
