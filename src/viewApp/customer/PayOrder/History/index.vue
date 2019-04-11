@@ -90,6 +90,7 @@ export default {
                                 startTime: "",
                                 endTime:"",
                                 tranType:"all",
+                                revFlag:"",
                                 token:"",
                                 merCode:"",
                                 telePhone: "",
@@ -228,6 +229,15 @@ export default {
                 initSearch() {
                         this.$nextTick(() => {
                                 this.searchConfig.push({
+                                        title: "交易状态",
+                                        type: "v-radio-list",
+                                        defaultValue: this.searchQuery.revFlag,
+                                        values: utils.constToArr(CONST.revFlag),
+                                        cb: value => {
+                                                this.searchQuery.revFlag =utils.replaceSort(value);
+                                        }
+                                });
+                                this.searchConfig.push({
                                         title: "交易类型",
                                         type: "v-radio-list",
                                         defaultValue: this.searchQuery.tranType,
@@ -236,15 +246,6 @@ export default {
                                                 this.searchQuery.tranType =utils.replaceSort(value);
                                         }
                                 });
-                                // this.searchConfig.push({
-                                //         title: "交易状态",
-                                //         type: "v-radio-list",
-                                //         defaultValue: this.searchQuery.revFlag,
-                                //         values: utils.constToArr(CONST.revFlag),
-                                //         cb: value => {
-                                //                 this.searchQuery.revFlag =utils.replaceSort(value);
-                                //         }
-                                // });
                                 this.searchConfig.push({
                                         title: "起始时间",
                                         type: "myp-date",

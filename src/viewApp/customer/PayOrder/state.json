@@ -22,7 +22,7 @@
                 }
         },
         "revFlag": {
-                "sort-all": {
+                "": {
                         "name": "全部",
                         "color":"#409EFF"
                 },
