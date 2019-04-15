@@ -5,7 +5,7 @@
                         <m-cell title="结算金额">{{item.settAmt | moneyFormatCN(true)}}元</m-cell>
                         <m-cell title="账户名称">{{item.merSettAcctName}}</m-cell>
                         <m-cell title="结算卡号">{{item.merSettAcct | accountNum}}</m-cell>
-                        <m-cell title="出款状态">{{item.outState | analyFilter()}}</m-cell>
+                        <m-cell title="出款状态">{{item.outState | valToName}}</m-cell>
                 </input-wrapper>
         </div>
 </template>
@@ -28,16 +28,16 @@ export default {
                 };
         },
         filters: {
-                analyFilter: function (value) {
-                       if(value=='55'){
-                               // 成功
-                               return "出款成功"
-                       }else if(value=='44'){
-                               // 失败
-                               return "出款失败"
-                       }else{
+                valToName: function (value) {
+                        if(value=='00'){
+                                // 成功
+                                return "出款成功"
+                        }else if(value=='44'){
+                                // 失败
+                                return "出款失败"
+                        }else{
                                 return "出款中"
-                       }
+                        }
                 }
         },
         mounted() {

@@ -159,7 +159,7 @@ export default {
                     }
                   });
                 } else {
-                  this.Toast("请先注册");
+                  this.Toast("请先注册商户");
                 }
               } else {
                 this.Toast(data.message);
