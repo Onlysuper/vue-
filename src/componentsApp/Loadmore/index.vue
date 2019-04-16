@@ -141,17 +141,12 @@ export default {
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
                         this.list = [];
                         this.$refs.loadmore.finishInfinite(false);
-                        // this.loadQuery.currentPage++;
-                        // this.loadData(this.loadQuery).then(res => {
-                        //   this.list = list;
-                        //   this.isAllLoaded(list);
-                        // });
                 },
-                //下拉刷新操作
+                //上拉刷新操作
                 loadTop(done) {
+                        this.$emit("refresh");
                         this.allLoaded = false;
                         this.loadQuery = { ...this.defaultLoadQuery, ...this.searchQuery };
-
                         this.loadQuery.currentPage = 1;
                         let loadQuery= this.currentPageFn(this.loadQuery.currentPage,this.loadQuery);
                         this.loadData(loadQuery).then(list => {
@@ -159,12 +154,12 @@ export default {
                                         this.list = list;
                                         done();
                                         this.isAllLoaded(list);
-                                        this.$emit("refresh");
                                 }, 500);
                         });
                 },
-                //上拉加载操作
+                //下拉加载操作
                 loadBottom(done) {
+                        this.$emit("refresh");
                         if (this.allLoaded) {
                                 done(true)
                                 return;

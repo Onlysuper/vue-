@@ -47,7 +47,7 @@
         <div class="navbar-item navbar-line _av" @click="toHistory">历史记录</div>
       </div>
        <div class="today-pay-order-list" ref="scrollWarpper">
-          <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
+          <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi" @refresh="refresh">
                   <div class="list-item" v-for="(item,index) in list" :key="index">
                           <settle-item  
                           :status="[
@@ -56,18 +56,12 @@
                                   color:utils.valToColor(CONST,'revFlag',`${item.revFlag}`,'issort'),
                                   border:true
                                   }
-                                 
                           ]"
-                          
                           @click.native="toDetail(item)" 
                           :entName="item.merName"
                           :time="item.tranDateTime | dateTimeFilter"
                           :amount="item.tranAmt | moneyFormatCN(true)"
                           >
-                           <!-- {
-                                  name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
-                                  color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                                  }, -->
                           <span slot="icon"  :class="'icon '+iconHandle(item.tranType)"></span>
                           </settle-item>
                   </div>
@@ -133,16 +127,16 @@ export default {
         },
         // 搜索条件处理
         currentPageFn:(currentPage,loadQuery)=>{
-                let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
-                let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
-                let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,loadQuery.currentPage,loadQuery.pageSize,this.token+base.md5Data];
-                let md5Data = md5Encrypt(sendData.join(''));
-                loadQuery['startTime']=startTime;
-                loadQuery['endTime']=endTime;
-                loadQuery['tranType']= utils.replaceSort(loadQuery.tranType);
-                loadQuery['openid']=this.openid;
-                loadQuery['md5Data']=md5Data;
-                return loadQuery
+              let startTime = loadQuery.startTime.replace(/\/|\-/g,"");
+              let endTime = loadQuery.endTime.replace(/\/|\-/g,"");
+              let sendData = [loadQuery.telePhone,loadQuery.merCode,startTime,endTime,loadQuery.currentPage,loadQuery.pageSize,this.token+base.md5Data];
+              let md5Data = md5Encrypt(sendData.join(''));
+              loadQuery['startTime']=startTime;
+              loadQuery['endTime']=endTime;
+              loadQuery['tranType']= utils.replaceSort(loadQuery.tranType);
+              loadQuery['openid']=this.openid;
+              loadQuery['md5Data']=md5Data;
+              return loadQuery
         },
     };
   },
@@ -203,6 +197,7 @@ export default {
       this.init();
     },
     refresh() {
+      // console.log('更新今天的数据');
       this.payTotal();
     },
     init() {
