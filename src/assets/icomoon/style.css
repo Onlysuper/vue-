@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?4s32sl');
-  src:  url('fonts/icomoon.eot?4s32sl#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?4s32sl') format('truetype'),
-    url('fonts/icomoon.woff?4s32sl') format('woff'),
-    url('fonts/icomoon.svg?4s32sl#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?qc75vf');
+  src:  url('fonts/icomoon.eot?qc75vf#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?qc75vf') format('truetype'),
+    url('fonts/icomoon.woff?qc75vf') format('woff'),
+    url('fonts/icomoon.svg?qc75vf#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,163 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cloudUnionPay2 .path1:before {
+  content: "\e92b";
+  color: rgb(253, 40, 33);
+}
+.icon-cloudUnionPay2 .path2:before {
+  content: "\e92d";
+  margin-left: -1em;
+  color: rgb(197, 73, 83);
+}
+.icon-cloudUnionPay2 .path3:before {
+  content: "\e92e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path4:before {
+  content: "\e92f";
+  margin-left: -1em;
+  color: rgb(197, 73, 83);
+}
+.icon-cloudUnionPay2 .path5:before {
+  content: "\e930";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path6:before {
+  content: "\e931";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path7:before {
+  content: "\e932";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path8:before {
+  content: "\e933";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path9:before {
+  content: "\e934";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path10:before {
+  content: "\e935";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay2 .path11:before {
+  content: "\e936";
+  margin-left: -1em;
+  color: rgb(255, 34, 23);
+}
+.icon-cloudUnionPay2 .path12:before {
+  content: "\e937";
+  margin-left: -1em;
+  color: rgb(6, 107, 106);
+}
+.icon-cloudUnionPay2 .path13:before {
+  content: "\e938";
+  margin-left: -1em;
+  color: rgb(10, 47, 105);
+}
+.icon-cloudUnionPay2 .path14:before {
+  content: "\e939";
+  margin-left: -1em;
+  color: rgb(228, 29, 33);
+}
+.icon-cloudUnionPay2 .path15:before {
+  content: "\e93a";
+  margin-left: -1em;
+  color: rgb(197, 73, 83);
+}
+.icon-cloudUnionPay .path1:before {
+  content: "\e93b";
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay .path2:before {
+  content: "\e93c";
+  margin-left: -1em;
+  color: rgb(216, 42, 41);
+}
+.icon-cloudUnionPay .path3:before {
+  content: "\e93d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay .path4:before {
+  content: "\e93e";
+  margin-left: -1em;
+  color: rgb(222, 50, 50);
+}
+.icon-cloudUnionPay .path5:before {
+  content: "\e93f";
+  margin-left: -1em;
+  color: rgb(0, 72, 136);
+}
+.icon-cloudUnionPay .path6:before {
+  content: "\e940";
+  margin-left: -1em;
+  color: rgb(0, 128, 137);
+}
+.icon-cloudUnionPay .path7:before {
+  content: "\e941";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay .path8:before {
+  content: "\e942";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-cloudUnionPay .path9:before {
+  content: "\e943";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-unionPay .path1:before {
+  content: "\e944";
+  color: rgb(207, 10, 44);
+}
+.icon-unionPay .path2:before {
+  content: "\e945";
+  margin-left: -1em;
+  color: rgb(0, 40, 86);
+}
+.icon-unionPay .path3:before {
+  content: "\e946";
+  margin-left: -1em;
+  color: rgb(0, 112, 120);
+}
+.icon-unionPay .path4:before {
+  content: "\e947";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-unionPay .path5:before {
+  content: "\e948";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-unionPay .path6:before {
+  content: "\e949";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-unionPay .path7:before {
+  content: "\e94a";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-unionPay .path8:before {
+  content: "\e94b";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
 .icon-untitled:before {
   content: "\e928";
 }

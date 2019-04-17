@@ -21,19 +21,19 @@
                                                 border:true
                                                 }
                                         ]">
-                                        <!-- {
-                                                name:utils.valToName(CONST,'payType-show',`${item.tranType}`,'issort'),
-                                                color:utils.valToColor(CONST,'payType-show',`${item.tranType}`,'issort')
-                                                }, -->
-                                            <!-- <i slot="icon" :class="iconHandle(item.tranType)"></i>     -->
-                             
-                                         <!-- <span slot="icon"  :class="'icon-qq'"></span> -->
-                                        <span slot="icon"  :class="'icon '+iconHandle(item.tranType)"></span>
-                                        <!-- <span slot="iconname" class="iconname">
-                                                无卡快捷
+                                      
+                                        <!-- <span slot="icon"  :class="'icon '+iconHandle(item.tranType)"> -->
+                                        <div class="icon-box" slot="icon">
+                                                <span slot="icon"  :class="'icon '+iconHandle(item.tranType)">
+                                                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span><span class="path12"></span><span class="path13"></span><span class="path14"></span><span class="path15"></span>
+                                                </span>
+                                        </div>
+                                      
+                                         <!-- <span slot="icon" class="'icon icon-cloudUnionPay2">
+                                               
                                         </span> -->
-                                        
                                         </settle-item>
+                                         
                                         
                                 </div>
                         </loadmore>
@@ -162,7 +162,7 @@ export default {
                 iconHandle(item){
                         if(item=='00'){
                                 // 刷卡
-                                return "icon-shuaka";
+                                return "icon-unionPay";
                         }else if(item=='01'||item=='03'||item=='15'){
                                 // 微信
                                 return "icon-wechat";
@@ -171,7 +171,7 @@ export default {
                                  return "icon-alipay";
                         }else if(item=='06'||item=='17'){
                                 //银联二维码
-                                return "icon--1";
+                                return "icon-cloudUnionPay2";
                         }else if(item=='07'){
                                 // qq
                                 return "icon-qq";
