@@ -21,7 +21,9 @@
                                                 border:true
                                                 }
                                         ]">
-                                        <div class="icon-box" slot="icon" v-html="iconHandle(item.tranType)"></div>
+                                       <div class="icon-box" slot="icon" >
+                                                <img  class="icon-img" :src="iconHandle(item.tranType)" alt="">'
+                                        </div>
                                         </settle-item>
                                          
                                         
@@ -152,25 +154,22 @@ export default {
                 iconHandle(item){
                         if(item=='00'){
                                 // 刷卡
-                                let imgsrc = require('@/assets/images/iconUnionPay.png');
-                                return `${'<img style="width:42px" class="icon-img" src="'+imgsrc+'" alt="">'}`
+                                return require('@/assets/images/iconUnionPay.png');
                         }else if(item=='01'||item=='03'||item=='15'){
                                 // 微信
-                                 return `${'<span  class="icon-wechat"></span>'}`
+                                return require('@/assets/images/iconWxpay.png');
                         }else if(item=='04'||item=='16'){
                                 // 支付宝
-                                  return `${'<span  class="icon-alipay"></span>'}`
+                                return require('@/assets/images/iconAlipay.png');
                         }else if(item=='06'||item=='17'){
                                 //银联二维码
-                                 let imgsrc = require('@/assets/images/iconCloudUnipay.png');
-                                return `${'<img style="width:42px" class="icon-img" src="'+imgsrc+'" alt="">'}`
-                                //  return `${'<span  class="icon-cloudUnionPay2"></span>'}`
+                                return require('@/assets/images/iconCloudUnipay.png');
                         }else if(item=='07'){
                                 // qq
-                                return `${'<span  class="icon-qq"></span>'}`
+                               return require('@/assets/images/iconQQ.png');
                         }else if(item=='05'||item=='12'||item=='08'||item=='09'){
                                 // 无卡快捷
-                                return `${'<span  class="icon-untitled"></span>'}`
+                               return require('@/assets/images/iconNocardPay.png');
                         }
                 },
                 setQueryMd5Data(){

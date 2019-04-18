@@ -89,7 +89,7 @@ export default {
     font-size:42px;
     margin-left: 30/@rem;
     img{
-        width: 10/@rem !important;
+        width: 80/@rem !important;
     }
   }
   
