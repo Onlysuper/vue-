@@ -22,7 +22,7 @@
                                                 }
                                         ]">
                                        <div class="icon-box" slot="icon" >
-                                                <img  class="icon-img" :src="iconHandle(item.tranType)" alt="">'
+                                                <img  class="icon-img" :src="iconHandle(item.tranType)" alt="">
                                         </div>
                                         </settle-item>
                                          
