@@ -84,28 +84,15 @@ export default {
   display: flex;
   width: 100%;
   align-items: center;
-  .icon-box {
-    font-size: 80/@rem;
+  .icon-box{
+    // font-size: 80/@rem;
+    font-size:42px;
     margin-left: 30/@rem;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-    // span,i {
-      
-    //   padding: 3/@rem 0;
-    //   &.icon{
-    //     // font-size: 80/@rem;
-    //     font-size: 80/@rem;
-    //   }
-    //   &.iconname{
-    //     color:@m-color2;
-    //     font-size: 12/@rem;
-    //   }
-    //   margin-left: 30/@rem;
-    // }
+    img{
+        width: 10/@rem !important;
+    }
   }
-
+  
   .content {
     padding: 30/@rem 0;
     flex: 1;
