@@ -29,7 +29,7 @@ export default {
         },
         filters: {
                 valToName: function (value) {
-                        if(value=='00'){
+                        if( value=='00' || value=='4' ){
                                 // 成功
                                 return "出款成功"
                         }else if(value=='44'){
