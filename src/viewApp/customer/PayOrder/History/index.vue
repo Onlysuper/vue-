@@ -7,7 +7,7 @@
                         </div>
                         <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
                                 <!-- {{searchQuery.tranType | analyFilter(CONST,'payType','issort')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元 -->
-                                {{searchTranType}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
+                                {{searchTranType}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN(true)}}元
                         </tip>
                         <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
