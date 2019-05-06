@@ -124,7 +124,8 @@ mypFilters.install = function (Vue, options) {
                 try{
                     return json[type][value]['name'] || value;
                 }catch(error){
-                    return value=='sort-'? "":value;
+                //     return value=='sort-'? "":value;
+                    return "";
                 }
                 
         })

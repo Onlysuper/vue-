@@ -5,6 +5,10 @@
                                 <div class="search-info">{{searchQuery.startTime | dateFormatCN}} - {{searchQuery.endTime | dateFormatCN}}</div>
                                 <div class="search-btn" @click="hidden = true">筛选</div>
                         </div>
+                        <tip slot="header" class="tip-color" :showClose="false" v-if="showTip">
+                                <!-- {{searchQuery.tranType | analyFilter(CONST,'payType','issort')}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元 -->
+                                {{searchTranType}}：{{amountCount}}笔 金额：{{amountSum | moneyFormatCN}}元
+                        </tip>
                         <loadmore :api="api" @watchDataList="watchDataList" :handeleResault="handeleResault" :currentPageFn="currentPageFn"  ref="MypLoadmoreApi">
                                 <div v-for="(item,index) in newlist" :key="index">
                                         <banner-date v-if="item.date" slot="top" :date="item.date | dateFormatCN">
@@ -21,12 +25,10 @@
                                                 border:true
                                                 }
                                         ]">
-                                       <div class="icon-box" slot="icon" >
-                                                <img  class="icon-img" :src="iconHandle(item.tranType)" alt="">
+                                        <div class="icon-box" slot="icon" >
+                                                <img  class="icon-img" :src="whichPayHandle(item.tranType) | imgUrl" alt="">
                                         </div>
                                         </settle-item>
-                                         
-                                        
                                 </div>
                         </loadmore>
                 </full-page>
@@ -65,6 +67,7 @@ export default {
         },
         data() {
                 return {
+                        searchTranType:"", //搜索选择的支付方式类型
                         CONST:CONST,
                         openid: utils.getOpenId(),
                         token:utils.storage.getStorage("token"),
@@ -92,7 +95,15 @@ export default {
                         },
                         // 处理loadMore返回的数据，返回列表
                         handeleResault:(res)=>{
-                                return res.result.data.merTranList
+                                if(res.result.data){
+                                   this.amountCount=res.result.data.totalCount;
+                                   this.amountSum=res.result.data.totalTranAmtSum;
+                                   this.showTip=true;
+                                   this.searchTranType=this.searchTranTypeHandle(this.searchQuery.tranType,CONST,'payType','issort');
+                                   return res.result.data.merTranList;
+                                   
+                                }
+                               
                         },
                         // 搜索条件处理
                         currentPageFn:(currentPage,loadQuery)=>{
@@ -109,22 +120,6 @@ export default {
                 };
         },
         computed:{
-                iconname(){
-                    let tranType =this.searchQuery.tranType;
-                    if(tranType=='0'){
-                            // 刷卡
-                            return "wechat";
-                    }if(tranType=='1'){
-                            // 微信
-                            return "wechat";
-                    }if(tranType=='2'){
-                            // 支付宝
-                            return "alipay";
-                    }if(tranType=='3'){
-                            // 银联
-                            return "wechat";
-                    }
-                },
                 pageSize(){
                         if(this.searchQuery.pageSize){
                              return this.searchQuery.pageSize   
@@ -150,26 +145,71 @@ export default {
 
                 this.initSearch();
         },
+         filters: {
+                imgUrl: function (value) {
+                       if(value=='Cardpay'){
+                                 // 刷卡
+                            return require('@/assets/images/iconUnionPay.png');
+                       }else if(value=='Wxpay'){
+                               // 微信
+                            return require('@/assets/images/iconWxpay.png');
+                       }else if(value=='Alipay'){
+                                // 支付宝
+                             return require('@/assets/images/iconAlipay.png');
+                       }else if(value=='Unipay'){
+                                //银联二维码
+                             return require('@/assets/images/iconCloudUnipay.png');
+                       }else if(value=='Qqpay'){
+                                 // qq
+                             return require('@/assets/images/iconQQ.png');
+                       }else if(value=='Nocardpay'){
+                                 // 无卡快捷
+                             return require('@/assets/images/iconNocardPay.png');
+                       }else{
+                               return ""
+                       }
+                }
+        },
         methods: {
-                iconHandle(item){
+                searchTranTypeHandle(data,json, type,issort){
+                        let value = data;
+                        if(issort=='issort'){
+                                // 要求属性是sort-开头的 如果没有需要加上
+                                if(!(/sort-/g.test(value))){
+                                        value=`${'sort-'+value}`
+                                }
+                        }else{
+                                //要求属性不能是sort-开头的 如果有需要去掉
+                                if(/sort-/g.test(value)){
+                                        value=value.replace('sort-','');
+                                }
+                        }
+                        try{
+                        return json[type][value]['name'] || value;
+                        }catch(error){
+                        //     return value=='sort-'? "":value;
+                        return "";
+                        }
+                },
+                whichPayHandle(item){
                         if(item=='00'){
                                 // 刷卡
-                                return require('@/assets/images/iconUnionPay.png');
+                                return "Cardpay";
                         }else if(item=='01'||item=='03'||item=='15'){
                                 // 微信
-                                return require('@/assets/images/iconWxpay.png');
+                                return "Wxpay"
                         }else if(item=='04'||item=='16'){
                                 // 支付宝
-                                return require('@/assets/images/iconAlipay.png');
+                                return "Alipay"
                         }else if(item=='06'||item=='17'){
                                 //银联二维码
-                                return require('@/assets/images/iconCloudUnipay.png');
+                                 return "Unipay"
                         }else if(item=='07'){
                                 // qq
-                               return require('@/assets/images/iconQQ.png');
+                               return "Qqpay";
                         }else if(item=='05'||item=='12'||item=='08'||item=='09'){
                                 // 无卡快捷
-                               return require('@/assets/images/iconNocardPay.png');
+                              return "Nocardpay";
                         }
                 },
                 setQueryMd5Data(){
@@ -193,6 +233,7 @@ export default {
                         return utils.formatDate(new Date(Date.now() - num * (24 * 60 * 60 * 1000)), "yyyy-MM-dd");
                 },
                 search() {
+                        this.showTip = false;
                         this.hidden = false;
                         this.$refs.MypLoadmoreApi.load({
                                 token: utils.storage.getStorage("token"),
@@ -294,7 +335,8 @@ export default {
         }
 
         .tip-color {
-                background: @main-color;
+                background: #0a70cc;
+                // background: @main-color;
         }
 
         .history-list {
